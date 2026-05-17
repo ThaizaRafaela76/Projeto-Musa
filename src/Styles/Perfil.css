@@ -1,0 +1,22 @@
+.perfil {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh ;
+}
+
+.perfil_info {
+  display: flex;
+  gap: 60px;
+  padding: var(--padding-pagina)
+}
+
+.perfil_dados {
+  max-width: 500px;
+}
+
+.fotoPerfil {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}

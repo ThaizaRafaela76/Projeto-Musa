@@ -1,0 +1,7 @@
+.rodape {
+    background-color: var(--vinho);
+    color: var(--bege);
+    text-align: center;
+    padding: 18px 0px;
+    margin-top: auto;
+}
