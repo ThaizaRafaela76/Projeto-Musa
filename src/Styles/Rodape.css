@@ -4,4 +4,14 @@
     text-align: center;
     padding: 18px 0px;
     margin-top: auto;
+    font-weight: bold;
+}
+
+.rodape-bege {
+    background-color: var(--bege);
+    color: var(--vinho);
+    font-weight: bold;
+    text-align: center;
+    padding: 18px 0px;
+    margin-top: auto;
 }

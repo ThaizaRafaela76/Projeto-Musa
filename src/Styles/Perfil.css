@@ -1,3 +1,8 @@
+body {
+  background-color: var(--vinho);
+  color: var(--bege)
+}
+
 .perfil {
   display: flex;
   flex-direction: column;
@@ -6,12 +11,31 @@
 
 .perfil_info {
   display: flex;
+  gap: 8rem;
+  padding: var(--padding-pagina);
+  margin-left: 14rem;
+}
+
+.perfil_obras {
+  display: flex;
   gap: 60px;
   padding: var(--padding-pagina)
 }
 
 .perfil_dados {
+  display: flex;
+  flex-direction: column;
   max-width: 500px;
+  gap: 10px;
+  text-align: justify;
+}
+
+.perfil_foto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
 }
 
 .fotoPerfil {
@@ -19,4 +43,12 @@
   width: 250px;
   height: 250px;
   object-fit: cover;
+}
+
+.perfil_user {
+  padding-top: 1rem;
+}
+
+.artista_cidade {
+  padding-top: 0.2rem;
 }
