@@ -1,0 +1,93 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 20px;
+    padding: 15px 70px 15px 70px;
+    margin: 30px;
+
+    background-color: var(--bege);
+    color: var(--vinho);
+
+}
+
+.logo img{
+    width: 120px;
+}
+
+.links {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 7rem;
+    
+}
+
+.links a {
+    color: var(--vinho);
+    text-decoration: none;
+}
+
+.links a:hover {
+    color: var(--laranja);
+}
+
+.links button {
+    background: none;
+    border: none;
+}
+
+.links button svg {
+  width: 35px;
+  height: 35px;
+  color: var(--vinho)
+}
+
+.links button svg:hover {
+  color: var(--laranja);
+}
+
+.usuario {
+    position: relative;
+}
+
+.dropdown {
+    overflow: hidden;
+
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--pink);
+    border-radius: 10px;
+  
+
+    min-width: 160px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown a {
+    color: var(--bege);
+    padding: 15px 20px;
+}
+
+.dropdown a:hover {
+    background-color: var(--bege);
+    color: var(--pink);
+}
+
+.triangulo {
+  width: 14px;
+  height: 14px;
+  background-color: var(--pink);
+  transform: rotate(45deg) translateX(-50%);
+  border-radius: 3px 0 0 0; 
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  pointer-events: none;
+}
