@@ -2,10 +2,11 @@ import { useState } from 'react'
 import './App.css'
 import Rodape from './Componentes/Rodape'
 //import Perfil from './Pages/Perfil'
+import Navbar from './Componentes/Navbar'
 
 function App() {
   
-  /* const artista = {
+  /*const artista = {
     nome: "Nina Sousa",
     portfolio: "www.ninasousa.com.br",
     bio: "Sou artista visual interessada nos limiares entre memória e matéria. Trabalho com pigmentos naturais, tecidos descartados e tinta a óleo para criar obras que oscilam entre o íntimo e o coletivo. Sou artista visual interessada nos limiares entre memória e matéria. Sou artista visual de matéria e mem.",
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <Perfil artista={artista} />
+      <Navbar />
     </>
   )
 }
