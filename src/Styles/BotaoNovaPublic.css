@@ -1,0 +1,14 @@
+.botao-nova {
+    background-color: var(--bege);
+    color: var(--vinho);
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: 'Nunito', sans-serif;
+    padding: 8px 12px;
+}
+  

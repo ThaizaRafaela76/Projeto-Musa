@@ -1,5 +1,6 @@
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Perfil.css"
+import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
 
 function Perfil({artista}) {
 
@@ -26,7 +27,10 @@ function Perfil({artista}) {
                     </div>
                 </section>
                 <section className="perfil_obras">
+                    <div className="criacao">
                     <h2>Obras da artista</h2>
+                    <BotaoNovaPublic />
+                    </div>
                     {/* cards das obras */}
                 </section>
             </main>
