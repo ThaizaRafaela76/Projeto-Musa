@@ -1,13 +1,15 @@
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Perfil.css"
+import "../Componentes/Navbar"
 import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
+import Navbar from "../Componentes/Navbar"
 
 function Perfil({artista}) {
 
     return (
         <div className="perfil">
             <header>
-                {/*navbar */}
+                <Navbar />
             </header>
             <main>
                 <section className="perfil_info">
