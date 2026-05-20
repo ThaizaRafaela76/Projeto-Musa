@@ -4,6 +4,8 @@ import Rodape from './Componentes/Rodape'
 //import Perfil from './Pages/Perfil'
 import Navbar from './Componentes/Navbar'
 
+
+
 function App() {
   
   /* const artista = {
@@ -15,6 +17,7 @@ function App() {
     cidade: "Quixadá",
     foto: "https://i.pinimg.com/736x/6b/db/58/6bdb58edfc0e529db72cd5066047aca7.jpg"
   } */
+
 
   return (
     <>
