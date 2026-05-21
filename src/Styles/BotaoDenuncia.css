@@ -1,0 +1,26 @@
+.botao-denuncia {
+    width: 95px;
+    height: 95px;
+
+    border: none;
+    border-radius: 20px;
+
+    background-color: var(--vinho);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botao-denuncia:hover {
+    background-color: var(--laranja);
+}
+
+.botao-denuncia svg {
+    font-size: 55px;
+    color: var(--bege);
+}
