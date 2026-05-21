@@ -1,0 +1,81 @@
+.inicio-home {
+    margin-top: 0;
+    padding-top: 0;
+    background-color: var(--vinho);
+    height: 200px;
+}
+
+.corpo-home {
+    background-color: var(--bege);
+    padding: var(--padding-pagina);
+}
+
+.sobre-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    color: var(--vinho);
+    padding-top: 100px;
+}
+
+.sobre-titulo {
+    font-size: 40px;
+    padding-bottom: 45px;
+}
+
+.sobre-texto {
+    max-width: 1300px;
+    padding-bottom: 30px;
+    line-height: 1.6;
+}
+
+.sobre-texto2 {
+    max-width: 1300px;
+    
+    line-height: 1.6;
+}
+
+.cidade-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 680px;
+    overflow: visible;
+
+    margin: 0 auto; 
+}
+.cidades-home {
+    background-color: var(--vinho);
+    color: var(--bege);
+
+    max-width: 900px;
+    padding: 50px;
+    border-radius: 20px;
+
+    position: relative;
+    z-index: 2;
+}
+.cidade-titulo {
+    font-size: 40px;
+    padding-bottom: 25px;
+}
+.cidade-texto {
+    max-width: 600px;
+    line-height: 1.6;
+}
+.cidade-mapa {
+    position: relative;
+    margin-left: -160px;
+    transform: translateY(5%);
+    z-index: 3;
+}
+.cidade-mapa img {
+    width: 650px;
+    max-width: none;
+    display: block;
+}

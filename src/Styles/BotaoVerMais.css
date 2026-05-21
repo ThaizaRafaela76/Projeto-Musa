@@ -1,0 +1,21 @@
+.bnt-vermais {
+    display: flex;
+    background-color: var(--bege);
+    color: var(--vinho);
+    border: none;
+    border-radius: 8px;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: 'Nunito', sans-serif;
+    padding: 8px 12px;
+    gap: 4px;
+}
+
+.bnt-vermais:hover {
+    background-color: var(--vinho);
+    color: var(--bege)
+}
