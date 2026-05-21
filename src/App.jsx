@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import './App.css'
+
 import Rodape from './Componentes/Rodape'
-//import Perfil from './Pages/Perfil'
 import Navbar from './Componentes/Navbar'
+import CardTemplate from './Componentes/CardTemplate'
 
+// IMPORTANDO A IMAGEM
+import imagemOcula from './assets/ocula.png'
 
+//import Perfil from './Pages/Perfil'
 
 function App() {
-  
+
   /* const artista = {
     nome: "Nina Sousa",
     portfolio: "www.ninasousa.com.br",
@@ -18,11 +22,21 @@ function App() {
     foto: "https://i.pinimg.com/736x/6b/db/58/6bdb58edfc0e529db72cd5066047aca7.jpg"
   } */
 
-
   return (
     <>
+
+    <Acervo />
       {/*<Perfil artista={artista} />*/}
-      <Navbar /> 
+
+      {/*<Navbar />*/}
+
+      {/*<CardTemplate
+        imagem={imagemOcula}
+        titulo="OCULA"
+        subtitulo="Lygia Pape"
+      />*/}
+
+      {/*<Rodape />*/}
     </>
   )
 }

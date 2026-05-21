@@ -1,0 +1,38 @@
+.pagina-acervo {
+    background-color: #5B5368;
+
+    min-height: 100vh;
+
+    padding: 40px;
+}
+
+.titulo-acervo {
+    text-align: center;
+
+    margin-top: 40px;
+    margin-bottom: 60px;
+
+    color: white;
+}
+
+.titulo-acervo p {
+    font-size: 14px;
+
+    margin-bottom: 10px;
+}
+
+.titulo-acervo h1 {
+    font-size: 36px;
+
+    margin: 0;
+}
+
+.cards-acervo {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+}
