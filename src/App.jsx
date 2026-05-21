@@ -24,10 +24,8 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
       <Perfil artista={artista} />
       {/* <Navbar /> */} 
-=======
 
     <Acervo />
       {/*<Perfil artista={artista} />*/}
@@ -41,7 +39,6 @@ function App() {
       />*/}
 
       {/*<Rodape />*/}
->>>>>>> dccc3cca3b3a07b3f7e85d8b63e3ec331413f354
     </>
   )
 }
