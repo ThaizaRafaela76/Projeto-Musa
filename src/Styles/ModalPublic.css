@@ -1,0 +1,22 @@
+.modal-publicacao {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 750px;
+    height: 500px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    background-color: var(--bege);
+    color: var(--vinho);
+    z-index: 100;
+}
+
+.modal-public-conteudo {
+    display: flex;
+    gap: 4rem;
+}
+
+textarea {
+    resize: none;
+}

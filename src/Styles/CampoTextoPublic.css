@@ -1,0 +1,15 @@
+.campo-texto-public-field {
+    width: 300px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid var(--vinho);
+    box-sizing: border-box;
+    margin: 4px 0;
+    background-color: var(--bege);
+    gap: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bolder;
+}
