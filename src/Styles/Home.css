@@ -3,6 +3,8 @@
     padding-top: 0;
     background-color: var(--vinho);
     height: 200px;
+
+    
 }
 
 .corpo-home {
@@ -35,6 +37,8 @@
 .sobre-texto2 {
     max-width: 1300px;
     line-height: 1.6;
+
+    margin-bottom: -55px;
 }
 
 .cidade-section {
@@ -47,6 +51,7 @@
     overflow: visible;
 
     margin: 0 auto; 
+    margin-bottom: 100px;
 }
 .cidades-home {
     background-color: var(--vinho);
@@ -78,3 +83,90 @@
     max-width: none;
     display: block;
 }
+
+
+.div-post{
+    background-color: var(--laranja);
+    border-radius: 20px;
+
+    padding-top: 30px;
+}
+.post-home {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 0 30px 0 30px;
+    padding-bottom: 50px;
+}
+.post-titulo {
+    color: var(--bege);
+    font-size: 40px;
+}
+.post-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    overflow-x: scroll;
+    scrollbar-width: none;
+
+    gap: 4rem;
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 0 0 30px;
+
+}
+.div-setas {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 3rem;
+    margin-top: 50px;
+    padding-bottom: 30px;
+    
+}
+.div-setas button {
+    display: flex;
+    align-items: center;
+
+    background: none;
+    border: none;
+}
+.bnt-esq {
+    color: var(--bege);
+    font-size: 45px;
+}
+.bnt-dir {
+    color: var(--bege);
+    font-size: 45px;
+}
+
+
+
+.div-artista{
+    margin-top: 150px;
+
+    background-color: var(--pink);
+    border-radius: 20px;
+    
+    max-width: 310px;
+}
+
+.artista-home {
+    padding: 30px 0 30px 0;
+    margin-left: 30px;
+}
+
+.artista-titulo {
+    color: var(--bege);
+    max-width: 300px;
+    font-size: 40px;
+    
+    padding-bottom: 70px;
+}
+

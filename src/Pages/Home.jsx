@@ -1,3 +1,5 @@
+import { useRef } from "react"
+
 import "../Styles/Home.css"
 import { BsArrowLeftCircle } from "react-icons/bs"
 import { BsArrowRightCircle } from "react-icons/bs"
@@ -5,9 +7,16 @@ import Navbar from "../Componentes/Navbar"
 import mapa from "../assets/mapa.png"
 import Rodape from "../Componentes/Rodape"
 import BotaoVerMais from "../Componentes/BotaoVerMais"
+import CardTemplate from "../Componentes/CardTemplate"
 
 
 const Home = () => {
+    const ref = useRef(null)
+
+    function scrollEsq () {
+        ref.current.scrollBy({ left: -300, behavior: 'smooth' })
+    }
+
     return (
         <div>
             <header className="inicio-home">
@@ -38,28 +47,32 @@ const Home = () => {
                         <img src={mapa} alt="mapa de territorio do sertão central" />
                     </div>
                 </section>
-                <section>
+                <section className="div-post">
                     <div className="post-home">
                         <h1 className="post-titulo">Últimas postagens</h1>
                         <BotaoVerMais />
                     </div>
-                    <div className="post-card">
-                        {/*template de card */}
-                        <button className="bnt-esq"><BsArrowLeftCircle /></button>
+                    <div className="post-card" ref={ref}>
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                    </div>
+                    <div className="div-setas">
+                        <button className="bnt-esq" onClick={scrollEsq}><BsArrowLeftCircle /></button>
                         <button className="bnt-dir"><BsArrowRightCircle /></button>
                     </div>
                 </section>
-                <section>
-                    <div className="artistas-home">
-                        <h1 className="artistas-titulo">Conheça as Artistas</h1>
-                        {/* botão de "ver mais" */}
+                <section className="div-artista">
+                    <div className="artista-home">
+                        <h1 className="artista-titulo">Conheça as Artistas</h1>
+                        <BotaoVerMais />
                     </div>
                     <div className="artistas-card">
                         {/* card de artistas */}
                     </div>
                 </section>
             </main>
-            
             <Rodape />
         </div>
     )
