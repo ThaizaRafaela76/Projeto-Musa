@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 
-import Rodape from './Componentes/Rodape'
-import Navbar from './Componentes/Navbar'
-import CardTemplate from './Componentes/CardTemplate'
+//import Rodape from './Componentes/Rodape'
+//import Navbar from './Componentes/Navbar'
+import Home from './Pages/Home'
+//import CardTemplate from './Componentes/CardTemplate'
 
 // IMPORTANDO A IMAGEM
-import imagemOcula from './assets/ocula.png'
+//import imagemOcula from './assets/ocula.png'
 
 //import Perfil from './Pages/Perfil'
 
@@ -24,10 +25,10 @@ function App() {
 
   return (
     <>
-      <Perfil artista={artista} />
+      {/*<Perfil artista={artista} />/*}
       {/* <Navbar /> */} 
 
-    <Acervo />
+    {/*<Acervo //*>
       {/*<Perfil artista={artista} />*/}
 
       {/*<Navbar />*/}
@@ -39,6 +40,7 @@ function App() {
       />*/}
 
       {/*<Rodape />*/}
+      <Home />
     </>
   )
 }
