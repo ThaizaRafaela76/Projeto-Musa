@@ -1,19 +1,23 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 //import Rodape from './Componentes/Rodape'
 //import Navbar from './Componentes/Navbar'
 //import Home from './Pages/Home'
-import Acervo from './Pages/Acervo'
 //import CardTemplate from './Componentes/CardTemplate'
 
-// IMPORTANDO A IMAGEM
-//import imagemOcula from './assets/ocula.png'
-
+//import Rodape from './Componentes/Rodape';
+//import Navbar from './Componentes/Navbar';
+// import Artistas from './Pages/Artistas';
+// import Home from './Pages/Home'
+// import CardTemplate from './Componentes/CardTemplate';
+// import Acervo from './Pages/Acervo';
+// // IMPORTANDO A IMAGEM
+// import imagemOcula from './assets/ocula.png'
+// import BarraPesquisa from './Componentes/BarraPesquisa';
 //import Perfil from './Pages/Perfil'
 
 function App() {
-
   /* const artista = {
     nome: "Nina Sousa",
     portfolio: "www.ninasousa.com.br",
@@ -30,19 +34,26 @@ function App() {
       <Perfil artista={artista} />
       {/* <Navbar /> */} 
 
-    {/*<Acervo //*>
+      {/* <Acervo /> */}
       {/*<Perfil artista={artista} />*/}
 
-      {/*<Navbar />*/}
+      {/* <Navbar /> */}
 
-      {/*<CardTemplate
+      {/* <CardTemplate
         imagem={imagemOcula}
         titulo="OCULA"
         subtitulo="Lygia Pape"
-      />*/}
+      /> */}
 
       {/*<Rodape />*/}
-      <Acervo />
+      {/* <Acervo /> */}
+      {/* <Rodape /> */}
+      {/* <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa}></BarraPesquisa>
+      <div>
+        {pesquisa}
+      </div> */}
+      {/* <Home /> */}
+      {/* <Artistas></Artistas> */}
     </>
   )
 }

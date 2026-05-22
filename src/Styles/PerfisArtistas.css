@@ -1,0 +1,27 @@
+.controles {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.conteudo {
+    flex: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 28px 24px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+
+.pagina {
+    min-height: 100vh;
+    background: var(--vinho);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }

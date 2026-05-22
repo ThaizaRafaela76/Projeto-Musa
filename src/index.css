@@ -22,6 +22,9 @@
   min-height: 100vh ;
 }
 
-body {
+body,
+input,
+button,
+textarea {
   font-family: 'Nunito', sans-serif;
 }

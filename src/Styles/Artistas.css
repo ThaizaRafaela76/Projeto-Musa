@@ -1,0 +1,19 @@
+.artistas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    
+}
+.text1{
+    font-size: 0.9rem;
+    font-weight: bolder;
+}
+
+.text2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--vinho);  
+}

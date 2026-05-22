@@ -1,0 +1,59 @@
+.ordenar {
+  position: relative;
+}
+
+.btnOrdenar {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1.5px solid var(--vinho);
+  background: var(--bege);
+  color: var(--vinho);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.btnOrdenar:hover {
+  background-color: #f4ebe0;
+}
+
+.IconeOrdenar {
+  font-size: 16px;
+  color: var(--vinho);
+}
+
+.menuOrdenar {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: var(--bege);
+  border: 1.5px solid var(--bege);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 100;
+  min-width: 200px;
+}
+
+.itemOrdenar {
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--vinho);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.itemOrdenar:hover {
+  background: #f4ebe0;
+}
+
+.itemOrdenar--ativo {
+  background: var(--vinho);
+  color: var(--bege);
+}
+
+.itemOrdenar--ativo:hover {
+  background: #6b1a2e;
+}

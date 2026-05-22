@@ -1,0 +1,36 @@
+.iconeLupa {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    
+    transform: translateY(-50%);
+    
+    font-size: 18px;
+    color: var(--vinho);
+    
+    pointer-events: none;
+  }
+ .inputPesquisa {
+    width: 100%;
+    height: 100%;
+   
+    padding: 10px 40px 10px 16px;       
+   
+    border-radius:6px;
+    border: 1.5px solid var(--vinho);
+   
+    background: var(--bege);
+    font-size: 14px;
+    font: bold;
+    color: var(--vinho);
+    
+    outline: none;
+    box-sizing: border-box;
+  }
+  .caixaPesquisa {
+    /* width: 425px; */
+    position: relative;
+    font: bold;
+    flex: 1;
+    min-width: 200;
+  }
