@@ -1,0 +1,20 @@
+.upload-publicacao input {
+    display: none;
+}
+
+.upload-publicacao label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 220px;
+    border: 2px solid var(--vinho);
+    border-radius: 8px;
+}
+
+.upload-publicacao svg {
+    display: flex;
+    align-content: center;
+    font-size: 40px;
+    cursor: pointer;
+}

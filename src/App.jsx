@@ -26,6 +26,7 @@ function App() {
   return (
     <>
       {/*<Perfil artista={artista} />/*}
+      <Perfil artista={artista} />
       {/* <Navbar /> */} 
 
     {/*<Acervo //*>
