@@ -3,7 +3,8 @@ import './App.css'
 
 //import Rodape from './Componentes/Rodape'
 //import Navbar from './Componentes/Navbar'
-import Home from './Pages/Home'
+//import Home from './Pages/Home'
+import Acervo from './Pages/Acervo'
 //import CardTemplate from './Componentes/CardTemplate'
 
 // IMPORTANDO A IMAGEM
@@ -41,7 +42,7 @@ function App() {
       />*/}
 
       {/*<Rodape />*/}
-      <Home />
+      <Acervo />
     </>
   )
 }

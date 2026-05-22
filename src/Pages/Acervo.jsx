@@ -5,6 +5,9 @@ import CardTemplate from "../Componentes/CardTemplate";
 import "../Styles/Acervo.css";
 
 import imagemOcula from "../assets/ocula.png";
+import imagemTresorixas from "../assets/tresorixas.png";
+import imagemEusou from "../assets/eusou.png";
+import imagemAntropofagia from "../assets/antropofagia.png";
 import bannerAcervo from "../assets/banner-acervo.png";
 
 function Acervo() {
@@ -34,25 +37,59 @@ function Acervo() {
 
             </section>
 
-            <section className="cards-acervo">
+            <section className="cards-section">
 
-                <CardTemplate
-                    imagem={imagemOcula}
-                    titulo="OCULA"
-                    subtitulo="Lygia Pape"
-                />
+                <div className="cards-acervo">
 
-                <CardTemplate
-                    imagem={imagemOcula}
-                    titulo="ABAPORU"
-                    subtitulo="Tarsila"
-                />
+                   <CardTemplate
+                        imagem={imagemAntropofagia}
+                        titulo="ANTROPOFAGIA"
+                        subtitulo="Tarsila do Amaral"
+                    />
 
-                <CardTemplate
-                    imagem={imagemOcula}
-                    titulo="RETIRANTES"
-                    subtitulo="Portinari"
-                />
+                    <CardTemplate
+                        imagem={imagemOcula}
+                        titulo="OCULA"
+                        subtitulo="Tarsila"
+                    />
+
+                   <CardTemplate
+                        imagem={imagemTresorixas}
+                        titulo="TRÊS ORIXÁS"
+                        subtitulo="Djanira Motta"
+                    />
+
+                    <CardTemplate
+                        imagem={imagemAntropofagia}
+                        titulo="ANTROPOFAGIA"
+                        subtitulo="Tarsila do Amaral"
+                    />
+
+                    <CardTemplate
+                        imagem={imagemOcula}
+                        titulo="OCULA"
+                        subtitulo="Lygia Pape"
+                    />
+
+                    <CardTemplate
+                        imagem={imagemEusou}
+                        titulo="EU SOU A MONSTRA"
+                        subtitulo="Hilda Hist"
+                    />
+
+                    <CardTemplate
+                        imagem={imagemTresorixas}
+                        titulo="TRÊS ORIXÁS"
+                        subtitulo="Djanira Motta"
+                    />
+
+                    <CardTemplate
+                        imagem={imagemAntropofagia}
+                        titulo="ANTROPOFAGIA"
+                        subtitulo="Tarsila do Amaral"
+                    />
+
+                </div>
 
             </section>
 
