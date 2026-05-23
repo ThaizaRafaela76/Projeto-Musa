@@ -9,7 +9,7 @@ import './App.css';
 //import Rodape from './Componentes/Rodape';
 //import Navbar from './Componentes/Navbar';
 // import Artistas from './Pages/Artistas';
-// import Home from './Pages/Home'
+ import Home from './Pages/Home'
 // import CardTemplate from './Componentes/CardTemplate';
 // import Acervo from './Pages/Acervo';
 // // IMPORTANDO A IMAGEM
@@ -52,7 +52,7 @@ function App() {
       <div>
         {pesquisa}
       </div> */}
-      {/* <Home /> */}
+      <Home />
       {/* <Artistas></Artistas> */}
     </>
   )

@@ -1,27 +1,35 @@
 import { useRef } from "react"
 
 import "../Styles/Home.css"
-import { BsArrowLeftCircle } from "react-icons/bs"
-import { BsArrowRightCircle } from "react-icons/bs"
+import Capa from "../assets/capahome.png"
+import { FaCircleArrowLeft } from "react-icons/fa6"
+import { FaCircleArrowRight } from "react-icons/fa6"
 import Navbar from "../Componentes/Navbar"
 import mapa from "../assets/mapa.png"
 import Rodape from "../Componentes/Rodape"
 import BotaoVerMais from "../Componentes/BotaoVerMais"
 import CardTemplate from "../Componentes/CardTemplate"
+import CardTemplateArtista from "../Componentes/CardTemplateArtista"
 
 
 const Home = () => {
     const ref = useRef(null)
 
-    function scrollEsq () {
-        ref.current.scrollBy({ left: -300, behavior: 'smooth' })
+    function scrollDir() {
+        ref.current.scrollBy({left: 300, behavior: 'smooth'})
+    }
+    function scrollEsq() {
+        ref.current.scrollBy({left: -300, behavior: 'smooth'})
     }
 
     return (
-        <div>
+        <div className="div-geral">
             <header className="inicio-home">
                 <Navbar />
-                <img src="/" />
+                <div className="capa-home">
+                  <img src={Capa} />  
+                </div>
+                
             </header>
 
             <main className="corpo-home">
@@ -57,10 +65,12 @@ const Home = () => {
                         <CardTemplate />
                         <CardTemplate />
                         <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
                     </div>
                     <div className="div-setas">
-                        <button className="bnt-esq" onClick={scrollEsq}><BsArrowLeftCircle /></button>
-                        <button className="bnt-dir"><BsArrowRightCircle /></button>
+                        <button className="bnt-esq" onClick={scrollEsq}><FaCircleArrowLeft /></button>
+                        <button className="bnt-dir"onClick={scrollDir}><FaCircleArrowRight /></button>
                     </div>
                 </section>
                 <section className="div-artista">
@@ -68,8 +78,11 @@ const Home = () => {
                         <h1 className="artista-titulo">Conheça as Artistas</h1>
                         <BotaoVerMais />
                     </div>
-                    <div className="artistas-card">
-                        {/* card de artistas */}
+                    <div className="artista-card">
+                        <CardTemplateArtista />
+                        <CardTemplateArtista />
+                        <CardTemplateArtista />
+                        <CardTemplateArtista />
                     </div>
                 </section>
             </main>
