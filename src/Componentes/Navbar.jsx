@@ -29,7 +29,7 @@ function Navbar() {
     }
 
     return (
-        <div >
+        <div>
             <nav className="nav">
                 <a href="/" className="logo">
                     <img src={logo} alt="id do projeto"/>

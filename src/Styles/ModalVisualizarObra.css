@@ -1,0 +1,99 @@
+.modal-geral {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 750px;
+    height: 500px;
+    padding-left: 40px;
+    padding-right: 40px;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    background-color: var(--bege);
+    color: var(--vinho);
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.org-modal {
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    gap: 40px;
+}
+
+.btn-modal {
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+
+    gap: 0.3rem;
+    width: 100%;
+}
+
+.btn-modal button:last-child {
+    width: 95px;
+    height: 95px;
+    border: none;
+    border-radius: 20px;
+
+    background-color: var(--vinho);
+    color: var(--bege);
+    font-size: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: scale(0.45);
+    transform-origin: top right;
+    margin-left: -40px;
+    
+}
+
+.btn-modal button:last-child:hover {
+    background-color: var(--laranja);
+}
+
+.btn-modal .botao-denuncia {
+    transform: scale(0.45);
+    transform-origin: top right;
+    margin-left: -40px;
+}
+
+.div-imagem img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.div-imagem {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.titulo-obra {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.div-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 340px;
+    flex: 1;
+}
+
+.descr-obra {
+    line-height: 1.3;
+    text-align: justify;
+    margin-top: 30px;
+}
