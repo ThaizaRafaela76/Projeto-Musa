@@ -10,6 +10,7 @@
     height: 220px;
     border: 2px solid var(--vinho);
     border-radius: 8px;
+    margin-top: 26px;
 }
 
 .upload-publicacao svg {

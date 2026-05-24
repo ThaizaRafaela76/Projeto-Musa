@@ -1,4 +1,7 @@
 .publicar-obra {
+    display: block;
+    margin-left: auto;
+    margin-top: 30px;
     background-color: var(--vinho);
     color: var(--bege);
     border: none;
@@ -6,7 +9,7 @@
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bolder;
     font-family: 'Nunito', sans-serif;
     padding: 8px 12px;

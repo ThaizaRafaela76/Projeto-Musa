@@ -45,7 +45,7 @@ function Perfil({artista}) {
                 <section className="perfil_obras">
                     <div className="criacao">
                     <h2>Obras da artista</h2>
-                    <BotaoNovaPublic onClick={abrirModal}/>
+                    <BotaoNovaPublic aoClicar={abrirModal}/>
                     <ModalPublic aberto={estadoModal} fechado={fecharModal}/>
                     </div>
                     {/* cards das obras */}

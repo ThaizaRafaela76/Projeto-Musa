@@ -2,8 +2,8 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 750px;
-    height: 500px;
+    width: 800px;
+    height: 550px;
     padding: 40px;
     transform: translate(-50%, -50%);
     border-radius: 8px;
@@ -12,11 +12,70 @@
     z-index: 100;
 }
 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.7);
+    z-index: 99;
+}
+
 .modal-public-conteudo {
     display: flex;
-    gap: 4rem;
+    align-items: flex-start;
+    margin-top: 12px;
+    justify-content: center;
+    gap: 6rem;
+    
+}
+
+.modal-public-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fechar-modal-public {
+    display: flex;
+    justify-content: center;
+    background-color: var(--vinho);
+    color: var(--bege);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.fechar-modal-public svg {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.fechar-modal-public:hover {
+    background-color: var(--laranja);
+    color: var(--bege)
+}
+
+.modal-public-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal-public-esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 textarea {
     resize: none;
+}
+
+#campo-descricao {
+    height: 120px;
 }
