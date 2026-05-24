@@ -18,8 +18,10 @@ body {
 
 .perfil_obras {
   display: flex;
-  gap: 60px;
-  padding: var(--padding-pagina)
+  flex-direction: column;
+  gap: 4rem;
+  padding: var(--padding-pagina);
+  padding-top: 4rem;
 }
 
 .perfil_dados {
@@ -35,7 +37,6 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  
 }
 
 .fotoPerfil {
@@ -57,4 +58,18 @@ body {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.obras {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  row-gap: 26px;
+  column-gap: 1px;
+  
+
+}
+
+.obras .card-template {
+ background-color: var(--bege);
 }

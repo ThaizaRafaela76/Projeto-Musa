@@ -4,6 +4,7 @@ import "../Styles/Perfil.css"
 import "../Componentes/Navbar"
 import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
 import ModalPublic from "../Componentes/ModalPublic"
+import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
 
 function Perfil({artista}) {
@@ -48,7 +49,16 @@ function Perfil({artista}) {
                     <BotaoNovaPublic aoClicar={abrirModal}/>
                     <ModalPublic aberto={estadoModal} fechado={fecharModal}/>
                     </div>
-                    {/* cards das obras */}
+                    <div className="obras">
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                        <CardTemplate />
+                    </div>
                 </section>
             </main>
             <Rodape variante="bege"/>
