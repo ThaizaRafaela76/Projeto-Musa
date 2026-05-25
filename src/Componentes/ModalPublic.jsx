@@ -4,6 +4,7 @@ import BotaoNovaPublic from "./BotaoNovaPublic"
 import CampoTextoPublicacaoEPerfil from "./CampoTextoPublicacaoEPerfil"
 import CampoImgPublic from "./CampoImgPublic"
 import BotaoPublicar from "./BotaoPublicar"
+import Filtro from "./Filtro"
 import { FaX } from "react-icons/fa6";
 
 
@@ -14,7 +15,8 @@ function ModalPublic({aberto, fechado}) {
     const[formPublic, setFormPublic] = useState({
         nomeObra: "",
         artistaObra: "",
-        descricaoObra: ""
+        descricaoObra: "",
+        categoriaObra: ""
     })
 
     const [erros, setErros] = useState({
@@ -51,28 +53,40 @@ function ModalPublic({aberto, fechado}) {
             <div className="modal-public-conteudo">
                 <div className="modal-public-esquerda">
                     <CampoImgPublic />
-                    <h3>Categoria da obra</h3>
+                    <div className="modal-categoria-obra">
+                            <h3>Categoria da obra</h3>
+                            <Filtro opcoes={[
+                                {value: "pintura", label:"Pintura"},
+                                {value: "colagem", label:"Colagem"},
+                                {value: "arte digital", label:"Arte digital"},
+                                {value: "fotografia", label:"Fotografia"},
+                                {value: "xilogravura", label:"Xilogravura"},
+                            ]}
+                            valor={formPublic.categoriaObra}
+                            onChange={(val) => setFormPublic({...formPublic, categoriaObra:val})}
+                            />
+                    </div>
                 </div>
                 <div className="modal-public-direita">
                     <CampoTextoPublicacaoEPerfil 
-                    value = {formPublic.nomeObra}
-                    label="Nome da obra" 
-                    tipo="input" 
-                    placeholder="Girassóis ao Entardecer"
-                    onChange={(e) => setFormPublic({...formPublic, nomeObra: e.target.value})} />
+                        value = {formPublic.nomeObra}
+                        label="Nome da obra" 
+                        tipo="input" 
+                        placeholder="Girassóis ao Entardecer"
+                        onChange={(e) => setFormPublic({...formPublic, nomeObra: e.target.value})} />
                     <CampoTextoPublicacaoEPerfil 
-                    value = {formPublic.artistaObra}
-                    label="Nome da artista" 
-                    tipo="input" 
-                    placeholder="Maria"
-                    onChange={(e) => setFormPublic({...formPublic, artistaObra: e.target.value})} />
+                        value = {formPublic.artistaObra}
+                        label="Nome da artista" 
+                        tipo="input" 
+                        placeholder="Maria"
+                        onChange={(e) => setFormPublic({...formPublic, artistaObra: e.target.value})} />
                     <CampoTextoPublicacaoEPerfil 
-                    value={formPublic.descricaoObra}
-                    label="Descrição" 
-                    tipo="textarea" 
-                    id="campo-descricao" 
-                    placeholder="Conte-nos um pouco sobre sua obra... :)"
-                    onChange={(e) => setFormPublic({...formPublic, descricaoObra: e.target.value})} />
+                        value={formPublic.descricaoObra}
+                        label="Descrição" 
+                        tipo="textarea" 
+                        id="campo-descricao" 
+                        placeholder="Conte-nos um pouco sobre sua obra... :)"
+                        onChange={(e) => setFormPublic({...formPublic, descricaoObra: e.target.value})} />
                 </div>
             </div>
             <BotaoPublicar publicarObra = {validarPublic} />

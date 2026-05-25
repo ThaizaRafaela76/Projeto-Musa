@@ -28,7 +28,6 @@
     margin-top: 12px;
     justify-content: center;
     gap: 6rem;
-    
 }
 
 .modal-public-header {
@@ -70,6 +69,16 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.modal-public-esquerda .btnFiltro {
+    border: 2px solid var(--vinho);
+}
+
+.modal-categoria-obra {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 textarea {

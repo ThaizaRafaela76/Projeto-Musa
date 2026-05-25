@@ -9,6 +9,7 @@
   background: var(--bege);
   color: var(--vinho);
   font-size: 14px;
+  font-weight: bolder;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -17,12 +18,14 @@
 }
 
 .btnFiltro:hover {
-  background-color:  #f4ebe0;
+  background-color: var(--bege);
 }
 
 .setaFiltro {
+  display: flex;
   font-size: 16px;
   color: var(--vinho);
+  align-items: center;
 }
 
 .menuFiltro {
@@ -35,20 +38,21 @@
   overflow: hidden;
   z-index: 100;
   min-width: 200px;
-  font: bold;
+  font-weight: bolder;
+  overflow-y: auto;
+  max-height: 150px;
 }
 
 .itemFiltro {
   padding: 10px 16px;
   font-size: 13px;
-  font: bold;
   color: var(--vinho);
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .itemFiltro:hover {
-  background:  #f4ebe0;
+  background: var(--bege);
 }
 
 .itemFiltro--ativo {
@@ -57,5 +61,5 @@
 }
 
 .itemFiltro--ativo:hover {
-  background:#6b1a2e;
+  background: var(--vinho);
 }
