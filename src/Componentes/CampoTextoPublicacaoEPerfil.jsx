@@ -1,6 +1,6 @@
 import "../Styles/CampoTextoPublic.css"
 
-const CampoTextoPublicacaoEPerfil = ({label, placeholder, tipo = "input", id, value, onChange}) => {
+const CampoTextoPublicacaoEPerfil = ({label, placeholder, tipo = "input", id, value, onChange, erro}) => {
     return(
         <div className="campo-texto-public">
             <label>{label}</label>
@@ -20,6 +20,7 @@ const CampoTextoPublicacaoEPerfil = ({label, placeholder, tipo = "input", id, va
                 value={value}
                 onChange={onChange} />
             )}
+            {erro && <p className="mensagem-erro">Campo obrigatório</p>}
         </div>
     )
 }

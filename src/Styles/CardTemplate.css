@@ -8,7 +8,7 @@
 
     overflow: hidden;
 
-    background-color: #E9E1D6;
+    background-color: var(--bege);
 }
 
 .card-imagem {
@@ -23,29 +23,34 @@
 .card-info {
     height: 64px;
 
-    background-color: #E9E1D6;
+    background-color: var(--bege);
 
     display: flex;
     flex-direction: column;
 
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .card-info h2 {
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 18px;
 
     margin: 0;
 
-    color: #2E2523;
+    color: var(--vinho);
 }
 
 .card-info p {
+    display: flex;
     font-size: 16px;
+    font-weight: 600;
 
     margin-top: 0px;
     margin-bottom: 0;
+    
+    align-items: center;
+    text-align: center;
 
-    color: #4A403D;
+    color: var(--vinho);
 }

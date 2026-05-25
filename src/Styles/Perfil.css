@@ -13,13 +13,14 @@ body {
   display: flex;
   gap: 8rem;
   padding: var(--padding-pagina);
-  margin-left: 14rem;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .perfil_obras {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 3rem;
   padding: var(--padding-pagina);
   padding-top: 4rem;
 }
@@ -28,8 +29,23 @@ body {
   display: flex;
   flex-direction: column;
   max-width: 500px;
-  gap: 10px;
+  gap: 8px;
   text-align: justify;
+}
+
+.perfil-contatos {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  gap: 4px;
+}
+
+.perfil_dados p {
+  font-size: 18px;
+}
+
+.perfil-contatos p {
+  font-size: 16px;
 }
 
 .perfil_foto {
@@ -37,6 +53,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-top: -18px;
 }
 
 .fotoPerfil {
@@ -47,11 +64,11 @@ body {
 }
 
 .perfil_user {
-  padding-top: 1rem;
+  padding-top: 0.6rem;
 }
 
 .artista_cidade {
-  padding-top: 0.2rem;
+  padding-top: 0.1rem;
 }
 
 .criacao {
@@ -60,14 +77,16 @@ body {
   justify-content: space-between;
 }
 
+.criacao h2 {
+  margin-top: 6px;
+}
+
 .obras {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
   row-gap: 26px;
   column-gap: 1px;
-  
-
 }
 
 .obras .card-template {

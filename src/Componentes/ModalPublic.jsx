@@ -17,6 +17,28 @@ function ModalPublic({aberto, fechado}) {
         descricaoObra: ""
     })
 
+    const [erros, setErros] = useState({
+        nomeObra: false,
+        artistaObra: false,
+        descricaoObra: false
+    })
+
+    const validarPublic = () => {
+        const novosErros = {
+            nomeObra: formPublic.nomeObra === "",
+            artistaObra: formPublic.artistaObra === "",
+            descricaoObra: formPublic.descricaoObra === ""
+        }
+
+        setErros(novosErros)
+
+        if (novosErros.nomeObra || novosErros.artistaObra || novosErros.descricaoObra) {
+        } 
+        else {
+            alert(`Obra ${formPublic.nomeObra} da artista ${formPublic.artistaObra} foi publicada com sucesso!`)
+        }
+    }
+
     return(
         <div className="modal-overlay">
         <div className="modal-publicacao">
@@ -53,7 +75,7 @@ function ModalPublic({aberto, fechado}) {
                     onChange={(e) => setFormPublic({...formPublic, descricaoObra: e.target.value})} />
                 </div>
             </div>
-            <BotaoPublicar publicarObra = {() => alert(`Obra ${formPublic.nomeObra} da artista ${formPublic.artistaObra} foi publicada com sucesso!`)} />
+            <BotaoPublicar publicarObra = {validarPublic} />
         </div>
         </div>
     )
