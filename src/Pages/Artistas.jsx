@@ -15,18 +15,18 @@ const Artistas = () => {
     ];
 
     const artistasMock = [
-        { id: 1, usuario: "@FridaKahlo", tipo: "Pintura", cidade: "Quixadá" },
-        { id: 2, usuario: "@FridaKahlo", tipo: "Fotografia", cidade: "Mombaça" },
-        { id: 3, usuario: "@FridaKahlo", tipo: "Escultura", cidade: "Choró" },
-        { id: 4, usuario: "@FridaKahlo", tipo: "Ilustração", cidade: "Pedra Branca" },
-        { id: 5, usuario: "@FridaKahlo", tipo: "Pintura", cidade: "Quixeramobim" },
-        { id: 6, usuario: "@FridaKahlo", tipo: "Grafite", cidade: "Banabuiu" },
-        { id: 7, usuario: "@FridaKahlo", tipo: "Fotografia", cidade: "Ibaretama" },
-        { id: 8, usuario: "@FridaKahlo", tipo: "Escultura", cidade: "Milhã" },
-        { id: 9, usuario: "@FridaKahlo", tipo: "Ilustração", cidade: "Senador" },
-        { id: 10, usuario: "@FridaKahlo", tipo: "Pintura", cidade: "Solonopole" },
-        { id: 11, usuario: "@FridaKahlo", tipo: "Grafite", cidade: "Piquet Carneiro" },
-        { id: 12, usuario: "@FridaKahlo", tipo: "Fotografia", cidade: "Ibicuitinga" },
+        { id: 1, usuario: "Nina Sousa", tipo: "Pintura", cidade: "Quixadá" },
+        { id: 2, usuario: "Beatriz Soares", tipo: "Fotografia", cidade: "Mombaça" },
+        { id: 3, usuario: "Cristiane Menezes", tipo: "Escultura", cidade: "Choró" },
+        { id: 4, usuario: "Francisca da Silva", tipo: "Ilustração", cidade: "Pedra Branca" },
+        { id: 5, usuario: "Zeuda Honório", tipo: "Pintura", cidade: "Quixeramobim" },
+        { id: 6, usuario: "Leticia Queiroz", tipo: "Grafite", cidade: "Banabuiu" },
+        { id: 7, usuario: "Julia Laiza", tipo: "Fotografia", cidade: "Ibaretama" },
+        { id: 8, usuario: "Erika Rodrigues", tipo: "Escultura", cidade: "Milhã" },
+        { id: 9, usuario: "Larissa Maia", tipo: "Ilustração", cidade: "Senador" },
+        { id: 10, usuario: "Thaiza Rafaela", tipo: "Pintura", cidade: "Solonopole" },
+        { id: 11, usuario: "Martina Ribeiro", tipo: "Grafite", cidade: "Piquet Carneiro" },
+        { id: 12, usuario: "Aparecida Maria", tipo: "Fotografia", cidade: "Ibicuitinga" },
     ];
 
     const opcoesOrdem = [
@@ -63,16 +63,10 @@ const Artistas = () => {
                 <div>
                     <span className="text2">São elas que criam.</span>
                 </div>
-                <div>
-                    {
-                        imagens.map((image, index) => {
-                            return (<img
-                                key={index}
-                                src={image}
-                                alt={`Imagem ${index + 1}`}
-                            />)
-                        })
-                    }
+                <div className="imagem-artistas">
+                    <img
+                        src={"src/assets/Images.png"}
+                    />
                 </div>
             </div>
             <PerfisArtistas mock={artistasMock} opcoesOrdem={opcoesOrdem} opcoesFiltro={opcoesFiltro}></PerfisArtistas>

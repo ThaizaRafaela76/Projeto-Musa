@@ -1,15 +1,19 @@
 .controles {
+    align-items: center;
+    justify-content: center;
+    max-width: 960px;
     display: flex;
     gap: 12px;
     margin-bottom: 28px;
     flex-wrap: wrap;
-    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
 .conteudo {
     flex: 1;
-    max-width: 960px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 28px 24px;
     position: relative;
@@ -24,4 +28,15 @@
     display: flex;
     flex-direction: column;
     position: relative;
+
+    padding-left: var(--padding-pagina);
+    padding-right: var(--padding-pagina);
+    padding-bottom: var(--padding-pagina);
   }
+
+.cardsContainer{
+  display: grid;
+  grid-template-columns: repeat(4, 312px);
+  gap: 20px;
+  justify-content: center;
+}

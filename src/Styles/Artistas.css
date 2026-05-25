@@ -5,7 +5,8 @@
     justify-content: center;
 
     text-align: center;
-    
+    padding-left: var(--padding-pagina);
+    padding-right: var(--padding-pagina);
 }
 .text1{
     font-size: 0.9rem;
@@ -16,4 +17,21 @@
     font-weight: bold;
     font-size: 1.5rem;
     color: var(--vinho);  
+}
+
+
+.imagem-artistas {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 70px;
+}
+
+.imagem-artistas img {
+    width: 90%;
+    max-width: 1600px;
+
+    object-fit: cover;
 }
