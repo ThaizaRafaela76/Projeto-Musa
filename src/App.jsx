@@ -1,60 +1,33 @@
-import { useState } from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-//import Rodape from './Componentes/Rodape'
-//import Navbar from './Componentes/Navbar'
-//import Home from './Pages/Home'
-//import CardTemplate from './Componentes/CardTemplate'
+import Home from './Pages/Home';
+import Acervo from './Pages/Acervo';
+import Artista from './Pages/Artistas';
+import Perfil from './Pages/Perfil';
 
-//import Rodape from './Componentes/Rodape';
-//import Navbar from './Componentes/Navbar';
-// import Artistas from './Pages/Artistas';
-import Home from './Pages/Home'
-// import CardTemplate from './Componentes/CardTemplate';
-//import Acervo from './Pages/Acervo';
-// // IMPORTANDO A IMAGEM
-// import imagemOcula from './assets/ocula.png'
-// import BarraPesquisa from './Componentes/BarraPesquisa';
-//import Perfil from './Pages/Perfil'
+import fotoPerfil from './assets/fotoperfil.png';
+
 
 function App() {
-   {/* const artista = {
+  const artistaInfo = {
+    foto: fotoPerfil,
     nome: "Beatriz Silva",
-    portfolio: "www.biaportfolio.com.br",
-    bio: "Sou artista visual interessada nos limiares entre matéria e memória. Faço trabalhos com tinta a óleo e tecidos descartados. Também sou apaixonada por colagens e ando me arriscando na produção de xilogravura. Amo bichinhos e flores, e sempre dou um jeito de representá-los na minha arte de alguma forma.",
-    username: "eubiasilva",
-    redeSocial: "@eubiasilva",
-    contato: "beatrizsilva@gmail.com",
+    username: "@beaslva",
     cidade: "Quixadá",
-    foto: "https://i.pinimg.com/1200x/d9/d9/ef/d9d9ef5bad2003dfcfd654293fc9c33b.jpg"
-  } */}
-
+    portfolio: "www.beaslva.com.br",
+    bio: "Sou artista visual interessada nos limiares entre memória e matéria. Trabalho com pigmentos naturais, tecidos descartados e tinta a óleo para criar obras que oscilam entre o íntimo e o coletivo.",
+    contato: "@beaslva.arts"
+  }
   return (
-    <>
-      {/* <Perfil artista={artista} /> */}
-      {/* <Navbar /> */} 
-
-      {/* <Acervo />*/}
-
-      {/* <Navbar /> */}
-
-      {/* <CardTemplate
-        imagem={imagemOcula}
-        titulo="OCULA"
-        subtitulo="Lygia Pape"
-      /> */}
-
-      {/*<Rodape />*/}
-      {/* <Acervo /> */}
-      {/* <Rodape /> */}
-      {/* <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa}></BarraPesquisa>
-      <div>
-        {pesquisa}
-      </div> */}
-      <Home /> 
-      {/* <Artistas></Artistas> */}
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home />}/>
+        <Route path='/acervo' element={<Acervo />} />
+        <Route path='/artistas' element={<Artista />} />
+        <Route path='/minhaconta' element={<Perfil artista={artistaInfo} />} />
+      </Routes>
+    </Router>
   )
 }
 
-export default App
+export default App;

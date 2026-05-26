@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom"
 import { VscAccount } from "react-icons/vsc"
 import "../Styles/Navbar.css"
 import logo from '../assets/logo_musa2.png'
@@ -14,12 +15,12 @@ function Navbar() {
 
     let menuDropdown = null
 
-    if(menuAberto === true) {
+    if (menuAberto === true) {
         menuDropdown = (
             <div>
                 <div className="triangulo"></div>
                 <div className="dropdown">
-                    <a href="/conta">Minha conta</a>
+                    <Link to="/minhaconta">Minha conta</Link>
                     <a href="/sair">Sair</a>
                 </div>
             </div>
@@ -28,27 +29,32 @@ function Navbar() {
         menuDropdown = null;
     }
 
+    const navigate = useNavigate()
+
+    function irParaSobre() {
+        navigate('/')
+        setTimeout(() => {
+            document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })
+        }, 100)
+    }
+
     return (
-        <div>
-            <nav className="nav">
-                <a href="/" className="logo">
-                    <img src={logo} alt="id do projeto"/>
-                </a>
-                <div className="links">
-                    <a href="/sobre">Sobre</a>
-                    <a href="/acervo">Acervo</a>
-                    <a href="/artista">Artistas</a>
+        <nav className="nav">
+            <Link to="/" className="logo">
+                <img src={logo} alt="id do projeto" />
+            </Link>
+            <div className="links">
+                <button onClick={irParaSobre} className="link-sobre">Sobre</button>
+                <Link to="/acervo">Acervo</Link>
+                <Link to="/artistas">Artistas</Link>
 
                 <div className="usuario">
-                    <button onClick={alterarMenu}>
-                        <VscAccount/>
-                    </button>
+                    <button onClick={alterarMenu}><VscAccount /></button>
 
                     {menuDropdown}
                 </div>
-                </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     )
 }
 

@@ -4,7 +4,7 @@
 
 .inicio-home {
     background-color: var(--vinho);
-    height: 750px;
+    height: 700px;
 
     display: flex;
     flex-direction: column;
@@ -123,6 +123,7 @@
     color: var(--bege);
     font-size: 40px;
 }
+
 .post-card {
     display: flex;
     flex-direction: row;
@@ -166,12 +167,54 @@
 }
 
 /*PARTE DAS ARTISTAS*/
-.div-artista{
+.div-artista {
     margin-top: 150px;
-
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+}
+
+.div-artista-carrossel {
+    flex: 1;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.artista-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    gap: 2rem;
+    padding: 0 10px; 
+}
+
+.artista-card > * {
+    flex-shrink: 0;
+}
+
+.bnt-dir-artista {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--pink);
+    font-size: 2.5rem;
+    padding: 0 10px;
+    flex-shrink: 0;
+}
+.bnt-esq-artista {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--pink);
+    font-size: 2.5rem;
+
+    flex-shrink: 0;
+}
+
+.bnt-esq-artista:hover, .bnt-dir-artista:hover {
+    color: var(--vinho);
 }
 
 .artista-home {
@@ -190,6 +233,7 @@
     transform-origin: left center;
 
     z-index: 1;
+    margin-right: 40px;
 }
 
 .artista-titulo {
@@ -199,19 +243,8 @@
     
     padding-bottom: 70px;
 }
-.artista-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-    overflow-x: scroll;
-    scrollbar-width: none;
-    margin-left: 3.5rem;
 
-    gap: 3rem;
-    padding-left: 30px;
-    flex: 1;
+a {
+    text-decoration: none;
 }
-.artista-card > * {
-    flex-shrink: 0;
-}
+
