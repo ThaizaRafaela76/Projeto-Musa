@@ -55,23 +55,25 @@ const Artistas = () => {
 
     return (
         <div>
-            <Navbar></Navbar>
+            
             <div className="artistas">
-                <div>
-                    <span className="text1">Artistas</span>
-                </div>
-                <div>
-                    <span className="text2">São elas que criam.</span>
-                </div>
-                <div className="imagem-artistas">
-                    <img
-                        src={"src/assets/Images.png"}
-                    />
+                <div className="navbar"><Navbar ></Navbar></div>
+                <div className="artistasConteudo">
+                    <div>
+                        <span className="text1">Artistas</span>
+                    </div>
+                    <div>
+                        <span className="text2">São elas que criam.</span>
+                    </div>
+                    <div className="imagem-artistas">
+                        <img
+                            src={"src/assets/Images.png"}
+                        />
+                    </div>
                 </div>
             </div>
             <PerfisArtistas mock={artistasMock} opcoesOrdem={opcoesOrdem} opcoesFiltro={opcoesFiltro}></PerfisArtistas>
             <Rodape variante="bege" ></Rodape>
-
         </div>
     );
 }

@@ -8,6 +8,7 @@
     flex-wrap: wrap;
     margin-left: auto;
     margin-right: auto;
+    background-color: var(--vinho);
 
 }
 
@@ -19,16 +20,17 @@
     position: relative;
     z-index: 1;
     width: 100%;
+    background-color: var(--vinho);
   }
 
 
 .pagina {
     min-height: 100vh;
-    background: var(--vinho);
+    background-color: var(--vinho);
     display: flex;
     flex-direction: column;
     position: relative;
-
+  
     padding-left: var(--padding-pagina);
     padding-right: var(--padding-pagina);
     padding-bottom: var(--padding-pagina);
@@ -39,4 +41,6 @@
   grid-template-columns: repeat(4, 312px);
   gap: 20px;
   justify-content: center;
+  background-color: var(--vinho);
+  
 }
