@@ -15,8 +15,9 @@ function App() {
     username: "@beaslva",
     cidade: "Quixadá",
     portfolio: "www.beaslva.com.br",
-    bio: "Sou artista visual interessada nos limiares entre memória e matéria. Trabalho com pigmentos naturais, tecidos descartados e tinta a óleo para criar obras que oscilam entre o íntimo e o coletivo.",
-    contato: "@beaslva.arts"
+    bio: "Sou artista visual interessada nos limiares entre matéria e memória. Faço trabalhos com tinta a óleo e tecidos descartados. Também sou apaixonada por colagens e ando me arriscando na produção de xilogravura. Amo bichinhos e flores, e sempre dou um jeito de representá-los na minha arte de alguma forma.",
+    redeSocial: "@beaslva.arts",
+    contato: "beatrizsilva@gmail.com"
   }
   return (
     <Router>

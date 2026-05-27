@@ -5,7 +5,6 @@ import CampoTextoPublicacaoEPerfil from "./CampoTextoPublicacaoEPerfil"
 import CampoTextArea from "./CampoTextArea"
 import CampoImgPublic from "./CampoImgPublic"
 import BotaoPublicar from "./BotaoPublicar"
-import Filtro from "./Filtro"
 import { FaX } from "react-icons/fa6";
 
 
@@ -17,7 +16,8 @@ function ModalPublic({aberto, fechado}) {
         nomeObra: "",
         artistaObra: "",
         descricaoObra: "",
-        categoriaObra: ""
+        categoriaObra: "",
+        imagemObra: null
     })
 
     const[erros, setErros] = useState({})
@@ -39,6 +39,10 @@ function ModalPublic({aberto, fechado}) {
             novosErros.descricaoObra = "A descrição é obrigatória"
         }
 
+        if(!formPublic.imagemObra) {
+            novosErros.imagemObra = "Insira a imagem da sua obra"
+        }
+
         setErros(novosErros);
 
         if(Object.keys(novosErros).length > 0) {
@@ -46,6 +50,7 @@ function ModalPublic({aberto, fechado}) {
         }
 
         alert(`Form enviado`, formPublic)
+        fechado()
     }
 
     return(
@@ -63,19 +68,15 @@ function ModalPublic({aberto, fechado}) {
                 <form className="form-publicacao" onSubmit={handleSubmit}>
                 {/* conteúdo do lado esquerdo */}
                 <div className="modal-public-esquerda">
-                    <CampoImgPublic />
+                    <CampoImgPublic
+                        name="imagemObra"
+                        imagem={formPublic.imagemObra}
+                        setImagem={(img) => setFormPublic({...formPublic, imagemObra: img})}
+                        erro={erros.imagemObra}
+                    />
                     <div className="modal-categoria-obra">
                             <h3>Categoria da obra</h3>
-                            <Filtro opcoes={[
-                                {value: "pintura", label:"Pintura"},
-                                {value: "colagem", label:"Colagem"},
-                                {value: "arte digital", label:"Arte digital"},
-                                {value: "fotografia", label:"Fotografia"},
-                                {value: "xilogravura", label:"Xilogravura"},
-                            ]}
-                            valor={formPublic.categoriaObra}
-                            onChange={(val) => setFormPublic({...formPublic, categoriaObra:val})}
-                            />
+                            <p>Aqui vai ser o filtro</p>
                     </div>
                 </div>
                  {/* conteúdo do lado direito */}
@@ -101,7 +102,6 @@ function ModalPublic({aberto, fechado}) {
                             placeholder="Conte-nos um pouco sobre sua obra... :)"
                             handleOnChange={(e) => setFormPublic({...formPublic, descricaoObra: e.target.value})}
                             erro={erros.descricaoObra} />
-
 
                         <BotaoPublicar publicarObra />
                 </div>

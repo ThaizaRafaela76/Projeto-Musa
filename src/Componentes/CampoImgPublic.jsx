@@ -1,13 +1,44 @@
 import "../Styles/CampoImgPublic.css"
-import { FaRegImages } from "react-icons/fa6";
+import { FaRegImage } from "react-icons/fa6";
 
-const CampoImgPublic = () => {
+const CampoImgPublic = ({name, imagem, setImagem, erro}) => {
+
+    function handleImagem(e) {
+        const arquivo = e.target.files[0]
+
+        console.log(arquivo)
+
+        if(arquivo) {
+            setImagem(arquivo)
+        }
+    }
+
     return(
         <div className="upload-publicacao">
-            <input type="file" accept="image/*" id="upload"/>
-            <label htmlFor="upload">
-                <FaRegImages />
+            <label htmlFor="upload_public">
+                {imagem ? (
+                    <img 
+                        src={URL.createObjectURL(imagem)}
+                        alt="Prévia da obra"
+                        className="preview-img"
+                    />
+                ) : (
+                <>
+                <p>Adicionar uma imagem</p>
+                <FaRegImage />
+                </>
+            )}
             </label>
+
+            <input 
+            type="file" 
+            id="upload_public"
+            accept="image/*" 
+            onChange={handleImagem}
+            hidden
+            />
+
+            {erro && <span>{erro}</span>}
         </div>
     )
 }

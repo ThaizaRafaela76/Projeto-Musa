@@ -4,18 +4,33 @@
 
 .upload-publicacao label {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 260px;
-    height: 220px;
+    width: 280px;
+    height: 280px;
     border: 2px solid var(--vinho);
     border-radius: 8px;
     margin-top: 26px;
+    gap: 14px;
 }
 
 .upload-publicacao svg {
-    display: flex;
-    align-content: center;
     font-size: 40px;
+    cursor: pointer;
+}
+
+.upload-publicacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-img {
+    width: 280px;
+    height: 280px;
+    border-radius: 8px;
+    object-fit: cover;
     cursor: pointer;
 }
