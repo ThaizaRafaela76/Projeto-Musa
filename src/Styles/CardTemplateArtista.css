@@ -1,5 +1,5 @@
 .card-template {
-    width: 312px;
+    width: 280px;
 
     display: flex;
     flex-direction: column;
@@ -8,12 +8,12 @@
 
     overflow: hidden;
 
-    background-color: #E9E1D6;
+    background-color: var(--bege);
 }
 
 .card-imagem {
     width: 100%;
-    height: 212px;
+    height: 200px;
 
     object-fit: cover;
 
@@ -23,7 +23,7 @@
 .card-info {
     height: 64px;
 
-    background-color: #E9E1D6;
+    background-color: var(--bege);
 
     display: flex;
     flex-direction: column;
@@ -33,12 +33,12 @@
 }
 
 .card-info h2 {
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 22x;
+    font-weight: 100, bold;
 
     margin: 0;
 
-    color: #2E2523;
+    color: var(--vinho);
 }
 
 .card-info p {
@@ -47,5 +47,5 @@
     margin-top: 0px;
     margin-bottom: 0;
 
-    color: #4A403D;
+    color: var(--vinho);
 }

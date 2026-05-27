@@ -33,13 +33,13 @@
   
     padding-left: var(--padding-pagina);
     padding-right: var(--padding-pagina);
-    padding-bottom: var(--padding-pagina);
+    padding-bottom: var(--padding-pagina);  
   }
 
 .cardsContainer{
   display: grid;
   grid-template-columns: repeat(4, 312px);
-  gap: 20px;
+  gap: 15px;
   justify-content: center;
   background-color: var(--vinho);
   

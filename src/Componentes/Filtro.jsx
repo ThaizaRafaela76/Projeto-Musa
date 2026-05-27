@@ -17,7 +17,11 @@ const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOr
     <div className="filtro">
       <button
         className="btnFiltro"
-        onClick={() => setAberto(!aberto)}
+        onClick={(event) => {
+          event.stopPropagation();
+          event.preventDefault();
+          setAberto(!aberto);
+        }}
       >
         {labelAtual}
         <span className="setaFiltro">{!aberto && (<MdOutlineKeyboardArrowDown />)}{aberto && (<MdOutlineKeyboardArrowUp />)}</span>

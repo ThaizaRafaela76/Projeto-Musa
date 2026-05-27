@@ -1,6 +1,7 @@
 import "../Styles/BotaoPublicar.css"
 
 const BotaoPublicar = () => {
+    // event.stopPropagation();
     return(
             <button 
                 className="publicar-obra" 
