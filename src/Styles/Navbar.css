@@ -104,3 +104,17 @@
   left: 50%;
   pointer-events: none;
 }
+.dropdown .dropdown-sair {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--bege);
+    padding: 15px 20px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+.dropdown .dropdown-sair:hover {
+    background-color: var(--bege);
+    color: var(--pink);
+}

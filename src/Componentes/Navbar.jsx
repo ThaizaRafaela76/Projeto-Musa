@@ -3,11 +3,14 @@ import { VscAccount } from "react-icons/vsc"
 import "../Styles/Navbar.css"
 import logo from '../assets/logo_musa2.png'
 
+import ModalSair from "./ModalSair"
+
 import { useState } from "react"
 
 function Navbar() {
 
     const [menuAberto, setMenuAberto] = useState(false)
+    const [mostrarModal, setMostrarModal] = useState(false)
 
     function alterarMenu() {
         setMenuAberto(!menuAberto);
@@ -21,7 +24,12 @@ function Navbar() {
                 <div className="triangulo"></div>
                 <div className="dropdown">
                     <Link to="/minhaconta">Minha conta</Link>
-                    <a href="/sair">Sair</a>
+                    <button className="dropdown-sair" onClick={() => {
+                        setMostrarModal(true)
+                        setMenuAberto(false) 
+                    }}>
+                        Sair
+                    </button>
                 </div>
             </div>
         );
@@ -39,6 +47,7 @@ function Navbar() {
     }
 
     return (
+        <>
         <nav className="nav">
             <Link to="/" className="logo">
                 <img src={logo} alt="id do projeto" />
@@ -55,6 +64,10 @@ function Navbar() {
                 </div>
             </div>
         </nav>
+            {mostrarModal && ( 
+                <ModalSair onFechar={() => setMostrarModal(false)} />
+            )}
+        </>
     )
 }
 

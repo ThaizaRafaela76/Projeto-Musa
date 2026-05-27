@@ -248,3 +248,14 @@ a {
     text-decoration: none;
 }
 
+.artista-card .card-template {
+    background-color: var(--pink);
+}
+
+.artista-card .card-info {
+    background-color: var(--pink);
+}
+.artista-card .card-info h2 {
+    color: var(--bege);
+}
+

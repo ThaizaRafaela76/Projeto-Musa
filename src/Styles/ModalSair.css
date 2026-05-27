@@ -1,0 +1,70 @@
+.overlay-sair {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-geral-sair {
+    width: 750px;
+    height: 350px;
+    border-radius: 8px;
+    background-color: var(--bege);
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto-sair {
+    color: var(--vinho);
+}
+
+.bnt-confirmar {
+    background-color: var(--vinho);
+    color: var(--bege);
+    border: 2px solid var(--vinho);
+    border-radius: 10px;
+
+    font-weight: bold;
+    padding: 3px 25px 3px 25px;
+
+    padding: 5px 40px;
+    font-size: 1.5rem;
+}
+.bnt-confirmar:hover {
+    background-color: var(--laranja);
+    border: 2px solid var(--laranja);
+}
+
+.bnt-cancelar {
+    background: none;
+    color: var(--vinho);
+    border: 2px solid var(--vinho);
+    border-radius: 10px;
+
+    font-weight: bold;
+    padding: 3px 25px 3px 25px;
+
+    padding: 5px 40px;
+    font-size: 1.5rem;
+}
+.bnt-cancelar:hover {
+    background-color: var(--laranja);
+    border: 2px solid var(--laranja);
+    color: var(--bege);
+}
+
+.div-bnts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4rem;
+    margin-top: 2rem;
+}
