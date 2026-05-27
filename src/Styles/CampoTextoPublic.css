@@ -1,4 +1,6 @@
 .campo-texto-public-field {
+    display: flex;
+    flex-direction: column;
     width: 300px;
     padding: 8px;
     font-size: 15px;
@@ -10,6 +12,10 @@
     gap: 10px;
 }
 
+.campo-erro {
+    border: 2px solid var(--pink);
+}
+
 label {
     font-size: 18px;
     display: block;
@@ -19,4 +25,9 @@ label {
 input::placeholder, textarea::placeholder {
     color: var(--vinho);
     opacity: 0.5;
+}
+
+textarea {
+    resize: none;
+    height: 120px;
 }

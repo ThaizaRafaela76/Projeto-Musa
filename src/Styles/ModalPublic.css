@@ -3,7 +3,7 @@
     top: 50%;
     left: 50%;
     width: 800px;
-    height: 550px;
+    height: 560px;
     padding: 40px;
     transform: translate(-50%, -50%);
     border-radius: 8px;
@@ -62,7 +62,12 @@
 .modal-public-direita {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
+}
+
+.form-publicacao {
+    display: flex;
+    gap: 6rem;
 }
 
 .modal-public-esquerda {
@@ -81,10 +86,10 @@
     gap: 4px;
 }
 
-textarea {
-    resize: none;
+span {
+    min-height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--pink);
 }
 
-#campo-descricao {
-    height: 120px;
-}

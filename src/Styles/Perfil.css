@@ -82,11 +82,11 @@ body {
 }
 
 .obras {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  width: 100%;
-  row-gap: 26px;
-  column-gap: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
 .obras .card-template {

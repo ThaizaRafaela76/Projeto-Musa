@@ -1,8 +1,13 @@
 import "../Styles/BotaoPublicar.css"
 
-const BotaoPublicar = ({publicarObra}) => {
+const BotaoPublicar = () => {
     return(
-            <button className="publicar-obra" onClick={publicarObra}>Publicar</button>
+            <button 
+                className="publicar-obra" 
+                type="submit" 
+            >
+                Publicar
+            </button>
     )
 }
 

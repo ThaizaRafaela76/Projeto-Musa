@@ -2,6 +2,7 @@ import { useState } from "react"
 import "../Styles/ModalPublic.css"
 import BotaoNovaPublic from "./BotaoNovaPublic"
 import CampoTextoPublicacaoEPerfil from "./CampoTextoPublicacaoEPerfil"
+import CampoTextArea from "./CampoTextArea"
 import CampoImgPublic from "./CampoImgPublic"
 import BotaoPublicar from "./BotaoPublicar"
 import Filtro from "./Filtro"
@@ -19,30 +20,38 @@ function ModalPublic({aberto, fechado}) {
         categoriaObra: ""
     })
 
-    const [erros, setErros] = useState({
-        nomeObra: false,
-        artistaObra: false,
-        descricaoObra: false
-    })
+    const[erros, setErros] = useState({})
 
-    const validarPublic = () => {
-        const novosErros = {
-            nomeObra: formPublic.nomeObra === "",
-            artistaObra: formPublic.artistaObra === "",
-            descricaoObra: formPublic.descricaoObra === ""
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        let novosErros = {};
+
+        if(!formPublic.nomeObra.trim()) {
+            novosErros.nomeObra = "O nome da obra é obrigatório"
         }
 
-        setErros(novosErros)
-
-        if (novosErros.nomeObra || novosErros.artistaObra || novosErros.descricaoObra) {
-        } 
-        else {
-            alert(`Obra ${formPublic.nomeObra} da artista ${formPublic.artistaObra} foi publicada com sucesso!`)
+        if(!formPublic.artistaObra.trim()) {
+            novosErros.artistaObra = "O nome da artista é obrigatório"
         }
+
+        if(!formPublic.descricaoObra.trim()) {
+            novosErros.descricaoObra = "A descrição é obrigatória"
+        }
+
+        setErros(novosErros);
+
+        if(Object.keys(novosErros).length > 0) {
+            return;
+        }
+
+        alert(`Form enviado`, formPublic)
     }
 
     return(
         <div className="modal-overlay">
+
+        {/* header do modal */}
         <div className="modal-publicacao">
             <div className="modal-public-header">
                 <h2>Nova publicação</h2>
@@ -51,6 +60,8 @@ function ModalPublic({aberto, fechado}) {
                 </button>
             </div>
             <div className="modal-public-conteudo">
+                <form className="form-publicacao" onSubmit={handleSubmit}>
+                {/* conteúdo do lado esquerdo */}
                 <div className="modal-public-esquerda">
                     <CampoImgPublic />
                     <div className="modal-categoria-obra">
@@ -67,29 +78,35 @@ function ModalPublic({aberto, fechado}) {
                             />
                     </div>
                 </div>
+                 {/* conteúdo do lado direito */}
                 <div className="modal-public-direita">
-                    <CampoTextoPublicacaoEPerfil 
-                        value = {formPublic.nomeObra}
-                        label="Nome da obra" 
-                        tipo="input" 
-                        placeholder="Girassóis ao Entardecer"
-                        onChange={(e) => setFormPublic({...formPublic, nomeObra: e.target.value})} />
-                    <CampoTextoPublicacaoEPerfil 
-                        value = {formPublic.artistaObra}
-                        label="Nome da artista" 
-                        tipo="input" 
-                        placeholder="Maria"
-                        onChange={(e) => setFormPublic({...formPublic, artistaObra: e.target.value})} />
-                    <CampoTextoPublicacaoEPerfil 
-                        value={formPublic.descricaoObra}
-                        label="Descrição" 
-                        tipo="textarea" 
-                        id="campo-descricao" 
-                        placeholder="Conte-nos um pouco sobre sua obra... :)"
-                        onChange={(e) => setFormPublic({...formPublic, descricaoObra: e.target.value})} />
+                        <CampoTextoPublicacaoEPerfil 
+                            label="Nome da obra"  
+                            name="nomeObra"
+                            placeholder="Girassóis ao Entardecer"
+                            value = {formPublic.nomeObra}
+                            handleOnChange={(e) => setFormPublic({...formPublic, nomeObra: e.target.value})}
+                            erro={erros.nomeObra} />
+                        <CampoTextoPublicacaoEPerfil 
+                            label="Nome da artista"  
+                            name="artistaObra"
+                            placeholder="Maria"
+                            value = {formPublic.artistaObra}
+                            handleOnChange={(e) => setFormPublic({...formPublic, artistaObra: e.target.value})}
+                            erro={erros.artistaObra} />
+                        <CampoTextArea
+                            label="Descrição" 
+                            name="descricaoObra" 
+                            value={formPublic.descricaoObra}
+                            placeholder="Conte-nos um pouco sobre sua obra... :)"
+                            handleOnChange={(e) => setFormPublic({...formPublic, descricaoObra: e.target.value})}
+                            erro={erros.descricaoObra} />
+
+
+                        <BotaoPublicar publicarObra />
                 </div>
+                </form>
             </div>
-            <BotaoPublicar publicarObra = {validarPublic} />
         </div>
         </div>
     )
