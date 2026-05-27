@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link, useNavigate } from "react-router-dom";
 import BarraPesquisa from "./BarraPesquisa";
 import Filtro from "./Filtro";
 import Ordenar from "./Ordenar";
@@ -24,14 +25,18 @@ function PerfisArtistas({mock, opcoesOrdem, opcoesFiltro}) {
         return ordem == "az" ? a.usuario.localeCompare(b.usuario) : b.usuario.localeCompare(a.usuario)
     });
 
-    console.log(mockFiltrados)
+    const navigate = useNavigate();
+    function irParaPerfil(){
+        navigate('/minhaconta');
+
+    }
     return (
         <div className="pagina">
             <div className="conteudo">
                 <div className="controles">
                     <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa}></BarraPesquisa>
-                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro}></Filtro>
-                    <Ordenar valor={ordem} onChange={setOrdem}></Ordenar>
+                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta}></Filtro>
+                    <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto}></Ordenar>
                 </div>
                 {   
                     mockFiltrados.lenght === 0 ? (
@@ -42,10 +47,12 @@ function PerfisArtistas({mock, opcoesOrdem, opcoesFiltro}) {
                         <div className="cardsContainer">
                             {
                                 mockFiltrados.map((item) =>(
-                                    <CardTemplateArtista 
-                                        nome={item.usuario} 
-                                        imagem={"src/assets/image 11.png"}
-                                    ></CardTemplateArtista>
+                                    <div className="cardLink" onClick={irParaPerfil}>
+                                        <CardTemplateArtista 
+                                            nome={item.usuario} 
+                                            imagem={"src/assets/image 11.png"}
+                                        ></CardTemplateArtista>
+                                    </div>
                                 ))
                             }
                             

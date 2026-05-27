@@ -44,3 +44,7 @@
   background-color: var(--vinho);
   
 }
+
+.cardLink{
+  cursor: pointer;
+}

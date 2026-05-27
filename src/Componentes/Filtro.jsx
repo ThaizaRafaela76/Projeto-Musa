@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
 import "../Styles/Filtro.css";
 
 
-const Filtro = ({ opcoes, valor, onChange }) => {
-  const [aberto, setAberto] = useState(false);
+const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOrdemAberta}) => {
 
-  const labelAtual =
-    opcoes.find((op) => op.value === valor)?.label || "Filtro";
+  const labelAtual = opcoes.find((op) => op.value === valor)?.label || "Filtro";
 
+  useEffect(()=>{
+    if(aberto){
+      setOrdemAberta(false);
+    }
+  },[aberto]);
+  
   return (
     <div className="filtro">
       <button

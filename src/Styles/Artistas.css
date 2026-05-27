@@ -22,6 +22,7 @@
 .text1{
     font-size: 0.9rem;
     font-weight: bolder;
+    color: var(--vinho);
 }
 
 .text2 {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuArrowUpDown } from "react-icons/lu";
 import "../Styles/Ordenar.css";
 
@@ -7,8 +7,13 @@ const opcoesOrdem = [
   { value: "za", label: "Z → A" },
 ];
 
-const Ordenar = ({ valor, onChange }) => {
-  const [aberto, setAberto] = useState(false);
+const Ordenar = ({ valor, onChange, aberto, setAberto,filtroAberto, setFiltroAberto}) => {
+
+  useEffect(()=>{
+      if(aberto){
+        setFiltroAberto(false);
+      }
+  },[aberto])
 
   return (
     <div className="ordenar">
@@ -20,7 +25,7 @@ const Ordenar = ({ valor, onChange }) => {
         <span className="iconeOrdenar"><LuArrowUpDown/></span>
       </button>
 
-      {aberto && (
+      {aberto && !filtroAberto && (
         <div className="menuOrdenar">
           {opcoesOrdem.map((op) => (
             <div
