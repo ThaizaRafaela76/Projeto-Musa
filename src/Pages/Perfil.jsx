@@ -29,7 +29,7 @@ function Perfil({ artista }) {
             id: 1,
             imagem: "https://i.pinimg.com/1200x/a3/16/45/a31645095097e81b3743ea41413f5ce7.jpg",
             titulo: "Joaninha em folha",
-            categoria: "pintura",
+            categoria: "Pintura",
             subtitulo: "Beatriz Silva",
             descricao: "Registro delicado de uma joaninha repousando sobre uma folha úmida ao amanhecer. A obra explora a ideia de pequenos universos naturais e a fragilidade dos ciclos da vida."
         },
@@ -37,7 +37,7 @@ function Perfil({ artista }) {
             id: 2,
             imagem: "https://i.pinimg.com/1200x/c9/6a/70/c96a703ea9b9a048d78bc68e7d696fd0.jpg",
             titulo: "Bordado & Fotos",
-            categoria: "colagem",
+            categoria: "Colagem",
             subtitulo: "Beatriz Silva",
             descricao: "Colagem que une fotografias antigas e bordados manuais, criando uma narrativa afetiva sobre memória, tempo e reconstrução de histórias pessoais."
         },
@@ -45,7 +45,7 @@ function Perfil({ artista }) {
             id: 3,
             imagem: "https://i.pinimg.com/1200x/3e/ec/0f/3eec0f584cd0e9530068c6022e93fb88.jpg",
             titulo: "Passado Presente",
-            categoria: "colagem",
+            categoria: "Colagem",
             subtitulo: "Beatriz Silva",
             descricao: "Composição que mistura elementos antigos e contemporâneos, refletindo sobre como memórias se sobrepõem ao presente e moldam nossa percepção do tempo."
         },
@@ -53,7 +53,7 @@ function Perfil({ artista }) {
             id: 4,
             imagem: "https://i.pinimg.com/736x/2b/bc/d0/2bbcd05e70d76fa501aed68a4df8f07f.jpg",
             titulo: "Ramo",
-            categoria: "pintura",
+            categoria: "Pintura",
             subtitulo: "Beatriz Silva",
             descricao: "Representação minimalista de um ramo seco encontrado em meio urbano, simbolizando resistência e beleza em processos de transformação natural."
         },
@@ -61,7 +61,7 @@ function Perfil({ artista }) {
             id: 5,
             imagem: "https://i.pinimg.com/736x/bd/8d/a3/bd8da37f8773a5a8ae27f66950484d0e.jpg",
             titulo: "O olhar",
-            categoria: "pintura",
+            categoria: "Pintura",
             subtitulo: "Beatriz Silva",
             descricao: "Estudo visual sobre o ato de observar e ser observado, explorando camadas emocionais escondidas no contato visual entre sujeito e mundo."
         },
@@ -69,7 +69,7 @@ function Perfil({ artista }) {
             id: 6,
             imagem: "https://i.pinimg.com/736x/93/be/1d/93be1d9205ad046f50540570b967f187.jpg",
             titulo: "Flores",
-            categoria: "xilogravura",
+            categoria: "Xilogravura",
             subtitulo: "Beatriz Silva",
             descricao: "Xilogravura inspirada em flores silvestres, destacando contrastes entre delicadeza e força através de traços marcados e repetitivos."
             
@@ -78,7 +78,6 @@ function Perfil({ artista }) {
             id: 7,
             imagem: "https://i.pinimg.com/1200x/e2/5e/65/e25e65d354236c51cff38f4202397500.jpg",
             titulo: "Xilogatura",
-            categoria: "xilogravura",
             subtitulo: "Beatriz Silva",
             descricao: "Exploração gráfica da xilogravura como linguagem experimental, unindo texturas orgânicas e formas abstratas em uma composição expressiva."
 
