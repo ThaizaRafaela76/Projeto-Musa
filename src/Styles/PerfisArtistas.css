@@ -33,16 +33,16 @@
   
     padding-left: var(--padding-pagina);
     padding-right: var(--padding-pagina);
-    padding-bottom: var(--padding-pagina);  
+    padding-bottom: 30px;
+    gap: 30px; 
   }
 
 .cardsContainer{
   display: grid;
-  grid-template-columns: repeat(4, 312px);
-  gap: 15px;
+  grid-template-columns: repeat(4, 280px);
+  gap: 30px;
   justify-content: center;
   background-color: var(--vinho);
-  
 }
 
 .cardLink{

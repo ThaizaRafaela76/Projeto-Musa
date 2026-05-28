@@ -1,5 +1,5 @@
 .pagina-acervo {
-    background-color: #ffffff;
+    background-color: var(--bege);
 
     min-height: 100vh;
 }
@@ -12,7 +12,7 @@
     margin-top: 50px;
     margin-bottom: 40px;
 
-    color: #3A3A3A;
+    color: var(--vinho);
 }
 
 .titulo-acervo p {
@@ -101,7 +101,7 @@
 /*NOME DO BOTÃO ORDENAR EM BOLD*/
 
 .controles-acervo .btnOrdenar {
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 
@@ -270,4 +270,10 @@
 .titulo-acervo p {
     font-size: 16px;
     font-weight: 700;
+}
+
+/* botão nova */
+
+.controles-acervo > *:last-child {
+    margin-left: 200px;
 }

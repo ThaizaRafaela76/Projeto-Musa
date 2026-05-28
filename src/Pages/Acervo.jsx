@@ -6,6 +6,9 @@ import ModalDenuncia from "../Componentes/ModalDenuncia"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
 import { IoWarningOutline } from "react-icons/io5"
 
+import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
+import ModalPublic from "../Componentes/ModalPublic"
+
 import Navbar from "../Componentes/Navbar";
 import Rodape from "../Componentes/Rodape";
 import CardTemplate from "../Componentes/CardTemplate";
@@ -31,7 +34,7 @@ function Acervo() {
     const [filtroAberto, setFiltroAberto] = useState(false)
     const [ordemAberta, setOrdemAberta] = useState(false)
     const opcoesFiltro = [
-        { value: "", label: "Todas as obras" },
+        { value: "", label: "Filtro" },
         { value: "Pintura", label: "Pintura" },
         { value: "Colagem", label: "Colagem" },
         { value: "Arte digital", label: "Arte digital" },
@@ -87,7 +90,17 @@ function Acervo() {
         return ordem == "az" ? a.titulo.localeCompare(b.titulo) : b.titulo.localeCompare(a.titulo)
     });
 
+    const[estadoModal, setEstadoModal] = useState(false);
 
+    const abrirModal = () => {
+        setEstadoModal(true)
+        document.body.style.overflow = "hidden"
+    }
+
+    const fecharModal = () => {
+        setEstadoModal(false)
+        document.body.style.overflow = "auto"
+    }
     return (
         <div className="pagina-acervo">
 
@@ -121,8 +134,10 @@ function Acervo() {
                     <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} />
                     <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} />
                     <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
+                    <BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>
                 </div>
-
+                <ModalPublic aberto={estadoModal} fechado={fecharModal}/>
+                
 
                 <div className="cards-acervo">
                     {obrasFiltrados.map((obra) => (
