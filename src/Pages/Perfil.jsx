@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react"
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Perfil.css"
 import "../Componentes/Navbar"
@@ -6,10 +6,13 @@ import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
 import ModalPublic from "../Componentes/ModalPublic"
 import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
+import ModalDenuncia from "../Componentes/ModalDenuncia"
+import BotaoDenuncia from "../Componentes/BotaoDenuncia"
+import { IoWarningOutline } from "react-icons/io5"
 
-function Perfil({artista}) {
+function Perfil({ artista }) {
 
-    const[estadoModal, setEstadoModal] = useState(false);
+    const [estadoModal, setEstadoModal] = useState(false);
 
     const abrirModal = () => {
         setEstadoModal(true)
@@ -21,6 +24,88 @@ function Perfil({artista}) {
         document.body.style.overflow = "auto"
     }
 
+    const obras = [
+        {
+            id: 1,
+            imagem: "https://i.pinimg.com/1200x/a3/16/45/a31645095097e81b3743ea41413f5ce7.jpg",
+            titulo: "Joaninha em folha",
+            categoria: "pintura",
+            subtitulo: "Beatriz Silva",
+            descricao: "Registro delicado de uma joaninha repousando sobre uma folha úmida ao amanhecer. A obra explora a ideia de pequenos universos naturais e a fragilidade dos ciclos da vida."
+        },
+        {
+            id: 2,
+            imagem: "https://i.pinimg.com/1200x/c9/6a/70/c96a703ea9b9a048d78bc68e7d696fd0.jpg",
+            titulo: "Bordado & Fotos",
+            categoria: "colagem",
+            subtitulo: "Beatriz Silva",
+            descricao: "Colagem que une fotografias antigas e bordados manuais, criando uma narrativa afetiva sobre memória, tempo e reconstrução de histórias pessoais."
+        },
+        {
+            id: 3,
+            imagem: "https://i.pinimg.com/1200x/3e/ec/0f/3eec0f584cd0e9530068c6022e93fb88.jpg",
+            titulo: "Passado Presente",
+            categoria: "colagem",
+            subtitulo: "Beatriz Silva",
+            descricao: "Composição que mistura elementos antigos e contemporâneos, refletindo sobre como memórias se sobrepõem ao presente e moldam nossa percepção do tempo."
+        },
+        {
+            id: 4,
+            imagem: "https://i.pinimg.com/736x/2b/bc/d0/2bbcd05e70d76fa501aed68a4df8f07f.jpg",
+            titulo: "Ramo",
+            categoria: "pintura",
+            subtitulo: "Beatriz Silva",
+            descricao: "Representação minimalista de um ramo seco encontrado em meio urbano, simbolizando resistência e beleza em processos de transformação natural."
+        },
+        {
+            id: 5,
+            imagem: "https://i.pinimg.com/736x/bd/8d/a3/bd8da37f8773a5a8ae27f66950484d0e.jpg",
+            titulo: "O olhar",
+            categoria: "pintura",
+            subtitulo: "Beatriz Silva",
+            descricao: "Estudo visual sobre o ato de observar e ser observado, explorando camadas emocionais escondidas no contato visual entre sujeito e mundo."
+        },
+        {
+            id: 6,
+            imagem: "https://i.pinimg.com/736x/93/be/1d/93be1d9205ad046f50540570b967f187.jpg",
+            titulo: "Flores",
+            categoria: "xilogravura",
+            subtitulo: "Beatriz Silva",
+            descricao: "Xilogravura inspirada em flores silvestres, destacando contrastes entre delicadeza e força através de traços marcados e repetitivos."
+            
+        },
+        {
+            id: 7,
+            imagem: "https://i.pinimg.com/1200x/e2/5e/65/e25e65d354236c51cff38f4202397500.jpg",
+            titulo: "Xilogatura",
+            categoria: "xilogravura",
+            subtitulo: "Beatriz Silva",
+            descricao: "Exploração gráfica da xilogravura como linguagem experimental, unindo texturas orgânicas e formas abstratas em uma composição expressiva."
+
+        }
+    ]
+
+    const [obraSelecionada, setObraSelecionada] = useState(null)
+    const [modalDenunciaAberto, setModalDenunciaAberto] = useState(false)
+
+    function abrirObra(obra) {
+        setObraSelecionada(obra)
+        document.body.style.overflow = "hidden"
+    }
+
+    function fecharObra() {
+        setObraSelecionada(null)
+        document.body.style.overflow = "auto"
+    }
+
+    function abrirDenuncia() {
+        setModalDenunciaAberto(true)
+    }
+
+    function fecharDenuncia() {
+        setModalDenunciaAberto(false)
+    }
+
     return (
         <div className="perfil">
             <header>
@@ -29,68 +114,75 @@ function Perfil({artista}) {
             <main>
                 <section className="perfil_info">
                     <div className="perfil_foto">
-                        <img className="fotoPerfil" src={artista.foto} alt={artista.nome}/>
+                        <img className="fotoPerfil" src={artista.foto} alt={artista.nome} />
                         <div className="perfil_user">
-                        <h3>{artista.username}</h3>
-                        <p className="artista_cidade">{artista.cidade}</p>
+                            <h3>{artista.username}</h3>
+                            <p className="artista_cidade">{artista.cidade}</p>
                         </div>
                     </div>
                     <div className="perfil_dados">
                         <h2>{artista.nome}</h2>
                         <p>{artista.portfolio}</p>
                         <p>{artista.bio}</p>
-                    <div className="perfil-contatos">  
-                        <p>{artista.redeSocial}</p>
-                        <p>{artista.contato}</p>
-                    </div>      
+                        <div className="perfil-contatos">
+                            <p>{artista.redeSocial}</p>
+                            <p>{artista.contato}</p>
+                        </div>
                     </div>
                 </section>
                 <section className="perfil_obras">
                     <div className="criacao">
-                    <h2>Obras da artista</h2>
-                    <BotaoNovaPublic aoClicar={abrirModal}/>
-                    <ModalPublic aberto={estadoModal} fechado={fecharModal}/>
+                        <h2>Obras da artista</h2>
+                        <BotaoNovaPublic aoClicar={abrirModal} />
+                        <ModalPublic aberto={estadoModal} fechado={fecharModal} />
                     </div>
                     <div className="obras">
-                        <CardTemplate
-                            imagem = "https://i.pinimg.com/1200x/a3/16/45/a31645095097e81b3743ea41413f5ce7.jpg"
-                            titulo ="Joaninha em folha"
-                            subtitulo="Beatriz Silva"
-                        />
-                        <CardTemplate
-                            imagem = "https://i.pinimg.com/1200x/c9/6a/70/c96a703ea9b9a048d78bc68e7d696fd0.jpg"
-                            titulo ="Bordado & Fotos"
-                            subtitulo="Beatriz Silva"
-                        />
-                        <CardTemplate 
-                            imagem = "https://i.pinimg.com/1200x/3e/ec/0f/3eec0f584cd0e9530068c6022e93fb88.jpg"
-                            titulo ="Passado Presente"
-                            subtitulo="Beatriz Silva"
-                        />
-                        <CardTemplate
-                            imagem = "https://i.pinimg.com/736x/2b/bc/d0/2bbcd05e70d76fa501aed68a4df8f07f.jpg"
-                            titulo ="Ramo"
-                            subtitulo="Beatriz Silva"
-                        />
-                        <CardTemplate
-                            imagem = "https://i.pinimg.com/736x/bd/8d/a3/bd8da37f8773a5a8ae27f66950484d0e.jpg"
-                            titulo ="O olhar"
-                            subtitulo="Beatriz Silva"
-                        />
-                        <CardTemplate
-                            imagem = "https://i.pinimg.com/736x/93/be/1d/93be1d9205ad046f50540570b967f187.jpg"
-                            titulo ="Flores"
-                            subtitulo="Beatriz Silva"
-                        />
-                        <CardTemplate
-                            imagem = "https://i.pinimg.com/1200x/e2/5e/65/e25e65d354236c51cff38f4202397500.jpg"
-                            titulo = "Xilogatura"
-                            subtitulo="Beatriz Silva"
-                        />
+                        {
+                            obras.map((obra) => (
+                                <button className="card-btn" key={obra.id} onClick={() => abrirObra(obra)}>
+                                    <CardTemplate
+                                        imagem={obra.imagem}
+                                        titulo={obra.titulo}
+                                        subtitulo={obra.subtitulo}
+                                    ></CardTemplate>
+                                </button>
+                            ))
+                        }
                     </div>
+                    {obraSelecionada && (
+                        <div className="overlay-obra" >
+                            <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
+                                <div className="btn-modal">
+                                    <button
+                                        className="botao-denuncia"
+                                        onClick={(e) => { e.stopPropagation(); abrirDenuncia(); }}
+                                    >
+                                        <IoWarningOutline />
+                                    </button>
+                                    <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
+                                </div>
+                                <div className="org-modal">
+                                    <div className="div-imagem">
+                                        <img src={obraSelecionada.imagem} alt={obraSelecionada.titulo} />
+                                        <h1 className="titulo-obra">{obraSelecionada.titulo}</h1>
+                                    </div>
+                                    <div className="div-info">
+                                        <h2>{obraSelecionada.subtitulo}</h2>
+                                        <h3>{obraSelecionada.categoria}</h3>
+                                        <p className="descr-obra">{obraSelecionada.descricao}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
+
+                        </div>
+                    )}
+
+
                 </section>
             </main>
-            <Rodape variante="bege"/>
+            <Rodape variante="bege" />
         </div>
     )
 }

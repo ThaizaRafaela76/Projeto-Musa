@@ -62,8 +62,8 @@ const Artistas = () => {
                     <div>
                         <span className="text1">Artistas</span>
                     </div>
-                    <div>
-                        <span className="text2">São elas que criam.</span>
+                    <div className="text2">
+                        <h1> São elas que criam. </h1>
                     </div>
                     <div className="imagem-artistas">
                         <img
