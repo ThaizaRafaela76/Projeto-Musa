@@ -38,7 +38,7 @@ const CampoImgPublic = ({name, imagem, setImagem, erro}) => {
             hidden
             />
 
-            {erro && <span>{erro}</span>}
+            {erro && <span className="erro-imagem">{erro}</span>}
         </div>
     )
 }

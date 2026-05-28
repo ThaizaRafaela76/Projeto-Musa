@@ -29,19 +29,23 @@ function ModalPublic({ aberto, fechado }) {
         let novosErros = {};
 
         if (!formPublic.nomeObra.trim()) {
-            novosErros.nomeObra = "O nome da obra é obrigatório"
+            novosErros.nomeObra = "*O nome da obra é obrigatório"
         }
 
         if (!formPublic.artistaObra.trim()) {
-            novosErros.artistaObra = "O nome da artista é obrigatório"
+            novosErros.artistaObra = "*O nome da artista é obrigatório"
         }
 
         if (!formPublic.descricaoObra.trim()) {
-            novosErros.descricaoObra = "A descrição é obrigatória"
+            novosErros.descricaoObra = "*A descrição é obrigatória"
         }
 
         if (!formPublic.imagemObra) {
-            novosErros.imagemObra = "Insira a imagem da sua obra"
+            novosErros.imagemObra = "*Insira a imagem da sua obra"
+        }
+
+        if (!formPublic.categoriaObra) {
+            novosErros.categoriaObra = "*Escolha uma categoria"
         }
 
 
@@ -51,7 +55,7 @@ function ModalPublic({ aberto, fechado }) {
             return;
         }
 
-        alert(`Form enviado`, formPublic)
+        alert(`Obra publicada!`)
         fechado()
     }
 
@@ -90,12 +94,17 @@ function ModalPublic({ aberto, fechado }) {
                                     { value: "xilogravura", label: "Xilogravura" },
                                 ]}
                                     valor={filtro}
-                                    onChange={setFiltro}
+                                    onChange={(valor) => {
+                                        setFiltro(valor);
+                                        setFormPublic({...formPublic, categoriaObra:valor})
+                                    }}
                                     aberto={filtroAberto}
                                     setAberto={setFiltroAberto}
                                     ordemAberta={ordemAberta}
                                     setOrdemAberta={setOrdemAberta}
+                                    erro={erros.categoriaObra}
                                 />
+                                {erros.categoriaObra && <span className="erro">{erros.categoriaObra}</span>}
                             </div>
                         </div>
                         {/* conteúdo do lado direito */}

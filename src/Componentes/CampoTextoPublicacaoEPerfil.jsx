@@ -13,7 +13,6 @@ const CampoTextoPublicacaoEPerfil = ({label, name, placeholder, value, handleOnC
                 placeholder={placeholder}
                 value={value}
                 onChange={handleOnChange}
-                erro
             />
 
             {erro && <span>{erro}</span>}

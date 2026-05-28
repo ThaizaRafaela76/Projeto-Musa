@@ -34,3 +34,14 @@
     object-fit: cover;
     cursor: pointer;
 }
+
+.erro-imagem{
+    align-items: flex-start;
+    padding-right: 90px;
+    margin-top: 8px;
+}
+
+
+.upload-publicacao label.erro {
+    border: 2px solid var(--pink);
+}
