@@ -9,6 +9,16 @@
     overflow: hidden;
 
     background-color: var(--bege);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+
+}
+
+.card-template:hover {
+    transform: translateY(-3px);
+    background: #f4ebe0;
+    
 }
 
 .card-imagem {
