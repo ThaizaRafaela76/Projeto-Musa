@@ -1,0 +1,305 @@
+.div-geral {
+    background-color: var(--vinho);
+}
+
+.inicio-home {
+    background-color: var(--vinho);
+    height: 700px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.inicio-home img {
+    width: 500px;
+}
+.capa-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.corpo-home {
+    background-color: var(--bege);
+    padding: var(--padding-pagina);
+}
+
+/*PARTE DO SOBRE*/
+.sobre-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    color: var(--vinho);
+    padding-top: 50px;
+}
+
+.sobre-titulo {
+    font-size: 40px;
+    padding-bottom: 45px;
+}
+
+.sobre-texto {
+    max-width: 1300px;
+    padding-bottom: 30px;
+    line-height: 1.6;
+}
+
+.sobre-texto2 {
+    max-width: 1300px;
+    line-height: 1.6;
+
+    margin-bottom: -55px;
+}
+
+/*PARTE DO TERRITORIO*/
+.cidade-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 680px;
+    overflow: visible;
+
+    margin: 0 auto; 
+    margin-bottom: 100px;
+}
+.cidades-home {
+    background-color: var(--vinho);
+    color: var(--bege);
+
+    max-width: 900px;
+    padding: 50px;
+    border-radius: 20px;
+
+    position: relative;
+    z-index: 2;
+}
+.cidade-titulo {
+    font-size: 40px;
+    padding-bottom: 25px;
+}
+.cidade-texto {
+    max-width: 600px;
+    line-height: 1.6;
+}
+.cidade-mapa {
+    position: relative;
+    margin-left: -160px;
+    transform: translateY(5%);
+    z-index: 3;
+}
+.cidade-mapa img {
+    width: 650px;
+    max-width: none;
+    display: block;
+}
+
+/*PARTE DAS ULTIMAS POSTAGENS*/
+.div-post{
+    background-color: var(--laranja);
+    border-radius: 20px;
+
+    padding-top: 30px;
+}
+.post-home {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 0 30px 0 30px;
+    padding-bottom: 40px;
+}
+.post-titulo {
+    color: var(--bege);
+    font-size: 40px;
+}
+
+.post-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    overflow-x: scroll;
+    scrollbar-width: none;
+
+    gap: 2rem;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 20px 0 0 0;
+}
+.post-card > * {
+    flex-shrink: 0;
+}
+
+.div-setas {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 3rem;
+    margin-top: 50px;
+    padding-bottom: 30px;
+    
+}
+.div-setas button {
+    display: flex;
+    align-items: center;
+
+    background: none;
+    border: none;
+}
+.bnt-esq, .bnt-dir{
+    color: var(--bege);
+    font-size: 45px;
+}
+.bnt-dir:hover, .bnt-esq:hover {
+    color: var(--vinho);
+}
+
+/*PARTE DAS ARTISTAS*/
+.div-artista {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.div-artista-carrossel {
+    flex: 1;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.artista-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    gap: 2rem;
+    padding: 0 10px; 
+}
+
+.artista-card > * {
+    flex-shrink: 0;
+}
+
+.bnt-dir-artista {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--pink);
+    font-size: 2.5rem;
+    padding: 0 10px;
+    flex-shrink: 0;
+}
+.bnt-esq-artista {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--pink);
+    font-size: 2.5rem;
+
+    flex-shrink: 0;
+}
+
+.bnt-esq-artista:hover, .bnt-dir-artista:hover {
+    color: var(--vinho);
+}
+
+.artista-home {
+    background-color: var(--pink);
+    border-radius: 20px;
+    
+    max-width: 300px;
+    padding: 30px;
+    
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transform: scale(1.1);
+    transform-origin: left center;
+
+    z-index: 1;
+    margin-right: 40px;
+}
+
+.artista-titulo {
+    color: var(--bege);
+    max-width: 280px;
+    font-size: 40px;
+    
+    padding-bottom: 70px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.artista-card .card-template {
+    background-color: var(--pink);
+}
+
+.artista-card .card-info {
+    background-color: var(--pink);
+}
+.artista-card .card-info h2 {
+    color: var(--bege);
+}
+
+.div-juntese {
+    margin-top: 130px;
+    margin-bottom: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    gap: 2rem;
+}
+
+.juntese-titulo {
+    font-size: 45px;
+    color: var(--vinho);
+}
+
+.juntese-texto {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1.4;
+
+    max-width: 1000px;
+
+    color: var(--vinho);
+}
+
+.bnt-juntese {
+    background: var(--laranja);
+    color: var(--bege);
+    border: none;
+    border-radius: 8px;
+
+    font-weight: bold;
+    padding: 9px 45px;
+    font-size: 1.4rem;
+
+    margin-top: 10px;
+}
+
+.bnt-juntese:hover {
+    background: var(--vinho);
+}
