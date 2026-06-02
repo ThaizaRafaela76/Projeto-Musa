@@ -1,0 +1,26 @@
+.editar-perfil {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    background-color: var(--bege);
+    color: var(--vinho);
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 4px 12px;
+    width: fit-content;
+
+    font-size: 16px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.editar-perfil:hover {
+    background-color: var(--pink);
+    color: var(--bege);
+}
+

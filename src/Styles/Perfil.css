@@ -33,6 +33,12 @@ body {
   text-align: justify;
 }
 
+.nome-editar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .perfil-contatos {
   display: flex;
   flex-direction: column;

@@ -1,25 +1,25 @@
-.publicar-obra {
+.salvar-alteracoes {
     background-color: var(--vinho);
     color: var(--bege);
 
     display: block;
-    padding: 8px 12px;
+    padding: 8px 14px;
+    width: fit-content;
+
     margin-left: auto;
     margin-top: 12px;
+
+    text-align: center;
+    cursor: pointer;
 
     border: none;
     border-radius: 8px;
 
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-
+    font-weight: bold;
     font-size: 18px;
-    font-weight: bolder;
-    font-family: 'Nunito', sans-serif;
 }
 
-.publicar-obra:hover {
+.salvar-alteracoes:hover {
     background-color: var(--laranja);
-    color: var(--bege)
+    color: var(--bege);
 }

@@ -17,7 +17,8 @@
 
 .botao-nova:hover {
     background-color: var(--laranja);
-    color: var(--bege)
+    color: var(--bege);
+    transform: scale(1.1);
 }
 
 .botao-nova svg {

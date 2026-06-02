@@ -8,7 +8,7 @@
     border: 2px solid var(--vinho);
     box-sizing: border-box;
     margin: 4px 0;
-    background-color: var(--bege);
+    background-color: transparent;
     gap: 10px;
 }
 
@@ -27,7 +27,12 @@ input::placeholder, textarea::placeholder {
     opacity: 0.5;
 }
 
+input {
+    color: var(--vinho);
+}
+
 textarea {
     resize: none;
     height: 120px;
+    color: var(--vinho);
 }

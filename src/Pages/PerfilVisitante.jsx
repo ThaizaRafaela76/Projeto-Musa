@@ -2,41 +2,13 @@ import { useState } from "react"
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Perfil.css"
 import "../Componentes/Navbar"
-import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
-import ModalPublic from "../Componentes/ModalPublic"
 import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
 import ModalDenuncia from "../Componentes/ModalDenuncia"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
 import { IoWarningOutline } from "react-icons/io5"
-import BotaoEditarPerfil from "../Componentes/BotaoEditarPerfil"
-import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
 
 function Perfil({ artista }) {
-
-   const[estadoModalEditar, setEstadoModalEditar] = useState(false);
-
-   const abrirModalEditar = () => {
-        setEstadoModalEditar(true);
-        document.body.style.overflow = "hidden"
-   }
-
-   const fecharModalEditar = () => {
-        setEstadoModalEditar(false);
-        document.body.style.overflow = "auto"
-   }
-
-    const [estadoModal, setEstadoModal] = useState(false);
-
-    const abrirModal = () => {
-        setEstadoModal(true)
-        document.body.style.overflow = "hidden"
-    }
-
-    const fecharModal = () => {
-        setEstadoModal(false)
-        document.body.style.overflow = "auto"
-    }
 
     const obras = [
         {
@@ -134,11 +106,7 @@ function Perfil({ artista }) {
                         </div>
                     </div>
                     <div className="perfil_dados">
-                        <div className="nome-editar">
-                            <h2>{artista.nome}</h2>
-                            <BotaoEditarPerfil  aoClicar={abrirModalEditar}/>
-                            <ModalEditarPerfil aberto={estadoModalEditar} fechado={fecharModalEditar}/>
-                        </div>
+                        <h2>{artista.nome}</h2>
                         <p>{artista.portfolio}</p>
                         <p>{artista.bio}</p>
                         <div className="perfil-contatos">
@@ -150,8 +118,6 @@ function Perfil({ artista }) {
                 <section className="perfil_obras">
                     <div className="criacao">
                         <h2>Obras da artista</h2>
-                        <BotaoNovaPublic aoClicar={abrirModal} />
-                        <ModalPublic aberto={estadoModal} fechado={fecharModal} />
                     </div>
                     <div className="obras">
                         {
