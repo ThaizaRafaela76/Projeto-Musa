@@ -6,15 +6,18 @@ import Artista from './Pages/Artistas'
 import Perfil from './Pages/Perfil'
 
 
+
 function App() {
   const artistaInfo = {
-    foto: "",
-    nome: "Nome da Artista",
-    username: "@usuario",
+    foto: "https://i.pinimg.com/736x/20/70/4c/20704c0d36e53ee8ff255a02dffc3fd0.jpg",
+    nome: "Beatriz Silva",
+    username: "@beaslva",
     cidade: "Quixadá",
-    portfolio: "Portfolio",
-    bio: "Bio da artista",
-    contato: "contato@email.com"
+    portfolio: "www.beaslva.com.br",
+    bio: "Sou artista visual interessada nos limiares entre matéria e memória. Faço trabalhos com tinta a óleo e tecidos descartados. Também sou apaixonada por colagens e ando me arriscando na produção de xilogravura. Amo bichinhos e flores, e sempre dou um jeito de representá-los na minha arte de alguma forma.",
+    contato: "beaslva@gmail.com",
+    redeSocial: "@beaslva.arts"
+
 }
   return (
     <Router>
