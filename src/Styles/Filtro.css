@@ -15,6 +15,7 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
+  width: 225px;
 }
 
 .btnFiltro:hover {
@@ -25,7 +26,9 @@
   display: flex;
   font-size: 16px;
   color: var(--vinho);
-  align-items: center;
+  margin-left: auto;
+
+  
 }
 
 .menuFiltro {

@@ -81,16 +81,16 @@ function Acervo() {
         { id: 8, imagem: imagemColunaPartida, titulo: "A COLUNA PARTIDA", autora: "Frida Kahlo", categoria: "Pintura", descricao: "A Coluna Partida (1944) é um autorretrato visceral da pintora mexicana Frida Kahlo. Ele retrata a sua agonia física e emocional após uma grave cirurgia na coluna. A obra é mundialmente conhecida por expor a sua dor crônica de forma crua, simbolizando simultaneamente o sofrimento, o aprisionamento e a força espiritual." },
     ]
 
-    const obrasFiltrados = obras.filter((item)=>{
+    const obrasFiltrados = obras.filter((item) => {
         const passaPesquisa = item.titulo.toLowerCase().includes(pesquisa.toLowerCase());
-        const passaFiltro = (filtro ==="" || item.categoria === filtro); 
-        console.log( passaPesquisa && passaFiltro);
+        const passaFiltro = (filtro === "" || item.categoria === filtro);
+        console.log(passaPesquisa && passaFiltro);
         return passaPesquisa && passaFiltro;
-    }).sort((a,b)=>{
+    }).sort((a, b) => {
         return ordem == "az" ? a.titulo.localeCompare(b.titulo) : b.titulo.localeCompare(a.titulo)
     });
 
-    const[estadoModal, setEstadoModal] = useState(false);
+    const [estadoModal, setEstadoModal] = useState(false);
 
     const abrirModal = () => {
         setEstadoModal(true)
@@ -136,20 +136,26 @@ function Acervo() {
                     <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
                     <BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>
                 </div>
-                <ModalPublic aberto={estadoModal} fechado={fecharModal}/>
-                
+                <ModalPublic aberto={estadoModal} fechado={fecharModal} />
+                {
+                    obrasFiltrados.length === 0 ? (
+                        <p>
+                            Nenhuma obra encontrada
+                        </p>
+                    ) : (
+                        <div className="cards-acervo">
+                            {obrasFiltrados.map((obra) => (
+                                <button key={obra.id} className="card-btn" onClick={() => abrirObra(obra)}>
+                                    <CardTemplate
+                                        imagem={obra.imagem}
+                                        titulo={obra.titulo}
+                                        subtitulo={obra.autora}
+                                    />
+                                </button>
+                            ))}
+                        </div>
+                    )}
 
-                <div className="cards-acervo">
-                    {obrasFiltrados.map((obra) => (
-                        <button key={obra.id} className="card-btn" onClick={() => abrirObra(obra)}>
-                            <CardTemplate
-                                imagem={obra.imagem}
-                                titulo={obra.titulo}
-                                subtitulo={obra.autora}
-                            />
-                        </button>
-                    ))}
-                </div>
 
                 {obraSelecionada && (
                     <div className="overlay-obra" >
