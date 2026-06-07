@@ -1,0 +1,29 @@
+.campo-input {
+display: flex;
+flex-direction: column;
+gap: 6px;
+width: 100%;
+}
+.campo-input label {
+font-size: 12px;
+color: #1f2937;
+font-weight: 500;
+}
+.campo-input-field {
+width: 100%;
+padding: 12px;
+border: 1px solid #d1d5db;
+border-radius: 8px;
+outline: none;
+transition: 0.2s;
+}
+.campo-input-field:focus {
+border-color: #5a1025;
+}
+.campo-erro {
+border-color: red;
+}
+.campo-input span {
+font-size: 12px;
+color: red;
+}

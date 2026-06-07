@@ -4,6 +4,7 @@ import Home from './Pages/Home'
 import Acervo from './Pages/Acervo'
 import Artista from './Pages/Artistas'
 import Perfil from './Pages/Perfil'
+//import Login from './Pages/Login'
 
 
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* <Route path='/' element={<Login />} /> */}
         <Route path='/' element={<Home />}/>
         <Route path='/acervo' element={<Acervo />} />
         <Route path='/artistas' element={<Artista />} />
