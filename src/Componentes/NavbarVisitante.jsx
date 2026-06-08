@@ -27,7 +27,7 @@ function Navbar() {
                 <Link to="/artistas">Artistas</Link>
 
                 <div className="entrar">
-                    <Link to="/fazerlogin"><button className="bnt-entrar">Entrar</button></Link>
+                    <Link to="/login"><button className="bnt-entrar">Entrar</button></Link>
                 </div>
             </div>
         </nav>
