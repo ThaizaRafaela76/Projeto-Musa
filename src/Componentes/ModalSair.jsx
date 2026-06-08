@@ -14,7 +14,7 @@ function ModalSair({ onFechar }) {
 
       alert("Você saiu com sucesso!");
 
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error(error);
       alert("Erro ao sair.");

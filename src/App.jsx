@@ -1,12 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebaseConfig";
 
 import Home from "./Pages/Home";
+import HomeVisitante from "./Pages/Visitante/HomeVisitante";
+
 import Acervo from "./Pages/Acervo";
 import Artista from "./Pages/Artistas";
 import Perfil from "./Pages/Perfil";
 import Login from "./Pages/Login";
 
 function App() {
+  const [usuario, setUsuario] = useState(undefined);
+
   const artistaInfo = {
     foto: "https://i.pinimg.com/736x/20/70/4c/20704c0d36e53ee8ff255a02dffc3fd0.jpg",
     nome: "Beatriz Silva",
@@ -18,17 +26,39 @@ function App() {
     redeSocial: "@beaslva.arts"
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUsuario(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (usuario === undefined) {
+    return <h1>Carregando...</h1>;
+  }
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+
+        {/* Home dinâmica */}
+        <Route
+          path="/"
+          element={usuario ? <Home /> : <HomeVisitante />}
+        />
+
         <Route path="/login" element={<Login />} />
+
         <Route path="/acervo" element={<Acervo />} />
+
         <Route path="/artistas" element={<Artista />} />
+
         <Route
           path="/minhaconta"
           element={<Perfil artista={artistaInfo} />}
         />
+
       </Routes>
     </Router>
   );
