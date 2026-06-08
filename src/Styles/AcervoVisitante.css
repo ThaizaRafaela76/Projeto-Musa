@@ -1,0 +1,280 @@
+.pagina-acervo {
+    background-color: var(--bege);
+
+    min-height: 100vh;
+}
+
+/* HERO */
+
+.titulo-acervo {
+    text-align: center;
+
+    margin-top: 50px;
+    margin-bottom: 40px;
+
+    color: var(--vinho);
+}
+
+.titulo-acervo p {
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+.titulo-acervo h1 {
+    font-size: 56px;
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    margin: 0;
+}
+
+/* BANNER */
+
+.imagem-acervo {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 70px;
+}
+
+.imagem-acervo img {
+    width: 90%;
+    max-width: 1600px;
+
+    object-fit: cover;
+}
+
+/* ÁREA DOS CARDS */
+
+.cards-section {
+    width: 100%;
+    background-color: var(--vinho);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    max-width: 100%;
+    min-height: 100vh;
+}
+
+/* CARDS */
+
+.cards-acervo {
+    width: 90%;
+    max-width: 1400px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+}
+
+
+/*CONTROLES DE PESQUISA, FILTRO E ORDENAR*/
+
+.controles-acervo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 5%;
+    margin-bottom: 30px;
+    width: 90%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* LARGURA DA CAIXA DE PESQUISA*/
+
+.controles-acervo .caixaPesquisa {
+    flex: unset;
+    width: 600px;
+}
+
+/*NOME DO BOTÃO ORDENAR EM BOLD*/
+
+.controles-acervo .btnOrdenar {
+    font-weight: bold;
+}
+
+
+/*LARGURA DO BOTÃO FILTRAR E ESPAÇAMENTO ENTRE O NOME DO BOTÃO E A SETA*/
+
+.controles-acervo .btnFiltro {
+    width: 150px;
+    justify-content: space-between;
+}
+
+/* TAMANHO DOS CARDS */
+
+.cards-acervo .card-template {
+    width: 280px;
+}
+
+.cards-acervo .card-imagem {
+    height: 170px;
+}
+
+.cards-acervo .card-info h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cards-acervo .card-info p {
+    font-size: 14px;
+}
+
+/* BOTÃO DO CARD */
+.card-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+/* 4 CARDS POR LINHA */
+.cards-acervo {
+    display: grid;
+    grid-template-columns: repeat(4, 280px);
+    justify-content: center;
+    gap: 30px;
+}
+
+/* MODAL DA OBRA */
+.overlay-obra {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+
+.modal-geral {
+    background-color: var(--bege);
+    color: var(--vinho);
+    border-radius: 16px;
+    padding: 30px 40px 40px 40px;
+    width: 750px;
+    max-width: 95vw;
+    display: flex;
+    flex-direction: column;
+    z-index: 201;
+}
+
+.btn-modal {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-fechar-obra {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--vinho);
+    color: var(--bege);
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-fechar-obra:hover {
+    background-color: var(--laranja);
+}
+
+.org-modal {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.div-imagem {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.div-imagem img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.titulo-obra {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 8px;
+}
+
+.div-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+}
+
+.descr-obra {
+    line-height: 1.5;
+    text-align: justify;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+
+.btn-modal .botao-denuncia {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+}
+
+.btn-modal .botao-denuncia svg {
+    font-size: 24px;
+}
+
+
+.overlay {
+    z-index: 300;
+}
+
+.modal-denuncia {
+    z-index: 301;
+}
+
+.titulo-acervo h1 {
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.titulo-acervo p {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/*botão de ordenar perto do de filtrar*/
+.controles-acervo > *:last-child {
+    margin-left: 0;
+}
