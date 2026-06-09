@@ -11,6 +11,7 @@ import Acervo from "./Pages/Acervo";
 import Artista from "./Pages/Artistas";
 import Perfil from "./Pages/Perfil";
 import Login from "./Pages/Login";
+import AcervoVisitante from "./Pages/AcervoVisitante";
 
 function App() {
   const [usuario, setUsuario] = useState(undefined);
@@ -50,7 +51,7 @@ function App() {
 
         <Route path="/login" element={<Login />} />
 
-        <Route path="/acervo" element={<Acervo />} />
+        <Route path="/acervo" element={usuario ? <Acervo /> : <AcervoVisitante />} />
 
         <Route path="/artistas" element={<Artista />} />
 

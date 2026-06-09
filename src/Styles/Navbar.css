@@ -46,6 +46,14 @@
     color: var(--laranja);
 }
 
+.dropdown .dropdown-conta {
+    color: var(--bege);
+}
+
+.dropdown .dropdown-conta:hover {
+    color: var(--pink);
+}
+
 .links button {
     background: none;
     border: none;

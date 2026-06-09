@@ -23,7 +23,7 @@ function Navbar() {
             <div>
                 <div className="triangulo"></div>
                 <div className="dropdown">
-                    <Link to="/minhaconta">Minha conta</Link>
+                    <Link to="/minhaconta" className="dropdown-conta">Minha conta</Link>
                     <button className="dropdown-sair" onClick={() => {
                         setMostrarModal(true)
                         setMenuAberto(false) 
