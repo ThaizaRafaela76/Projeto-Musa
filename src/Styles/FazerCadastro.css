@@ -1,0 +1,312 @@
+.cadastro-page {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+}
+
+.cadastro-card {
+    display: flex;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* LADO ESQUERDO */
+.cadastro-formulario {
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    gap: 16px;
+}
+
+.cadastro-logo-topo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 80px;
+}
+
+.cadastro-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cadastro-voltar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: var(--vinho);
+    width: fit-content;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.cadastro-voltar:hover {
+    color: var(--laranja);
+}
+
+/* BARRAS DE PROGRESSO */
+.cadastro-progresso {
+    display: flex;
+    gap: 8px;
+}
+
+.barra-progresso {
+    height: 5px;
+    width: 60px;
+    border-radius: 10px;
+    background-color: #e0e0e0;
+    transition: background-color 0.3s;
+}
+
+.barra-progresso.ativa {
+    background-color: var(--vinho);
+}
+
+.cadastro-titulo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+}
+
+/* CAMPOS */
+.cadastro-campos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.campo-cadastro label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.campo-cadastro input,
+.campo-cadastro textarea,
+.campo-cadastro select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    color: #3a3a3a;
+    background-color: white;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.campo-cadastro input:focus,
+.campo-cadastro textarea:focus,
+.campo-cadastro select:focus {
+    border-color: var(--vinho);
+}
+
+.campo-cadastro textarea {
+    resize: none;
+}
+
+.campo-erro {
+    border-color: red !important;
+}
+
+.erro-msg {
+    font-size: 12px;
+    color: red;
+    font-weight: 500;
+    min-height: 0 !important;
+}
+
+/* SENHA */
+.input-senha-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-senha-wrapper input {
+    padding-right: 44px;
+}
+
+.toggle-senha {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.toggle-senha:hover {
+    color: var(--vinho);
+}
+
+/* REQUISITOS DE SENHA */
+.requisitos-senha {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-top: 2px;
+}
+
+.requisitos-senha p {
+    font-size: 11px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.requisito-ok {
+    color: #16a34a;
+}
+
+.requisito-pendente {
+    color: #9ca3af;
+}
+
+/* SELECT */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 36px;
+}
+
+.select-wrapper::after {
+    content: "⌄";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-60%);
+    font-size: 1rem;
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+/* FOTO DE PERFIL */
+.upload-foto-perfil {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.upload-foto-perfil label {
+    cursor: pointer;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    color: #3a3a3a !important;
+}
+
+.icone-foto-perfil {
+    font-size: 100px;
+    color: #d1d5db;
+}
+
+.preview-foto-perfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* UPLOAD IMAGEM TRABALHO */
+.upload-trabalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px !important;
+    color: #9ca3af !important;
+    font-weight: normal !important;
+    transition: border-color 0.2s;
+}
+
+.upload-trabalho svg {
+    font-size: 1.2rem;
+    color: #9ca3af;
+}
+
+.upload-trabalho:hover {
+    border-color: var(--vinho);
+}
+
+/* BOTÃO PRÓXIMO */
+.botao-proximo {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--vinho);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background-color 0.2s;
+}
+
+.botao-proximo:hover {
+    background-color: #6b1a2e;
+}
+
+/* TELA DE SUCESSO */
+.cadastro-sucesso {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+}
+
+.cadastro-sucesso h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+}
+
+.cadastro-sucesso p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 14px;
+}
+
+/* LADO DIREITO - BANNER */
+.cadastro-banner {
+    width: 550px;
+    min-height: 600px;
+}
+
+.cadastro-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
