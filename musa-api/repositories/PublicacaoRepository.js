@@ -1,0 +1,1 @@
+import PublicacaoModel from "../models/PublicacaoModel"

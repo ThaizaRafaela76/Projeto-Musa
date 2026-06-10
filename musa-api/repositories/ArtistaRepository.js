@@ -1,0 +1,1 @@
+import ArtistaModel from "../models/ArtistaModel"
