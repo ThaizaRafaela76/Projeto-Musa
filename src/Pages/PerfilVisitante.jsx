@@ -1,14 +1,28 @@
 import { useState } from "react"
 import Rodape from "../Componentes/Rodape"
-import "../Styles/Perfil.css"
+import "../Styles/Visitante/PerfilVisitante.css"
 import "../Componentes/Navbar"
 import CardTemplate from "../Componentes/CardTemplate"
-import Navbar from "../Componentes/Navbar"
+import NavbarVisitante from "../Componentes/NavbarVisitante"
 import ModalDenuncia from "../Componentes/ModalDenuncia"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
+import BotaoExcluir from "../Componentes/BotaoExcluir"
+import ModalDenunciarPerfil from "../Componentes/ModalDenunciarPerfil"
 import { IoWarningOutline } from "react-icons/io5"
 
 function Perfil({ artista }) {
+
+    const[estadoModalDenunciarPerfil, setEstadoModalDenunciarPerfil] = useState(false);
+
+   const abrirModalDenunciarPerfil = () => {
+        setEstadoModalDenunciarPerfil(true);
+        document.body.style.overflow = "hidden"
+   }
+
+   const fecharModalDenunciarPerfil = () => {
+        setEstadoModalDenunciarPerfil(false);
+        document.body.style.overflow = "auto"
+   }
 
     const obras = [
         {
@@ -94,7 +108,7 @@ function Perfil({ artista }) {
     return (
         <div className="perfil">
             <header>
-                <Navbar />
+                <NavbarVisitante />
             </header>
             <main>
                 <section className="perfil_info">
@@ -106,7 +120,11 @@ function Perfil({ artista }) {
                         </div>
                     </div>
                     <div className="perfil_dados">
-                        <h2>{artista.nome}</h2>
+                        <div className="perfil-denunciar">
+                            <h2>{artista.nome}</h2>
+                            <BotaoDenuncia abrirModal={abrirModalDenunciarPerfil} />
+                            <ModalDenunciarPerfil aberto={estadoModalDenunciarPerfil} fecharModal={fecharModalDenunciarPerfil}/>
+                        </div>
                         <p>{artista.portfolio}</p>
                         <p>{artista.bio}</p>
                         <div className="perfil-contatos">

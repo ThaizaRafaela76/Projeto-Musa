@@ -28,7 +28,7 @@ function PerfisArtistas({ mock, opcoesOrdem, opcoesFiltro }) {
 
     const navigate = useNavigate();
     function irParaPerfil() {
-        navigate('/minhaconta');
+        navigate('/perfil');
 
     }
     return (

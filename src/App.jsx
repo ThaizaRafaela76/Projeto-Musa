@@ -10,6 +10,7 @@ import HomeVisitante from "./Pages/Visitante/HomeVisitante";
 import Acervo from "./Pages/Acervo";
 import Artista from "./Pages/Artistas";
 import Perfil from "./Pages/Perfil";
+import PerfilVisitante from "./Pages/PerfilVisitante"
 import Login from "./Pages/Login";
 import AcervoVisitante from "./Pages/AcervoVisitante";
 
@@ -58,6 +59,11 @@ function App() {
         <Route
           path="/minhaconta"
           element={<Perfil artista={artistaInfo} />}
+        />
+
+        <Route
+          path="/perfil"
+          element={<PerfilVisitante artista={artistaInfo} />}
         />
 
       </Routes>

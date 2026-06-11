@@ -1,0 +1,132 @@
+body {
+  background-color: var(--vinho);
+  color: var(--bege)
+}
+
+.perfil {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh ;
+}
+
+.perfil_info {
+  display: flex;
+  gap: 8rem;
+  padding: var(--padding-pagina);
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.perfil_obras {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: var(--padding-pagina);
+  padding-top: 4rem;
+}
+
+.perfil_dados {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  gap: 8px;
+  text-align: justify;
+}
+
+.perfil-denunciar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.perfil-denunciar .botao-denuncia {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--laranja);
+    color: var(--bege);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.perfil-denunciar .botao-denuncia svg {
+    font-size: 26px;
+}
+
+.perfil-denunciar .botao-denuncia:hover {
+    background-color: var(--pink);
+}
+
+.perfil-contatos {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  gap: 4px;
+}
+
+.perfil_dados p {
+  font-size: 18px;
+}
+
+.perfil-contatos p {
+  font-size: 16px;
+}
+
+.perfil_foto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -18px;
+}
+
+.fotoPerfil {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.perfil_user {
+  padding-top: 0.6rem;
+}
+
+.artista_cidade {
+  padding-top: 0.1rem;
+}
+
+.criacao {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.criacao h2 {
+  margin-top: 6px;
+}
+
+.obras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.obras .card-template {
+ background-color: var(--bege);
+}
+
+.card-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
