@@ -1,4 +1,5 @@
 import { useState } from "react"
+import {criarPublicacao} from "../services/publicacaoService"
 import "../Styles/ModalPublic.css"
 import BotaoNovaPublic from "./BotaoNovaPublic"
 import CampoTextoPublicacaoEPerfil from "./CampoTextoPublicacaoEPerfil"
@@ -9,13 +10,12 @@ import Filtro from "./Filtro"
 import { FaX } from "react-icons/fa6";
 
 
-function ModalPublic({ aberto, fechado }) {
+function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
 
     if (!aberto) return null;
 
     const [formPublic, setFormPublic] = useState({
         nomeObra: "",
-        artistaObra: "",
         descricaoObra: "",
         categoriaObra: "",
         imagemObra: null
@@ -23,7 +23,7 @@ function ModalPublic({ aberto, fechado }) {
 
     const [erros, setErros] = useState({})
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         let novosErros = {};
@@ -32,9 +32,6 @@ function ModalPublic({ aberto, fechado }) {
             novosErros.nomeObra = "*O nome da obra é obrigatório"
         }
 
-        if (!formPublic.artistaObra.trim()) {
-            novosErros.artistaObra = "*O nome da artista é obrigatório"
-        }
 
         if (!formPublic.descricaoObra.trim()) {
             novosErros.descricaoObra = "*A descrição é obrigatória"
@@ -55,8 +52,21 @@ function ModalPublic({ aberto, fechado }) {
             return;
         }
 
-        alert(`Obra publicada!`)
-        fechado()
+        try {
+            const formData = new FormData()
+            formData.append("nomeObra", formPublic.nomeObra)
+            formData.append("descricaoObra", formPublic.descricaoObra)
+            formData.append("categoriaObra", formPublic.categoriaObra)
+            formData.append("imagemObra", formPublic.imagemObra)
+
+            await criarPublicacao(formData)
+            if(onPublicacaoCriada) onPublicacaoCriada()
+            alert("Musa, sua obra foi publicada com sucesso! :)")
+            fechado() 
+        } catch(error) {
+            console.error(error)
+            alert("Erro ao publicar :( Tente novamente")
+        }
     }
 
     const [filtro, setFiltro] = useState("");
@@ -87,11 +97,11 @@ function ModalPublic({ aberto, fechado }) {
                                 <h3>Categoria da obra</h3>
                                 <Filtro opcoes={[
                                     { value: "", label: "Filtro" },
-                                    { value: "pintura", label: "Pintura" },
-                                    { value: "colagem", label: "Colagem" },
-                                    { value: "arte digital", label: "Arte digital" },
-                                    { value: "fotografia", label: "Fotografia" },
-                                    { value: "xilogravura", label: "Xilogravura" },
+                                    { value: "Pintura", label: "Pintura" },
+                                    { value: "Colagem", label: "Colagem" },
+                                    { value: "Arte digital", label: "Arte digital" },
+                                    { value: "Fotografia", label: "Fotografia" },
+                                    { value: "Xilogravura", label: "Xilogravura" },
                                 ]}
                                     valor={filtro}
                                     onChange={(valor) => {
@@ -116,13 +126,6 @@ function ModalPublic({ aberto, fechado }) {
                                 value={formPublic.nomeObra}
                                 handleOnChange={(e) => setFormPublic({ ...formPublic, nomeObra: e.target.value })}
                                 erro={erros.nomeObra} />
-                            <CampoTextoPublicacaoEPerfil
-                                label="Nome da artista"
-                                name="artistaObra"
-                                placeholder="Maria"
-                                value={formPublic.artistaObra}
-                                handleOnChange={(e) => setFormPublic({ ...formPublic, artistaObra: e.target.value })}
-                                erro={erros.artistaObra} />
                             <CampoTextArea
                                 label="Descrição"
                                 name="descricaoObra"

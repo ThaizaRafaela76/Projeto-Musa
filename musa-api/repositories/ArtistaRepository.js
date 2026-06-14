@@ -65,7 +65,7 @@ class ArtistaRepository {
         const docRef = doc(db, COLECAO, snapshot.docs[0].id)
         await updateDoc(docRef, dados)
 
-        return { id: snapshot.docs[0].id, ...dados }
+        return { id: snapshot.docs[0].id, uid, ...dados }
     }
 
 

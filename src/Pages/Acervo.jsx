@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { buscarPublicacoes } from "../services/publicacaoService.js"
 import BarraPesquisa from "../Componentes/BarraPesquisa"
 import Filtro from "../Componentes/Filtro"
 import Ordenar from "../Componentes/Ordenar"
@@ -70,8 +71,24 @@ function Acervo() {
         setModalDenunciaAberto(false)
     }
 
+    const [obras, setObras] = useState([])
+    const [refreshKey, setRefreshKey] = useState(0)
+
+    useEffect(() => {
+        async function carregarObras() {
+            try {
+                const publicacoes = await buscarPublicacoes()
+                setObras(publicacoes)
+            } catch(error) {
+                console.error("Erro ao carregar obras:", error)
+            }
+        }
+        carregarObras()
+    }, [refreshKey])
+
+    /*
     const obras = [
-        { id: 1, imagem: imagemAntropofagia, titulo: "ANTROPOFAGIA", autora: "Tarsila do Amaral", categoria: "Pintura", descricao: "A pintura Antropofagia (1929), de Tarsila do Amaral, é uma das obras mais importantes do Modernismo brasileiro. A tela sintetiza o Movimento Antropofágico — proposto por Oswald de Andrade — ao fundir elementos da cultura nacional, da fauna e da flora com técnicas europeias, simbolizando a deglutição da cultura estrangeira para criar uma identidade genuinamente brasileira." },
+        { id: 1, imagem: imagemAntropofagia, nomeObra: "ANTROPOFAGIA", autora: "Tarsila do Amaral", categoria: "Pintura", descricao: "A pintura Antropofagia (1929), de Tarsila do Amaral, é uma das obras mais importantes do Modernismo brasileiro. A tela sintetiza o Movimento Antropofágico — proposto por Oswald de Andrade — ao fundir elementos da cultura nacional, da fauna e da flora com técnicas europeias, simbolizando a deglutição da cultura estrangeira para criar uma identidade genuinamente brasileira." },
         { id: 2, imagem: imagemOcula, titulo: "OCULA", autora: "Lygia Pape", categoria: "Pintura", descricao: "Lygia Pape (1927–2004) foi uma das pioneiras do movimento Neoconcreto no Brasil. Sua obra revolucionária dissolveu as fronteiras entre o objeto e o observador, explorando a geometria, o espaço e o corpo humano por meio de esculturas, gravuras, instalações e cinema." },
         { id: 3, imagem: imagemTresorixas, titulo: "TRÊS ORIXÁS", autora: "Djanira Motta", categoria: "Pintura", descricao: "A obra Três Orixás (1966), pintada a óleo sobre tela pela modernista brasileira Djanira da Motta e Silva, é uma das representações mais emblemáticas das religiões de matriz africana no Brasil." },
         { id: 4, imagem: imagemEusou, titulo: "EU SOU A MONSTRA", autora: "Hilda Hilst", categoria: "Poesia", descricao: "Eu sou a monstra é o único livro infantil escrito pela grande autora brasileira Hilda Hilst, originalmente criado em 1988. A obra é um poema lúdico e imaginativo onde a personagem não possui uma forma física fixa, celebrando a liberdade e a identidade através do olhar infantil." },
@@ -79,15 +96,15 @@ function Acervo() {
         { id: 6, imagem: imagemAboba, titulo: "A BOBA", autora: "Anita Malfatti", categoria: "Pintura", descricao: "A Boba (1915-1916), pintado por Anita Malfatti nos Estados Unidos, é um marco do Expressionismo e do modernismo brasileiro. A obra simboliza a ruptura com a rigidez da arte acadêmica tradicional, priorizando a subjetividade, a tensão emocional e cores vibrantes para retratar a vulnerabilidade humana." },
         { id: 7, imagem: imagemAutorretrato, titulo: "AUTORRETRATO COM ANJOS", autora: "Maria Auxiliadora", categoria: "Pintura", descricao: "Autorretrato com anjos (1972) é uma das obras mais emblemáticas da artista naif Maria Auxiliadora da Silva. A tela retrata a artista no centro, em seu cavalete, pintando uma cena rural. Ela está rodeada por anjos (brancos e negros) que trazem seus materiais, como pincéis e tintas." },
         { id: 8, imagem: imagemColunaPartida, titulo: "A COLUNA PARTIDA", autora: "Frida Kahlo", categoria: "Pintura", descricao: "A Coluna Partida (1944) é um autorretrato visceral da pintora mexicana Frida Kahlo. Ele retrata a sua agonia física e emocional após uma grave cirurgia na coluna. A obra é mundialmente conhecida por expor a sua dor crônica de forma crua, simbolizando simultaneamente o sofrimento, o aprisionamento e a força espiritual." },
-    ]
+    ] */
 
     const obrasFiltrados = obras.filter((item) => {
-        const passaPesquisa = item.titulo.toLowerCase().includes(pesquisa.toLowerCase());
-        const passaFiltro = (filtro === "" || item.categoria === filtro);
+        const passaPesquisa = item.nomeObra.toLowerCase().includes(pesquisa.toLowerCase());
+        const passaFiltro = (filtro === "" || item.categoriaObra === filtro);
         console.log(passaPesquisa && passaFiltro);
         return passaPesquisa && passaFiltro;
     }).sort((a, b) => {
-        return ordem == "az" ? a.titulo.localeCompare(b.titulo) : b.titulo.localeCompare(a.titulo)
+        return ordem == "az" ? a.nomeObra.localeCompare(b.nomeObra) : b.nomeObra.localeCompare(a.nomeObra)
     });
 
     const [estadoModal, setEstadoModal] = useState(false);
@@ -136,7 +153,7 @@ function Acervo() {
                     <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
                     <BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>
                 </div>
-                <ModalPublic aberto={estadoModal} fechado={fecharModal} />
+                <ModalPublic aberto={estadoModal} fechado={fecharModal} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
                 {
                     obrasFiltrados.length === 0 ? (
                         <p>
@@ -147,9 +164,9 @@ function Acervo() {
                             {obrasFiltrados.map((obra) => (
                                 <button key={obra.id} className="card-btn" onClick={() => abrirObra(obra)}>
                                     <CardTemplate
-                                        imagem={obra.imagem}
-                                        titulo={obra.titulo}
-                                        subtitulo={obra.autora}
+                                        imagem={`http://localhost:3000${obra.imagemObra}`}
+                                        titulo={obra.nomeObra}
+                                        subtitulo={obra.artistaObra}
                                     />
                                 </button>
                             ))}
@@ -171,13 +188,13 @@ function Acervo() {
                             </div>
                             <div className="org-modal">
                                 <div className="div-imagem">
-                                    <img src={obraSelecionada.imagem} alt={obraSelecionada.titulo} />
-                                    <h1 className="titulo-obra">{obraSelecionada.titulo}</h1>
+                                    <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} alt={obraSelecionada.nomeObra} />
+                                    <h1 className="titulo-obra">{obraSelecionada.nomeObra}</h1>
                                 </div>
                                 <div className="div-info">
-                                    <h2>{obraSelecionada.autora}</h2>
-                                    <h3>{obraSelecionada.categoria}</h3>
-                                    <p className="descr-obra">{obraSelecionada.descricao}</p>
+                                    <h2>{obraSelecionada.artistaObra}</h2>
+                                    <h3>{obraSelecionada.categoriaObra}</h3>
+                                    <p className="descr-obra">{obraSelecionada.descricaoObra}</p>
                                 </div>
                             </div>
                         </div>
