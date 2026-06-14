@@ -5,6 +5,8 @@ import logo from "../assets/logo_musa2.png"
 import imagemCadastro from "../assets/login-image.png"
 import "../Styles/FazerCadastro.css"
 
+import { cadastrarArtista } from "../services/artistasService"
+
 const opcoesCidade = [
     { value: "", label: "Cidade - Estado" },
     { value: "Banabuiu", label: "Banabuiu - CE" },
@@ -41,7 +43,7 @@ const opcoesArea = [
 function FazerCadastro() {
     const navigate = useNavigate()
     const [etapa, setEtapa] = useState(1)
-
+    const [loading, setLoading] = useState(false)
     const [form, setForm] = useState({
         nomeCompleto: "",
         email: "",
@@ -102,12 +104,50 @@ function FazerCadastro() {
         return Object.keys(novosErros).length === 0
     }
 
+    async function handleFinalizarCadastro() {
+        if (!validarEtapa3){
+            return;
+        }
+        setLoading(true)
+        try {
+            const formData = new FormData()
+
+            formData.append("nomeCompleto", form.nomeCompleto)
+            formData.append("email", form.email)
+            formData.append("nomeUsuario", form.nomeUsuario)
+            formData.append("senha", form.senha)
+            formData.append("localizacao", form.localizacao)
+            formData.append("linkPortfolio", form.linkPortfolio || "")
+            formData.append("linkInstagram", form.linkInstagram || "")
+            formData.append("descricao", form.descricao || "")
+            formData.append("areaAtuacao", form.areaAtuacao)
+
+            if (form.fotoPerfil) {
+                formData.append("fotoPerfil", form.fotoPerfil)
+            }
+            if (form.imagemTrabalho) {
+                formData.append("imagemTrabalho", form.imagemTrabalho)
+            }
+
+            await cadastrarArtista(formData)
+
+            setEtapa(4) 
+        } catch (error) {
+            console.error(error)
+            const mensagem = error.response?.data?.erro || "Erro ao realizar cadastro. Tente novamente."
+            alert(mensagem)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+
+
     function proximaEtapa() {
         if (etapa === 1 && !validarEtapa1()) return
         if (etapa === 2 && !validarEtapa2()) return
         if (etapa === 3) {
-            if (!validarEtapa3()) return
-            setEtapa(4)
+            handleFinalizarCadastro()
             return
         }
         setEtapa(etapa + 1)
@@ -357,8 +397,8 @@ function FazerCadastro() {
                                 </div>
                             )}
 
-                            <button className="botao-proximo" onClick={proximaEtapa}>
-                                {etapa === 3 ? "Próximo" : "Próximo"}
+                            <button className="botao-proximo" onClick={proximaEtapa} disabled={loading}>
+                                {loading ? "Cadastrando..." : (etapa === 3 ? "Finalizar Cadastro" : "Próximo")}
                             </button>
                         </div>
                     )}

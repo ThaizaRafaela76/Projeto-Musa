@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Perfil.css"
 import "../Componentes/Navbar"
@@ -11,11 +12,22 @@ import BotaoDenuncia from "../Componentes/BotaoDenuncia"
 import { IoWarningOutline } from "react-icons/io5"
 import BotaoEditarPerfil from "../Componentes/BotaoEditarPerfil"
 import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
-
-function Perfil({ artista }) {
-
+import { atualizarPerfil } from "../services/artistasService"
+function Perfil({ artista, onPerfilAtualizado }) {
+   const navigate = useNavigate()
    const[estadoModalEditar, setEstadoModalEditar] = useState(false);
+//    const [obras, setObras] = useState([])
+   const [loading, setLoading] = useState(true)
 
+   useEffect(() => {
+        if (artista === null) {
+            setLoading(false)
+            // Opcional: redirecionar para login
+            // navigate("/login")
+        } else if (artista) {
+            setLoading(false)
+        }
+    }, [artista, navigate])
    const abrirModalEditar = () => {
         setEstadoModalEditar(true);
         document.body.style.overflow = "hidden"
@@ -118,7 +130,39 @@ function Perfil({ artista }) {
     function fecharDenuncia() {
         setModalDenunciaAberto(false)
     }
+    const [refreshKey, setRefreshKey] = useState(0)
 
+    const handleSalvarPerfil = async (dadosAtualizados) => {
+        setLoading(true)
+        try {
+            const atualizado = await atualizarPerfil(dadosAtualizados)
+            if (onPerfilAtualizado) {
+                onPerfilAtualizado(atualizado)
+            }
+            setLoading(false)
+            setRefreshKey(prev => prev + 1)
+        } catch (error) {
+            console.error(error)
+            alert("Erro ao atualizar perfil")
+        }
+    }
+
+
+    if (loading) {
+        return <div className="perfil"><h2>Carregando perfil...</h2></div>
+    }
+    if (!artista) {
+        return (
+            <div className="perfil">
+                <Navbar />
+                <div style={{ textAlign: "center", padding: "50px" }}>
+                    <h2>Perfil não encontrado</h2>
+                    <button onClick={() => navigate("/login")}>Ir para Login</button>
+                </div>
+                <Rodape variante="bege" />
+            </div>
+        )
+    }
     return (
         <div className="perfil">
             <header>
@@ -127,23 +171,23 @@ function Perfil({ artista }) {
             <main>
                 <section className="perfil_info">
                     <div className="perfil_foto">
-                        <img className="fotoPerfil" src={artista.foto} alt={artista.nome} />
+                        <img className="fotoPerfil" src={`${artista.fotoPerfil}?t=${Date.now()}`} alt={artista.nomeCompleto} />
                         <div className="perfil_user">
-                            <h3>{artista.username}</h3>
-                            <p className="artista_cidade">{artista.cidade}</p>
+                            <h3>{artista.nomeUsuario}</h3>
+                            <p className="artista_cidade">{artista.localizacao}</p>
                         </div>
                     </div>
                     <div className="perfil_dados">
                         <div className="nome-editar">
-                            <h2>{artista.nome}</h2>
+                            <h2>{artista.nomeCompleto}</h2>
                             <BotaoEditarPerfil  aoClicar={abrirModalEditar}/>
-                            <ModalEditarPerfil aberto={estadoModalEditar} fechado={fecharModalEditar}/>
+                            <ModalEditarPerfil aberto={estadoModalEditar} fechado={fecharModalEditar} artista={artista} onSalvar={handleSalvarPerfil}/>
                         </div>
-                        <p>{artista.portfolio}</p>
-                        <p>{artista.bio}</p>
+                        <p>{artista.linkPortfolio}</p>
+                        <p>{artista.descricao}</p>
                         <div className="perfil-contatos">
-                            <p>{artista.redeSocial}</p>
-                            <p>{artista.contato}</p>
+                            <p>{artista.linkInstagram}</p>
+                            <p>{artista.email}</p>
                         </div>
                     </div>
                 </section>

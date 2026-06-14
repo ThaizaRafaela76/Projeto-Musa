@@ -12,7 +12,7 @@ function ModalSair({ onFechar }) {
     try {
       await signOut(auth);
 
-      alert("Você saiu com sucesso!");
+      // alert("Você saiu com sucesso!");
 
       navigate("/");
     } catch (error) {

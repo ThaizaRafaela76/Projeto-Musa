@@ -1,4 +1,6 @@
+// services/PublicacaoService.js
 import PublicacaoRepository from "../repositories/PublicacaoRepository.js"
+import uploadImagemLocal from "./uploadLocalService.js"
 
 class PublicacaoService {
     constructor() {
@@ -6,18 +8,20 @@ class PublicacaoService {
     }
 
     async buscarTodos() {
-        const publicacoes = await this.publicacaoRepository.buscarTodos()
-        return publicacoes
+        return await this.publicacaoRepository.buscarTodos()
     }
 
-    async criarPublic(nomeObra, artistaObra, descricaoObra, categoriaObra, imagemObra) {
+    async criarPublic(uid, nomeObra, descricaoObra, categoriaObra, imagemObraFile) {
+        const imagemObraUrl = await uploadImagemLocal(imagemObraFile, "publicacoes")
+
         const novaPublicacao = await this.publicacaoRepository.criarPublic(
-            nomeObra, 
-            artistaObra, 
-            descricaoObra, 
-            categoriaObra, 
-            imagemObra
+            uid,
+            nomeObra,
+            descricaoObra,
+            categoriaObra,
+            imagemObraUrl
         )
+
         return novaPublicacao
     }
 }

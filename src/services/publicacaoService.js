@@ -1,0 +1,13 @@
+import api from "./api"
+
+export async function buscarPublicacoes() {
+    const response = await api.get("/publicacoes")
+    return response.data
+}
+
+export async function criarPublicacao(formData) {
+    const response = await api.post("/publicacoes", formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+    })
+    return response.data
+}

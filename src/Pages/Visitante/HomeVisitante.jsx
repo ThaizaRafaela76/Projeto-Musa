@@ -168,7 +168,7 @@ const HomeVisitante = () => {
                     <div className="div-juntese">
                         <h1 className="juntese-titulo">Junte-se à Musa</h1>
                         <p className="juntese-texto">Um espaço pensado para artistas mulheres divulgarem seus trabalhos e trajetórias, ampliando a visibilidade de suas produções artísticas.</p>
-                        <Link to="/fazercadastro"><button className="bnt-juntese">Cadastre-se</button></Link>
+                        <Link to="/cadastro"><button className="bnt-juntese">Cadastre-se</button></Link>
                     </div>
                 </section>
             </main>

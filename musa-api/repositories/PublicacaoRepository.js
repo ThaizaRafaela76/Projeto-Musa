@@ -1,23 +1,38 @@
-import PublicacaoModel from "../models/PublicacaoModel.js"
+import { collection, getDocs, addDoc, query, where } from "firebase/firestore"
+import { db } from "../firebase.js"
 
-const publicacoes = []
+
+const COLECAO = "publicacoes"
+
 
 class PublicacaoRepository {
     async buscarTodos() {
-        return Promise.resolve(publicacoes)
+        const snapshot = await getDocs(collection(db, COLECAO))
+        return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
     }
 
-    async criarPublic(nomeObra, artistaObra, descricaoObra, categoriaObra, imagemObra) {
-        const novaPublicacao = new PublicacaoModel(
-            publicacoes.lenght + 1,
-            nomeObra, 
-            artistaObra, 
-            descricaoObra, 
-            categoriaObra,
-            imagemObra
+    async criarPublic(uid, nomeObra, descricaoObra, categoriaObra, imagemObra) {
+        const artistaSnapshot = await getDocs(
+            query(collection(db, "artistas"), where("uid", "==", uid))
         )
-        publicacoes.push(novaPublicacao)
-        return Promise.resolve(novaPublicacao)
+        if (artistaSnapshot.empty){
+            throw new Error("Artista não encontrado")
+        }
+
+        const artista = artistaSnapshot.docs[0].data()
+
+        const novaPublicacao = {
+            uid,
+            artistaObra: artista.nomeCompleto,
+            nomeObra,
+            descricaoObra,
+            categoriaObra,
+            imagemObra,
+            dataDeCriacao: new Date()
+        }
+
+        const docRef = await addDoc(collection(db, COLECAO), novaPublicacao)
+        return { id: docRef.id, ...novaPublicacao }
     }
 }
 

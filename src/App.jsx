@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebaseConfig";
+import { buscarPerfil } from "./services/artistasService"
 
 import Home from "./Pages/Home";
 import HomeVisitante from "./Pages/Visitante/HomeVisitante";
@@ -13,28 +14,60 @@ import Perfil from "./Pages/Perfil";
 import PerfilVisitante from "./Pages/PerfilVisitante"
 import Login from "./Pages/Login";
 import AcervoVisitante from "./Pages/AcervoVisitante";
-
+import FazerCadastro from "./Pages/FazerCadastro"
 function App() {
   const [usuario, setUsuario] = useState(undefined);
+  const [artista, setArtista] = useState(null)
+  // const artistaInfo = {
+  //   foto: "https://i.pinimg.com/736x/20/70/4c/20704c0d36e53ee8ff255a02dffc3fd0.jpg",
+  //   nome: "Beatriz Silva",
+  //   username: "@beaslva",
+  //   cidade: "Quixadá",
+  //   portfolio: "www.beaslva.com.br",
+  //   bio: "Sou artista visual interessada nos limiares entre matéria e memória...",
+  //   contato: "beaslva@gmail.com",
+  //   redeSocial: "@beaslva.arts"
+  // };
 
-  const artistaInfo = {
-    foto: "https://i.pinimg.com/736x/20/70/4c/20704c0d36e53ee8ff255a02dffc3fd0.jpg",
-    nome: "Beatriz Silva",
-    username: "@beaslva",
-    cidade: "Quixadá",
-    portfolio: "www.beaslva.com.br",
-    bio: "Sou artista visual interessada nos limiares entre matéria e memória...",
-    contato: "beaslva@gmail.com",
-    redeSocial: "@beaslva.arts"
-  };
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     setUsuario(user);
+  //   });
+
+  //   return () => unsubscribe();
+  // }, []);
+  const carregarPerfil = useCallback(async () => {
+    if (!usuario) return
+    try {
+      const dados = await buscarPerfil()
+      setArtista(dados)
+    } catch (error) {
+      console.error("Erro ao carregar perfil:", error)
+      setArtista(null)
+    }
+  }, [usuario])
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUsuario(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUsuario(user)
+      if (user) {
+        const token = await user.getIdToken()
+        localStorage.setItem("token", token)
+        localStorage.setItem("uid", user.uid)
+        carregarPerfil();
+      } else {
+        localStorage.removeItem("token")
+        localStorage.removeItem("uid")
+        setArtista(null);
+      }
     });
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [carregarPerfil])
+
+  const atualizarPerfilNoApp = (novosDados) => {
+    setArtista(novosDados)
+  }
 
   if (usuario === undefined) {
     return <h1>Carregando...</h1>;
@@ -50,7 +83,9 @@ function App() {
           element={usuario ? <Home /> : <HomeVisitante />}
         />
 
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={usuario ? <Navigate to="/" /> : <Login />} />
+
+        <Route path="/cadastro" element={<FazerCadastro />} />
 
         <Route path="/acervo" element={usuario ? <Acervo /> : <AcervoVisitante />} />
 
@@ -58,14 +93,13 @@ function App() {
 
         <Route
           path="/minhaconta"
-          element={<Perfil artista={artistaInfo} />}
+          element={usuario ? <Perfil artista={artista} onPerfilAtualizado={atualizarPerfilNoApp} /> : <Navigate to="/login" />}
         />
 
         <Route
-          path="/perfil"
-          element={<PerfilVisitante artista={artistaInfo} />}
+          path="/perfil/:uid"
+          element={<PerfilVisitante />}
         />
-
       </Routes>
     </Router>
   );
