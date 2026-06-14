@@ -24,6 +24,10 @@ class PublicacaoService {
 
         return novaPublicacao
     }
+
+    async deletarPublicacao(id, uid) {
+        return await this.publicacaoRepository.deletarPublicacao(id, uid)
+    }
 }
 
 export default new PublicacaoService()

@@ -1,4 +1,4 @@
-import express from "express"
+import express, { request, response } from "express"
 import publicacaoService from "../services/PublicacaoService.js"
 import { verificarToken } from "../middleware/authMiddleware.js"
 import { upload } from "../middleware/uploadMiddleware.js"
@@ -37,5 +37,16 @@ router.post("/",
         }
     }
 )
+
+router.delete("/:id", verificarToken, async(request, response) => {
+    try{
+        const { id } = request.params
+        const resultado = await publicacaoService.deletarPublicacao(id, request.uid)
+        response.json(resultado)
+    }
+    catch (error) {
+        response.status(400).json({ erro: error.message })
+    }
+})
 
 export default router
