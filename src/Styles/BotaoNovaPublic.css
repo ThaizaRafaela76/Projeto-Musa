@@ -13,12 +13,13 @@
     font-family: 'Nunito', sans-serif;
     padding: 8px 12px;
     gap: 4px;
+
+    transition: background-color 0.2s;
 }
 
 .botao-nova:hover {
     background-color: var(--laranja);
     color: var(--bege);
-    transform: scale(1.1);
 }
 
 .botao-nova svg {

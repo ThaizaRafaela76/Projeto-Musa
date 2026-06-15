@@ -1,6 +1,11 @@
 import "../Styles/ModalExcluirPubli.css"
 
-function ModalExcluirPubli({ confirmar, cancelar }) {
+function ModalExcluirPubli({aberto, confirmar, cancelar }) {
+
+    if (!aberto) {
+        return null
+    }
+
     return (
         <div className="div-modal-excluir">
             <div className="div-excluir">

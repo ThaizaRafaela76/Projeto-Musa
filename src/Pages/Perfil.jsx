@@ -7,8 +7,8 @@ import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
 import ModalPublic from "../Componentes/ModalPublic"
 import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
-import ModalDenuncia from "../Componentes/ModalDenuncia"
-import BotaoDenuncia from "../Componentes/BotaoDenuncia"
+import ModalExcluirPublic from "../Componentes/ModalExcluirPubli.jsx"
+import BotaoExcluir from "../Componentes/BotaoExcluir.jsx"
 import { IoWarningOutline } from "react-icons/io5"
 import BotaoEditarPerfil from "../Componentes/BotaoEditarPerfil"
 import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
@@ -74,7 +74,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
 }, [artista, refreshKey])
 
     const [obraSelecionada, setObraSelecionada] = useState(null)
-    const [modalDenunciaAberto, setModalDenunciaAberto] = useState(false)
+    const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
 
     function abrirObra(obra) {
         setObraSelecionada(obra)
@@ -86,14 +86,13 @@ function Perfil({ artista, onPerfilAtualizado }) {
         document.body.style.overflow = "auto"
     }
 
-    function abrirDenuncia() {
-        setModalDenunciaAberto(true)
-    }
-
-    function fecharDenuncia() {
-        setModalDenunciaAberto(false)
+    function abrirModalExcluirPublic() {
+        setModalExcluirPublic(true)
     }
     
+    function fecharModalExcluirPublic() {
+        setModalExcluirPublic(false)
+    }
 
     const handleSalvarPerfil = async (dadosAtualizados) => {
         setLoading(true)
@@ -177,12 +176,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
                         <div className="overlay-obra" >
                             <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
                                 <div className="btn-modal">
-                                    <button
-                                        className="botao-denuncia"
-                                        onClick={(e) => { e.stopPropagation(); abrirDenuncia(); }}
-                                    >
-                                        <IoWarningOutline />
-                                    </button>
+                                    <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluirPublic(); }}/>
                                     <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
                                 </div>
                                 <div className="org-modal">
@@ -198,7 +192,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
                                 </div>
                             </div>
 
-                            <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
+                            <ModalExcluirPublic aberto = {modalExcluirPublic} cancelar = {fecharModalExcluirPublic} />
 
                         </div>
                     )}
