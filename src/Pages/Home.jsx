@@ -62,9 +62,9 @@ const Home = () => {
 
     return (
         <div className="div-geral">
-            <header className="inicio-home">
+            <header className="inicio-homee">
                 <Navbar />
-                <div className="capa-home">
+                <div className="capa-homee">
                     <img src={Capa} />
                 </div>
 
