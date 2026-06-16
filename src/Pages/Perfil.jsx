@@ -13,7 +13,7 @@ import { IoWarningOutline } from "react-icons/io5"
 import BotaoEditarPerfil from "../Componentes/BotaoEditarPerfil"
 import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
 import { atualizarPerfil } from "../services/artistasService"
-import { buscarPublicacoes } from "../services/publicacaoService.js"
+import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
 
 
 
@@ -84,6 +84,17 @@ function Perfil({ artista, onPerfilAtualizado }) {
     function fecharObra() {
         setObraSelecionada(null)
         document.body.style.overflow = "auto"
+    }
+
+    async function confirmarExclusao() {
+        try {
+            await deletarPublicacao(obraSelecionada.id, artista.uid)
+            fecharModalExcluirPublic()
+            fecharObra()
+            setRefreshKey(prev => prev + 1)
+        } catch (error) {
+            alert("Erro ao excluir a obra.")
+        }
     }
 
     function abrirModalExcluirPublic() {
@@ -192,7 +203,11 @@ function Perfil({ artista, onPerfilAtualizado }) {
                                 </div>
                             </div>
 
-                            <ModalExcluirPublic aberto = {modalExcluirPublic} cancelar = {fecharModalExcluirPublic} />
+                           <ModalExcluirPublic
+                                aberto={modalExcluirPublic}
+                                cancelar={fecharModalExcluirPublic}
+                                confirmar={confirmarExclusao}
+                            />
 
                         </div>
                     )}

@@ -4,7 +4,7 @@
 
 .inicio-home {
     background-color: var(--vinho);
-    height: 700px;
+    height: 650px;
 
     display: flex;
     flex-direction: column;

@@ -11,3 +11,8 @@ export async function criarPublicacao(formData) {
     })
     return response.data
 }
+
+export async function deletarPublicacao(id, uid) {
+    const response = await api.delete(`/publicacoes/${id}`, { data: { uid } })
+    return response.data
+}
