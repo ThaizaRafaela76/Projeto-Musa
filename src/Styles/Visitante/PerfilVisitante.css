@@ -3,13 +3,13 @@ body {
   color: var(--bege)
 }
 
-.perfil {
+.perfil-visitante .perfil {
   display: flex;
   flex-direction: column;
   min-height: 100vh ;
 }
 
-.perfil_info {
+.perfil-visitante .perfil_info {
   display: flex;
   gap: 8rem;
   padding: var(--padding-pagina);
@@ -17,7 +17,7 @@ body {
   align-items: flex-start;
 }
 
-.perfil_obras {
+.perfil-visitante .perfil_obras {
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -25,7 +25,7 @@ body {
   padding-top: 4rem;
 }
 
-.perfil_dados {
+.perfil-visitante .perfil_dados {
   display: flex;
   flex-direction: column;
   max-width: 500px;
@@ -33,13 +33,13 @@ body {
   text-align: justify;
 }
 
-.perfil-denunciar {
+.perfil-visitante .perfil-denunciar {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.perfil-denunciar .botao-denuncia {
+.perfil-visitante .perfil-denunciar .botao-denuncia {
     width: 38px;
     height: 38px;
     border: none;
@@ -54,30 +54,30 @@ body {
     margin-bottom: 5px;
 }
 
-.perfil-denunciar .botao-denuncia svg {
+.perfil-visitante .perfil-denunciar .botao-denuncia svg {
     font-size: 26px;
 }
 
-.perfil-denunciar .botao-denuncia:hover {
+.perfil-visitante .perfil-denunciar .botao-denuncia:hover {
     background-color: var(--pink);
 }
 
-.perfil-contatos {
+.perfil-visitante .perfil-contatos {
   display: flex;
   flex-direction: column;
   margin-top: 14px;
   gap: 4px;
 }
 
-.perfil_dados p {
+.perfil-visitante .perfil_dados p {
   font-size: 18px;
 }
 
-.perfil-contatos p {
+.perfil-visitante .perfil-contatos p {
   font-size: 16px;
 }
 
-.perfil_foto {
+.perfil-visitante .perfil_foto {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,32 +85,32 @@ body {
   margin-top: -18px;
 }
 
-.fotoPerfil {
+.perfil-visitante .fotoPerfil {
   border-radius: 50%;
   width: 250px;
   height: 250px;
   object-fit: cover;
 }
 
-.perfil_user {
+.perfil-visitante .perfil_user {
   padding-top: 0.6rem;
 }
 
-.artista_cidade {
+.perfil-visitante .artista_cidade {
   padding-top: 0.1rem;
 }
 
-.criacao {
+.perfil-visitante .criacao {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
 
-.criacao h2 {
+.perfil-visitante .criacao h2 {
   margin-top: 6px;
 }
 
-.obras {
+.perfil-visitante .obras {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -118,11 +118,11 @@ body {
   justify-content: center;
 }
 
-.obras .card-template {
+.perfil-visitante .obras .card-template {
  background-color: var(--bege);
 }
 
-.card-btn {
+.perfil-visitante .card-btn {
     background: none;
     border: none;
     padding: 0;

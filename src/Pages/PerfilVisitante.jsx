@@ -106,7 +106,7 @@ function Perfil({ artista }) {
     }
 
     return (
-        <div className="perfil">
+        <div className="perfil-visitante">
             <header>
                 <NavbarVisitante />
             </header>
