@@ -2,18 +2,18 @@
     background-color: var(--vinho);
 }
 
-.inicio-home {
+.inicio-homee {
     background-color: var(--vinho);
-    height: 700px;
+    height: 650px;
 
     display: flex;
     flex-direction: column;
 }
 
-.inicio-home img {
+.inicio-homee img {
     width: 500px;
 }
-.capa-home {
+.capa-homee {
     display: flex;
     justify-content: center;
     align-items: center;
