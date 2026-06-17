@@ -16,12 +16,12 @@ import { atualizarPerfil } from "../services/artistasService"
 import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
 
 
-
 function Perfil({ artista, onPerfilAtualizado }) {
    const navigate = useNavigate()
    const[estadoModalEditar, setEstadoModalEditar] = useState(false);
 //    const [obras, setObras] = useState([])
    const [loading, setLoading] = useState(true)
+   const [imgAberta, setImgAberta] = useState(false)
 
    useEffect(() => {
         if (artista === null) {
@@ -216,7 +216,12 @@ function Perfil({ artista, onPerfilAtualizado }) {
                                 </div>
                                 <div className="org-modal">
                                     <div className="div-imagem">
-                                        <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} alt={obraSelecionada.nomeObra} />
+                                        <img 
+                                            src={`http://localhost:3000${obraSelecionada.imagemObra}`} 
+                                            alt={obraSelecionada.nomeObra} 
+                                            onClick={() => setImgAberta(true)}
+                                            style={{cursor: "pointer"}}
+                                        />
                                         <h1 className="titulo-obra">{obraSelecionada.nomeObra}</h1>
                                     </div>
                                     <div className="div-info">
@@ -226,6 +231,12 @@ function Perfil({ artista, onPerfilAtualizado }) {
                                     </div>
                                 </div>
                             </div>
+
+                            {imgAberta && (
+                                <div className="overlay-img" onClick={() => setImgAberta(false)}>
+                                    <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="imagem-aberta" />
+                                </div>
+                            )}
 
                            <ModalExcluirPublic
                                 aberto={modalExcluirPublic}

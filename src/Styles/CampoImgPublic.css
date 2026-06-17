@@ -53,3 +53,29 @@
 .upload-publicacao label.erro svg {
     color: var(--vinho);
 }
+
+
+.upload-publicacao label:has(.preview-img) {
+    position: relative;
+}
+
+.upload-publicacao label:has(.preview-img):hover::after {
+    content: "Alterar imagem";
+    position: absolute;
+    color: var(--bege);
+    font-weight: bold;
+    font-size: 17px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.upload-publicacao label:has(.preview-img):hover .preview-img {
+    opacity: 0.3;
+    transition: opacity 0.2s ease;
+}
+
+.upload-publicacao label:has(.preview-img):hover {
+    background-color: var(--vinho);
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}

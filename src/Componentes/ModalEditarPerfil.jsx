@@ -81,7 +81,7 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
                 </div>
                 <form className="editar-conteudo" onSubmit={handleSubmit}>
                     <div className="editar-lado-esquerdo">
-                        <div>
+                        <div className="container-foto-perfil">
                             <img className="foto-modal-editar" src={artista.fotoPerfil} />
                         </div>
                         <div className="campos-lado-esquerdo">
