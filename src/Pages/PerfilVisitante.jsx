@@ -1,91 +1,55 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import Rodape from "../Componentes/Rodape"
-import "../Styles/Visitante/PerfilVisitante.css"
+import "../Styles/Perfil.css"
 import "../Componentes/Navbar"
 import CardTemplate from "../Componentes/CardTemplate"
-import NavbarVisitante from "../Componentes/NavbarVisitante"
+import Navbar from "../Componentes/Navbar"
+import { IoWarningOutline } from "react-icons/io5"
 import ModalDenuncia from "../Componentes/ModalDenuncia"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
-import BotaoExcluir from "../Componentes/BotaoExcluir"
 import ModalDenunciarPerfil from "../Componentes/ModalDenunciarPerfil"
-import { IoWarningOutline } from "react-icons/io5"
+import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
 
-function Perfil({ artista }) {
 
-    const[estadoModalDenunciarPerfil, setEstadoModalDenunciarPerfil] = useState(false);
+function Perfil({ artista, onPerfilAtualizado }) {
+   const navigate = useNavigate()
+   const [loading, setLoading] = useState(true)
+   const [imgAberta, setImgAberta] = useState(false)
 
-   const abrirModalDenunciarPerfil = () => {
-        setEstadoModalDenunciarPerfil(true);
-        document.body.style.overflow = "hidden"
-   }
-
-   const fecharModalDenunciarPerfil = () => {
-        setEstadoModalDenunciarPerfil(false);
-        document.body.style.overflow = "auto"
-   }
-
-    const obras = [
-        {
-            id: 1,
-            imagem: "https://i.pinimg.com/1200x/a3/16/45/a31645095097e81b3743ea41413f5ce7.jpg",
-            titulo: "Joaninha em folha",
-            categoria: "Pintura",
-            subtitulo: "Beatriz Silva",
-            descricao: "Registro delicado de uma joaninha repousando sobre uma folha úmida ao amanhecer. A obra explora a ideia de pequenos universos naturais e a fragilidade dos ciclos da vida."
-        },
-        {
-            id: 2,
-            imagem: "https://i.pinimg.com/1200x/c9/6a/70/c96a703ea9b9a048d78bc68e7d696fd0.jpg",
-            titulo: "Bordado & Fotos",
-            categoria: "Colagem",
-            subtitulo: "Beatriz Silva",
-            descricao: "Colagem que une fotografias antigas e bordados manuais, criando uma narrativa afetiva sobre memória, tempo e reconstrução de histórias pessoais."
-        },
-        {
-            id: 3,
-            imagem: "https://i.pinimg.com/1200x/3e/ec/0f/3eec0f584cd0e9530068c6022e93fb88.jpg",
-            titulo: "Passado Presente",
-            categoria: "Colagem",
-            subtitulo: "Beatriz Silva",
-            descricao: "Composição que mistura elementos antigos e contemporâneos, refletindo sobre como memórias se sobrepõem ao presente e moldam nossa percepção do tempo."
-        },
-        {
-            id: 4,
-            imagem: "https://i.pinimg.com/736x/2b/bc/d0/2bbcd05e70d76fa501aed68a4df8f07f.jpg",
-            titulo: "Ramo",
-            categoria: "Pintura",
-            subtitulo: "Beatriz Silva",
-            descricao: "Representação minimalista de um ramo seco encontrado em meio urbano, simbolizando resistência e beleza em processos de transformação natural."
-        },
-        {
-            id: 5,
-            imagem: "https://i.pinimg.com/736x/bd/8d/a3/bd8da37f8773a5a8ae27f66950484d0e.jpg",
-            titulo: "O olhar",
-            categoria: "Pintura",
-            subtitulo: "Beatriz Silva",
-            descricao: "Estudo visual sobre o ato de observar e ser observado, explorando camadas emocionais escondidas no contato visual entre sujeito e mundo."
-        },
-        {
-            id: 6,
-            imagem: "https://i.pinimg.com/736x/93/be/1d/93be1d9205ad046f50540570b967f187.jpg",
-            titulo: "Flores",
-            categoria: "Xilogravura",
-            subtitulo: "Beatriz Silva",
-            descricao: "Xilogravura inspirada em flores silvestres, destacando contrastes entre delicadeza e força através de traços marcados e repetitivos."
-            
-        },
-        {
-            id: 7,
-            imagem: "https://i.pinimg.com/1200x/e2/5e/65/e25e65d354236c51cff38f4202397500.jpg",
-            titulo: "Xilogatura",
-            subtitulo: "Beatriz Silva",
-            descricao: "Exploração gráfica da xilogravura como linguagem experimental, unindo texturas orgânicas e formas abstratas em uma composição expressiva."
-
+   useEffect(() => {
+        if (artista === null) {
+            setLoading(false)
+            // Opcional: redirecionar para login
+            // navigate("/login")
+        } else if (artista) {
+            setLoading(false)
         }
-    ]
+    }, [artista, navigate])
+
+
+    const [obras, setObras] = useState([])
+
+    useEffect(() => {
+    async function carregarObras() {
+        try {
+            const todasPublicacoes = await buscarPublicacoes()
+            console.log("publicações:", todasPublicacoes)
+            console.log("primeira publicação:", todasPublicacoes[0])
+            console.log("uid da artista:", artista.uid)
+            const obrasArtista = todasPublicacoes
+            .filter(p => p.uid === artista.uid)
+            .sort((a, b) => new Date(b.dataDeCriacao.seconds) - new Date(a.dataDeCriacao.seconds))                   
+            console.log("obras filtradas:", obrasArtista)
+            setObras(obrasArtista)
+        } catch (error) {
+            console.error("Erro ao carregar obras:", error)
+        }
+    }
+    if (artista) carregarObras()
+}, [artista, refreshKey])
 
     const [obraSelecionada, setObraSelecionada] = useState(null)
-    const [modalDenunciaAberto, setModalDenunciaAberto] = useState(false)
 
     function abrirObra(obra) {
         setObraSelecionada(obra)
@@ -97,39 +61,69 @@ function Perfil({ artista }) {
         document.body.style.overflow = "auto"
     }
 
-    function abrirDenuncia() {
-        setModalDenunciaAberto(true)
-    }
 
-    function fecharDenuncia() {
-        setModalDenunciaAberto(false)
+    if (loading) {
+        return <div className="perfil"><h2>Carregando perfil...</h2></div>
     }
-
+    if (!artista) {
+        return (
+            <div className="perfil">
+                <Navbar />
+                <div style={{ textAlign: "center", padding: "50px" }}>
+                    <h2>Perfil não encontrado</h2>
+                    <button onClick={() => navigate("/login")}>Ir para Login</button>
+                </div>
+                <Rodape variante="bege" />
+            </div>
+        )
+    }
     return (
         <div className="perfil-visitante">
             <header>
-                <NavbarVisitante />
+                <Navbar />
             </header>
             <main>
                 <section className="perfil_info">
                     <div className="perfil_foto">
-                        <img className="fotoPerfil" src={artista.foto} alt={artista.nome} />
+                        <img className="fotoPerfil" src={`${artista.fotoPerfil}?t=${Date.now()}`} alt={artista.nomeCompleto} />
                         <div className="perfil_user">
-                            <h3>{artista.username}</h3>
-                            <p className="artista_cidade">{artista.cidade}</p>
+                            <h3>{artista.nomeUsuario}</h3>
+                            <p className="artista_cidade">{artista.localizacao}</p>
                         </div>
                     </div>
                     <div className="perfil_dados">
-                        <div className="perfil-denunciar">
-                            <h2>{artista.nome}</h2>
-                            <BotaoDenuncia abrirModal={abrirModalDenunciarPerfil} />
-                            <ModalDenunciarPerfil aberto={estadoModalDenunciarPerfil} fecharModal={fecharModalDenunciarPerfil}/>
+                        <div className="nome-editar">
+                            <h2>{artista.nomeCompleto}</h2>
                         </div>
-                        <p>{artista.portfolio}</p>
-                        <p>{artista.bio}</p>
+                        {/* Alterado para ser um link clicavel */}
+                        <p><a
+
+                            href={
+                                artista.linkPortfolio.startsWith("http")
+                                    ? artista.linkPortfolio
+                                    : `https://${artista.linkPortfolio}`
+                            }
+
+                            style={{
+                                textDecoration: "none",
+                                color: "inherit"
+                            }}
+                        >Portfolio</a></p>
+                        <p>{artista.descricao}</p>
                         <div className="perfil-contatos">
-                            <p>{artista.redeSocial}</p>
-                            <p>{artista.contato}</p>
+                            <p><a 
+                            href={
+                                artista.linkInstagram.startsWith("http")
+                                ? artista.linkPortfolio
+                                : `https://${artista.linkPortfolio}`
+                            }
+
+                            style={{
+                                textDecoration: "none",
+                                color: "inherit"
+                            }}
+                            >Instagram</a></p>
+                            <p>{artista.email}</p>
                         </div>
                     </div>
                 </section>
@@ -142,9 +136,9 @@ function Perfil({ artista }) {
                             obras.map((obra) => (
                                 <button className="card-btn" key={obra.id} onClick={() => abrirObra(obra)}>
                                     <CardTemplate
-                                        imagem={obra.imagem}
-                                        titulo={obra.titulo}
-                                        subtitulo={obra.subtitulo}
+                                        imagem={`http://localhost:3000${obra.imagemObra}`}
+                                        titulo={obra.nomeObra}
+                                        subtitulo={obra.artistaObra}
                                     ></CardTemplate>
                                 </button>
                             ))
@@ -154,33 +148,35 @@ function Perfil({ artista }) {
                         <div className="overlay-obra" >
                             <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
                                 <div className="btn-modal">
-                                    <button
-                                        className="botao-denuncia"
-                                        onClick={(e) => { e.stopPropagation(); abrirDenuncia(); }}
-                                    >
-                                        <IoWarningOutline />
-                                    </button>
+                                    <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluirPublic(); }}/>
                                     <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
                                 </div>
                                 <div className="org-modal">
                                     <div className="div-imagem">
-                                        <img src={obraSelecionada.imagem} alt={obraSelecionada.titulo} />
-                                        <h1 className="titulo-obra">{obraSelecionada.titulo}</h1>
+                                        <img 
+                                            src={`http://localhost:3000${obraSelecionada.imagemObra}`} 
+                                            alt={obraSelecionada.nomeObra} 
+                                            onClick={() => setImgAberta(true)}
+                                            style={{cursor: "pointer"}}
+                                        />
+                                        <h1 className="titulo-obra">{obraSelecionada.nomeObra}</h1>
                                     </div>
                                     <div className="div-info">
-                                        <h2>{obraSelecionada.subtitulo}</h2>
-                                        <h3>{obraSelecionada.categoria}</h3>
-                                        <p className="descr-obra">{obraSelecionada.descricao}</p>
+                                        <h2>{obraSelecionada.artistaObra}</h2>
+                                        <h3>{obraSelecionada.categoriaObra}</h3>
+                                        <p className="descr-obra">{obraSelecionada.descricaoObra}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
+                            {imgAberta && (
+                                <div className="overlay-img" onClick={() => setImgAberta(false)}>
+                                    <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="imagem-aberta" />
+                                </div>
+                            )}
 
                         </div>
                     )}
-
-
                 </section>
             </main>
             <Rodape variante="bege" />
