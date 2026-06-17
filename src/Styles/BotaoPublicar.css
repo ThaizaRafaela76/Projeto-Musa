@@ -17,6 +17,8 @@
     font-size: 18px;
     font-weight: bolder;
     font-family: 'Nunito', sans-serif;
+
+    transition: background-color 0.2s;
 }
 
 .publicar-obra:hover {

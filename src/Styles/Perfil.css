@@ -82,7 +82,9 @@ body {
 .criacao {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 60rem;
 }
 
 .criacao h2 {

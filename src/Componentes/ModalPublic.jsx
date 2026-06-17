@@ -26,25 +26,36 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        let novosErros = {};
+        const regrasDeValidacao = {
+            nomeObra: [
+                {condicao: (v) => !v.trim(), mensagem: "*O nome da obra é obrigatório"},
+                {condicao: (v) => v.trim().length > 18, mensagem: "*O nome da obra deve possuir até 18 caracteres"}
+            ],
 
-        if (!formPublic.nomeObra.trim()) {
-            novosErros.nomeObra = "*O nome da obra é obrigatório"
+            descricaoObra: [
+                {condicao: (v) => !v.trim(), mensagem: "*A descrição da obra é obrigatória"},
+                {condicao: (v) => v.trim().length > 240, mensagem: "*A descrição da obra deve possuir até 240 caracteres"}
+            ],
+
+            imagemObra: [
+                {condicao: (v) => !v, mensagem: "*Insira uma imagem"},
+            ],
+
+            categoriaObra: [
+                {condicao: (v) => !v, mensagem: "*Escolha uma categoria"},
+            ],
         }
 
+        const novosErros = {}
 
-        if (!formPublic.descricaoObra.trim()) {
-            novosErros.descricaoObra = "*A descrição é obrigatória"
+        for (const [campo, listaDeRegras] of Object.entries(regrasDeValidacao)) {
+            for (const {condicao, mensagem} of listaDeRegras) {
+                if(condicao(formPublic[campo])) {
+                    novosErros[campo] = mensagem
+                    break
+                }
+            }
         }
-
-        if (!formPublic.imagemObra) {
-            novosErros.imagemObra = "*Insira a imagem da sua obra"
-        }
-
-        if (!formPublic.categoriaObra) {
-            novosErros.categoriaObra = "*Escolha uma categoria"
-        }
-
 
         setErros(novosErros);
 
@@ -102,6 +113,13 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                                     { value: "Arte digital", label: "Arte digital" },
                                     { value: "Fotografia", label: "Fotografia" },
                                     { value: "Xilogravura", label: "Xilogravura" },
+                                    { value: "Design", label: "Design" },
+                                    { value: "Poesia", label: "Poesia" },
+                                    { value: "Literatura", label: "Literatura" },
+                                    { value: "Arquitetura", label: "Arquitetura" },
+                                    { value: "Artesanato", label: "Artesanato" },
+                                    { value: "Desenho", label: "Desenho" },
+                                    { value: "Escultura", label: "Escultura" },
                                 ]}
                                     valor={filtro}
                                     onChange={(valor) => {
@@ -114,7 +132,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                                     setOrdemAberta={setOrdemAberta}
                                     erro={erros.categoriaObra}
                                 />
-                                {erros.categoriaObra && <span className="erro">{erros.categoriaObra}</span>}
+                                <span className="erro">{erros.categoriaObra}</span>
                             </div>
                         </div>
                         {/* conteúdo do lado direito */}

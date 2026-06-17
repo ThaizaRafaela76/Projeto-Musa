@@ -190,7 +190,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
                 </section>
                 <section className="perfil_obras">
                     <div className="criacao">
-                        <h2>Obras da artista</h2>
+                        <h2>Minhas obras</h2>
                         <BotaoNovaPublic aoClicar={abrirModal} />
                         <ModalPublic aberto={estadoModal} fechado={fecharModal} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
                     </div>
@@ -235,8 +235,6 @@ function Perfil({ artista, onPerfilAtualizado }) {
 
                         </div>
                     )}
-
-
                 </section>
             </main>
             <Rodape variante="bege" />

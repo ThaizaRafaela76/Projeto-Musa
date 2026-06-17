@@ -36,12 +36,20 @@
 }
 
 .erro-imagem{
-    align-items: flex-start;
-    padding-right: 90px;
+    align-self: flex-start;
     margin-top: 8px;
+    font-weight: bold;
+    color: var(--pink);
+    font-size: 14px;
 }
 
 
-.upload-publicacao label.erro {
-    border: 2px solid var(--pink);
+
+.upload-publicacao label.erro-borda {
+    border: 2px solid red;
+}
+
+.upload-publicacao label.erro p,
+.upload-publicacao label.erro svg {
+    color: var(--vinho);
 }

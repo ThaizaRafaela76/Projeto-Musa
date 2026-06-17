@@ -15,7 +15,7 @@ const CampoImgPublic = ({name, imagem, setImagem, erro}) => {
 
     return(
         <div className="upload-publicacao">
-            <label htmlFor="upload_public">
+            <label htmlFor="upload_public" className={erro ? "erro-borda" : ""}>
                 {imagem ? (
                     <img 
                         src={URL.createObjectURL(imagem)}

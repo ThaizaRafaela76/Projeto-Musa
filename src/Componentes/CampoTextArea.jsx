@@ -10,7 +10,7 @@ const CampoTextAreaPublic = ({label, name, placeholder, value, handleOnChange, e
                 value={value}
                 onChange={handleOnChange}
             />   
-            {erro && <span>{erro}</span>}
+            {erro && <span className="erro-imagem">{erro}</span>}
         </div>
     )
 }

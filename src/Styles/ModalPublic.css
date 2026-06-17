@@ -48,6 +48,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .fechar-modal-public svg {
@@ -93,10 +94,12 @@
 }
 
 
-span {
+.erro {
     min-height: 20px;
     font-size: 14px;
     font-weight: bold;
     color: var(--pink);
 }
+
+
 
