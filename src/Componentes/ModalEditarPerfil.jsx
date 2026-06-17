@@ -3,6 +3,7 @@ import "../Styles/ModalEditarPerfil.css"
 import CampoTextoPublicacaoEPerfil from "./CampoTextoPublicacaoEPerfil"
 import CampoTextArea from "./CampoTextArea"
 import BotaoSalvarAlteracoes from "./BotaoSalvarAlteracoes"
+import Filtro from "../Componentes/Filtro"
 import { IoCloseOutline } from "react-icons/io5"
 
 const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
@@ -60,6 +61,10 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
         }
 
     }
+
+    const [filtro, setFiltro] = useState("");
+    const [filtroAberto, setFiltroAberto] = useState(false);
+    const [ordemAberta, setOrdemAberta] = useState(false);
     
     if (!aberto) {
         return null
@@ -88,7 +93,32 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
                             />
                             <div className="modal-filtro-cidade">
                                 <h3>Cidade</h3>
-                                <p>aqui é o campo do filtro</p>
+                                <Filtro opcoes={[
+                                    { value: "", label: "Todas as cidades" },
+                                    { value: "Banabuiu", label: "Banabuiu" },
+                                    { value: "Choró", label: "Choró" },
+                                    { value: "Deputado Irapuan Pinheiro", label: "Deputado Irapuan Pinheiro" },
+                                    { value: "Ibaretama", label: "Ibaretama" },
+                                    { value: "Ibicuitinga", label: "Ibicuitinga" },
+                                    { value: "Milhã", label: "Milhã" },
+                                    { value: "Mombaça", label: "Mombaça" },
+                                    { value: "Pedra Branca", label: "Pedra Branca" },
+                                    { value: "Piquet Carneiro", label: "Piquet Carneiro" },
+                                    { value: "Quixadá", label: "Quixadá" },
+                                    { value: "Quixeramobim", label: "Quixeramobim" },
+                                    { value: "Senador", label: "Senador" },
+                                    { value: "Solonopole", label: "Solonopole" },
+                                ]}
+                                    valor={filtro}
+                                    onChange={(valor) => {
+                                        setFiltro(valor);
+                                    }}
+                                    aberto={filtroAberto}
+                                    setAberto={setFiltroAberto}
+                                    ordemAberta={ordemAberta}
+                                    setOrdemAberta={setOrdemAberta}
+
+                                />
                             </div>
                         </div>
                     </div>

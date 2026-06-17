@@ -98,3 +98,7 @@
     flex-direction: column;
     gap: 16px;
 }
+
+.modal-filtro-cidade .btnFiltro {
+    border: 2px solid var(--vinho);
+}
