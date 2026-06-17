@@ -26,8 +26,9 @@ import imagemTresorixas from "../assets/tresorixas.png";
 import imagemEusou from "../assets/eusou.png";
 import imagemAntropofagia from "../assets/antropofagia.png";
 import bannerAcervo from "../assets/banner-acervo.png";
+import NavbarVisitante from "../Componentes/NavbarVisitante.jsx"
 
-function Acervo() {
+function Acervo({usuario}) {
 
     const [pesquisa, setPesquisa] = useState("")
     const [filtro, setFiltro] = useState("")
@@ -35,7 +36,7 @@ function Acervo() {
     const [filtroAberto, setFiltroAberto] = useState(false)
     const [ordemAberta, setOrdemAberta] = useState(false)
     const opcoesFiltro = [
-        { value: "", label: "Filtro" },
+        { value: "", label: "Categorias" },
         { value: "Pintura", label: "Pintura" },
         { value: "Colagem", label: "Colagem" },
         { value: "Arte digital", label: "Arte digital" },
@@ -124,7 +125,7 @@ function Acervo() {
     return (
         <div className="pagina-acervo">
 
-            <Navbar />
+            {usuario ? <Navbar /> : <NavbarVisitante/>}
 
             <section className="titulo-acervo">
 
@@ -154,7 +155,7 @@ function Acervo() {
                     <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} />
                     <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} />
                     <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
-                    <BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>
+                    {usuario && (<BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>)}
                 </div>
                 <ModalPublic aberto={estadoModal} fechado={fecharModal} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
                 {

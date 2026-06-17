@@ -156,10 +156,34 @@ function Perfil({ artista, onPerfilAtualizado }) {
                             <BotaoEditarPerfil  aoClicar={abrirModalEditar}/>
                             <ModalEditarPerfil aberto={estadoModalEditar} fechado={fecharModalEditar} artista={artista} onSalvar={handleSalvarPerfil}/>
                         </div>
-                        <p>{artista.linkPortfolio}</p>
+                        {/* Alterado para ser um link clicavel */}
+                        <p><a
+
+                            href={
+                                artista.linkPortfolio.startsWith("http")
+                                    ? artista.linkPortfolio
+                                    : `https://${artista.linkPortfolio}`
+                            }
+
+                            style={{
+                                textDecoration: "none",
+                                color: "inherit"
+                            }}
+                        >Meu portifolio</a></p>
                         <p>{artista.descricao}</p>
                         <div className="perfil-contatos">
-                            <p>{artista.linkInstagram}</p>
+                            <p><a 
+                            href={
+                                artista.linkInstagram.startsWith("http")
+                                ? artista.linkPortfolio
+                                : `https://${artista.linkPortfolio}`
+                            }
+
+                            style={{
+                                textDecoration: "none",
+                                color: "inherit"
+                            }}
+                            >Instagram</a></p>
                             <p>{artista.email}</p>
                         </div>
                     </div>

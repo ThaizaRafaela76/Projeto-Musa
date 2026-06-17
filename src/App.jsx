@@ -80,16 +80,18 @@ function App() {
         {/* Home dinâmica */}
         <Route
           path="/"
-          element={usuario ? <Home /> : <HomeVisitante />}
+          // element={usuario ? <Home /> : <HomeVisitante />}
+          element={<Home usuario={usuario} />}
         />
 
         <Route path="/login" element={usuario ? <Navigate to="/" /> : <Login />} />
 
         <Route path="/cadastro" element={<FazerCadastro />} />
 
-        <Route path="/acervo" element={usuario ? <Acervo /> : <AcervoVisitante />} />
+        {/* <Route path="/acervo" element={usuario ? <Acervo  usuario={usuario}/> : <AcervoVisitante />} /> */}
+        <Route path="/acervo" element={<Acervo  usuario={usuario}/>} />
 
-        <Route path="/artistas" element={<Artista />} />
+        <Route path="/artistas" element={<Artista usuario={usuario}/>} />
 
         <Route
           path="/minhaconta"

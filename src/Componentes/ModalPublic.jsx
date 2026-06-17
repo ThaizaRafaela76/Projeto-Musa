@@ -96,7 +96,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                             <div className="modal-categoria-obra">
                                 <h3>Categoria da obra</h3>
                                 <Filtro opcoes={[
-                                    { value: "", label: "Filtro" },
+                                    { value: "", label: "Categorias" },
                                     { value: "Pintura", label: "Pintura" },
                                     { value: "Colagem", label: "Colagem" },
                                     { value: "Arte digital", label: "Arte digital" },

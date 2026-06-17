@@ -4,7 +4,7 @@ import '../Styles/Visitante/NavbarVisitante.css'
 import logo from '../assets/logo_musa2.png'
 
 
-function Navbar() {
+function NavbarVisitante() {
 
     const navigate = useNavigate()
 
@@ -35,4 +35,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default NavbarVisitante

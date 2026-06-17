@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect} from "react"
 import { Link } from "react-router-dom"
 import { buscarPublicacoes } from "../services/publicacaoService.js"
+import NavbarVisitante from "../Componentes/NavbarVisitante";
 
 import "../Styles/Home.css"
 import Capa from "../assets/capahome.png"
@@ -12,12 +13,12 @@ import Rodape from "../Componentes/Rodape"
 import BotaoVerMais from "../Componentes/BotaoVerMais"
 import CardTemplate from "../Componentes/CardTemplate"
 import CardTemplateArtista from "../Componentes/CardTemplateArtista"
-
+import { buscarTodosArtistas } from "../services/artistasService";
 
 import perfil from '../assets/image 11.png'
 
 
-const Home = () => {
+const Home = ({usuario}) => {
     const ref = useRef(null)
 
     function scrollDir() {
@@ -61,11 +62,31 @@ const Home = () => {
         carregarPostagens()
     }, [])
 
+    const [artistas, setArtistas] = useState([])
+
+    useEffect(() => {
+        const carregar = async () => {
+            try {
+                const resultado = await buscarTodosArtistas()
+                const artis = resultado.map((item, index) => {
+                    item.cidade = item.localizacao
+                    item.usuario = item.nomeUsuario
+                    return item
+                })
+                console.log(artis)
+                setArtistas(artis)
+            } catch (error) {
+                console.error("Erro ao carregar artista:", error)
+            }
+        }
+        carregar()
+    }, [])
+
 
     return (
         <div className="div-geral">
             <header className="inicio-homee">
-                <Navbar />
+                {usuario ? <Navbar /> : <NavbarVisitante/>}
                 <div className="capa-homee">
                     <img src={Capa} />
                 </div>
@@ -132,10 +153,11 @@ const Home = () => {
 
                     <div className="div-artista-carrossel">
                         <div className="artista-card" ref={refArtistas}  onScroll={verificaScroll}>
-                            <CardTemplateArtista imagem={perfil} nome="Eudenia Sousa" />
-                            <CardTemplateArtista imagem={perfil} nome="Luiza Matias" />
-                            <CardTemplateArtista imagem={perfil} nome="Rebeca Freitas" />
-                            <CardTemplateArtista imagem={perfil} nome="Yasmim Morais" />
+                            {artistas.map((artista)=>{
+                                return (
+                                    <CardTemplateArtista imagem={artista.fotoPerfil} nome={artista.usuario} />
+                                )
+                            })}
                         </div>
                     </div>
 
@@ -147,6 +169,15 @@ const Home = () => {
                         )}
                     </div>
                 </section>
+                {!usuario && 
+                    <section>
+                    <div className="div-juntese">
+                        <h1 className="juntese-titulo">Junte-se à Musa</h1>
+                        <p className="juntese-texto">Um espaço pensado para artistas mulheres divulgarem seus trabalhos e trajetórias, ampliando a visibilidade de suas produções artísticas.</p>
+                        <Link to="/cadastro"><button className="bnt-juntese">Cadastre-se</button></Link>
+                    </div>
+                </section>
+                }
             </main>
             <Rodape />
         </div>

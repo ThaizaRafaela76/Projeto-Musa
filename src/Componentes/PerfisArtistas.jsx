@@ -51,7 +51,7 @@ function PerfisArtistas({ mock, opcoesOrdem, opcoesFiltro }) {
                                     <div className="cardLink" onClick={irParaPerfil}>
                                         <CardTemplateArtista
                                             nome={item.usuario}
-                                            imagem={"src/assets/image 11.png"}
+                                            imagem={item.fotoPerfil}
                                         ></CardTemplateArtista>
                                     </div>
                                 ))

@@ -10,6 +10,9 @@ class ArtistaService {
 
     async buscarTodos() {
         const artistas = await this.artistaRepository.buscarTodos()
+        const artistaMap = artistas.map((item, index)=>{
+            item.fotoPerfil = `http://localhost:3000${item.fotoPerfil}`
+        })
         return artistas
     }
 
