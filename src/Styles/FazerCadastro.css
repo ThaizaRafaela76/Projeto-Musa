@@ -124,12 +124,12 @@
 }
 
 .campo-erro {
-    border-color: red !important;
+    border-color: var(--pink) !important;
 }
 
 .erro-msg {
     font-size: 12px;
-    color: red;
+    color: var(--pink);
     font-weight: 500;
     min-height: 0 !important;
 }

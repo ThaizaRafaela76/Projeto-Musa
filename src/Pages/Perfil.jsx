@@ -62,8 +62,11 @@ function Perfil({ artista, onPerfilAtualizado }) {
         try {
             const todasPublicacoes = await buscarPublicacoes()
             console.log("publicações:", todasPublicacoes)
+            console.log("primeira publicação:", todasPublicacoes[0])
             console.log("uid da artista:", artista.uid)
-            const obrasArtista = todasPublicacoes.filter(p => p.uid === artista.uid)
+            const obrasArtista = todasPublicacoes
+            .filter(p => p.uid === artista.uid)
+            .sort((a, b) => new Date(b.dataDeCriacao.seconds) - new Date(a.dataDeCriacao.seconds))                   
             console.log("obras filtradas:", obrasArtista)
             setObras(obrasArtista)
         } catch (error) {

@@ -46,7 +46,7 @@
 
 
 .upload-publicacao label.erro-borda {
-    border: 2px solid red;
+    border: 2px solid var(--pink);
 }
 
 .upload-publicacao label.erro p,

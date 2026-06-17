@@ -1,7 +1,5 @@
-
-
 body {
-  background-color: var(--vz);
+  background-color: var(--vinho);
   color: var(--bege)
 }
 
@@ -81,10 +79,10 @@ body {
 
 .criacao {
   display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 60rem;
+  justify-content: space-between;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%
 }
 
 .criacao h2 {
@@ -92,15 +90,15 @@ body {
 }
 
 .obras {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 312px);
+  row-gap: 2rem;
   justify-content: center;
 }
 
 .obras .card-template {
  background-color: var(--bege);
+ 
 }
 
 .card-btn {
