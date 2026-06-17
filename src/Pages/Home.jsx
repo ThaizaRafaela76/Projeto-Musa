@@ -1,5 +1,6 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect} from "react"
 import { Link } from "react-router-dom"
+import { buscarPublicacoes } from "../services/publicacaoService.js"
 
 import "../Styles/Home.css"
 import Capa from "../assets/capahome.png"
@@ -12,22 +13,8 @@ import BotaoVerMais from "../Componentes/BotaoVerMais"
 import CardTemplate from "../Componentes/CardTemplate"
 import CardTemplateArtista from "../Componentes/CardTemplateArtista"
 
-import Cisnei from '../assets/cisnei.png'
-import Tarde from '../assets/tardeamarela.png'
-import Gatos from '../assets/gatinhos.png'
-import Flor from '../assets/florecer.png'
-import Lirios from '../assets/lirios.png'
-import Lua from '../assets/lua.png'
 
 import perfil from '../assets/image 11.png'
-
-
-
-import imagemOcula from "../assets/ocula.png";
-import imagemTresorixas from "../assets/tresorixas.png";
-import imagemEusou from "../assets/eusou.png";
-import imagemAntropofagia from "../assets/antropofagia.png";
-import bannerAcervo from "../assets/banner-acervo.png";
 
 
 const Home = () => {
@@ -58,6 +45,21 @@ const Home = () => {
         refArtistas.current.scrollBy({ left: -300, behavior: 'smooth' })
         setTimeout(verificaScroll, 350)
     }
+
+    const [ultimasPostagens, setUltimasPostagens] = useState([])
+
+    useEffect(() => {
+        async function carregarPostagens() {
+            try {
+                const publicacoes = await buscarPublicacoes()
+                const ultimas = publicacoes.slice(-6).reverse()
+                setUltimasPostagens(ultimas)
+            } catch (error) {
+                console.error("Erro ao carregar postagens:", error)
+            }
+        }
+        carregarPostagens()
+    }, [])
 
 
     return (
@@ -99,43 +101,16 @@ const Home = () => {
                         <Link to="/acervo"><BotaoVerMais /></Link>
                     </div>
                     <div className="post-card" ref={ref}>
-                        <CardTemplate
-                            imagem={Cisnei}
-                            titulo="Reflexo do amor"
-                            subtitulo="Isis Martins"
-                        />
-
-                        <CardTemplate
-                            imagem={Tarde}
-                            titulo="Tarde de primavera"
-                            subtitulo="Cristina Sabino"
-                        />
-
-                        <CardTemplate
-                            imagem={Gatos}
-                            titulo="Manhã azul"
-                            subtitulo="Sophia Ferreira"
-                        />
-
-                        <CardTemplate
-                            imagem={Flor}
-                            titulo="Florescer"
-                            subtitulo="Elisa Gois"
-                        />
-
-                        <CardTemplate
-                            imagem={Lirios}
-                            titulo="Silêncio em rosa"
-                            subtitulo="Bianca Barroso"
-                        />
-
-                        <CardTemplate
-                            imagem={Lua}
-                            titulo="Lua lunar"
-                            subtitulo="Raiane Cavalcante"
-                        />
+                        {ultimasPostagens.map((obra) => (
+                            <CardTemplate
+                                key={obra.id}
+                                imagem={`http://localhost:3000${obra.imagemObra}`}
+                                titulo={obra.nomeObra}
+                                subtitulo={obra.artistaObra}
+                            />
+                        ))}
                     </div>
-                    <div className="div-setas">   {/* ← adiciona isso de volta */}
+                    <div className="div-setas">
                         <button className="bnt-esq" onClick={scrollEsq}><FaCircleArrowLeft /></button>
                         <button className="bnt-dir" onClick={scrollDir}><FaCircleArrowRight /></button>
                     </div>

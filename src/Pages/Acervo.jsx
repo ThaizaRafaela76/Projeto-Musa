@@ -118,6 +118,9 @@ function Acervo() {
         setEstadoModal(false)
         document.body.style.overflow = "auto"
     }
+
+    const [imgAberta, setImgAberta] = useState(false) //useState usado para abrir a imagem do card
+
     return (
         <div className="pagina-acervo">
 
@@ -188,7 +191,12 @@ function Acervo() {
                             </div>
                             <div className="org-modal">
                                 <div className="div-imagem">
-                                    <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} alt={obraSelecionada.nomeObra} />
+                                    <img 
+                                        src={`http://localhost:3000${obraSelecionada.imagemObra}`}
+                                        alt={obraSelecionada.nomeObra}
+                                        onClick={() => setImgAberta(true)} //isso foi adicionado. quando clicar na imagem, muda o estado dela para true
+                                        style={{ cursor: "pointer" }} // apenas para que o cursor mude para mãozinha, para saber que ali pode clicar
+                                    />
                                     <h1 className="titulo-obra">{obraSelecionada.nomeObra}</h1>
                                 </div>
                                 <div className="div-info">
@@ -198,6 +206,12 @@ function Acervo() {
                                 </div>
                             </div>
                         </div>
+
+                        {imgAberta && (  //Exibe a imagem em tela cheia ao clicar nela.
+                            <div className="overlay-imagem" onClick={() => setImgAberta(false)}>  {/*o overlay é o fundo escuro e quando clicar em qualque parte dele a imagem se fecha*/}
+                                <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="img-aberta" />
+                            </div>
+                        )}
 
                         <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
 
