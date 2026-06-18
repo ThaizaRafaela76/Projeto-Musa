@@ -139,7 +139,7 @@ function Acervo() {
                 <ModalPublic aberto={estadoModal} fechado={fecharModal} />
                 {
                     obrasFiltrados.length === 0 ? (
-                        <p>
+                        <p className="mensagem">
                             Nenhuma obra encontrada
                         </p>
                     ) : (

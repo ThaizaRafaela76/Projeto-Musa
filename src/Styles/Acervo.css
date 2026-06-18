@@ -300,3 +300,10 @@
     object-fit: contain;
     border-radius: 8px;
 }
+
+.mensagem {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    color: var(--bege);
+}

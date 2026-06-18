@@ -36,7 +36,7 @@ function Acervo({usuario}) {
     const [filtroAberto, setFiltroAberto] = useState(false)
     const [ordemAberta, setOrdemAberta] = useState(false)
     const opcoesFiltro = [
-        { value: "", label: "Categorias" },
+        { value: "", label: "Todas as obras" },
         { value: "Pintura", label: "Pintura" },
         { value: "Colagem", label: "Colagem" },
         { value: "Arte digital", label: "Arte digital" },
@@ -156,11 +156,11 @@ function Acervo({usuario}) {
                     <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} />
                     <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
                     {usuario && (<BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>)}
-                </div>
+                </div>       
                 <ModalPublic aberto={estadoModal} fechado={fecharModal} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
                 {
                     obrasFiltrados.length === 0 ? (
-                        <p>
+                        <p className="mensagem">
                             Nenhuma obra encontrada
                         </p>
                     ) : (

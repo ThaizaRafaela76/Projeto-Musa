@@ -278,3 +278,10 @@
 .controles-acervo > *:last-child {
     margin-left: 0;
 }
+
+.mensagem {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    color: var(--bege);
+}

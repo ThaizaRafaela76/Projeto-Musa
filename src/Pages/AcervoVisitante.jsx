@@ -112,7 +112,7 @@ function AcervoVisitante() {
                 </div>
 
                 {obrasFiltrados.length === 0 ? (
-                    <p>Nenhuma obra encontrada</p>
+                    <p className="mensagem">Nenhuma obra encontrada</p>
                 ) : (
                     <div className="cards-acervo">
                         {obrasFiltrados.map((obra) => (
