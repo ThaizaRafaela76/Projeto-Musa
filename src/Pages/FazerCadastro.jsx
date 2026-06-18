@@ -163,7 +163,12 @@ function FazerCadastro() {
 
     return (
         <main className="cadastro-page">
-            <img src={logo} alt="Musa" className="cadastro-logo-topo" />
+            <img src={logo} 
+                alt="Musa" 
+                className="cadastro-logo-topo" 
+                onClick={()=>{navigate("/")}}
+                style={{cursor: "pointer"}}
+            />
             <div className="cadastro-card">
                 <div className="cadastro-formulario">
 

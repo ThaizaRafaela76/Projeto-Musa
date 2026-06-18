@@ -3,10 +3,12 @@ import BannerLogin from "../Componentes/BannerLogin";
 
 import imagemLogin from "../assets/login-image.png";
 import logo from "../assets/logo_musa2.png";
+import { useNavigate } from "react-router-dom";
 
 import "../Styles/Login.css";
 
 const Login = () => {
+  const navigate = useNavigate()
   return (
     <main className="login-page">
 
@@ -15,6 +17,8 @@ const Login = () => {
         src={logo}
         alt="Musa"
         className="login-logo-topo"
+        onClick={()=>{navigate("/")}}
+        style={{cursor: "pointer"}}
       />
 
       {/* CARD PRINCIPAL (não mexe na estrutura interna) */}

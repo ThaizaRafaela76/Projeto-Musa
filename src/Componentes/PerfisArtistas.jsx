@@ -46,7 +46,7 @@ function PerfisArtistas({ mock, opcoesOrdem, opcoesFiltro }) {
                 </div>
                 {
                     mockFiltrados.length === 0 ? (
-                        <p>
+                        <p className="mensagem">
                             Nenhuma artista encontrada
                         </p>
                     ) : (
