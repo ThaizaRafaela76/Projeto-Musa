@@ -1,29 +1,58 @@
 .campo-input {
-display: flex;
-flex-direction: column;
-gap: 6px;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
 }
+
 .campo-input label {
-font-size: 12px;
-color: #1f2937;
-font-weight: 500;
+  font-size: 12px;
+  color: #1f2937;
+  font-weight: 500;
 }
+
 .campo-input-field {
-width: 100%;
-padding: 12px;
-border: 1px solid #d1d5db;
-border-radius: 8px;
-outline: none;
-transition: 0.2s;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
 }
+
 .campo-input-field:focus {
-border-color: #5a1025;
+  border-color: #5a1025;
 }
+
 .campo-erro {
-border-color: red;
+  border: 1px solid #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  animation: shake 0.3s ease-in-out;
 }
+
 .campo-input span {
-font-size: 12px;
-color: red;
+  font-size: 12px;
+  color: #dc2626;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-4px);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
+
+  75% {
+    transform: translateX(-4px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
