@@ -58,10 +58,11 @@
     font-size: 1.4rem;
     font-weight: bold;
     color: var(--bege);
+    background: var(--laranja) !important;
 
     margin: 0px;
 }
 
 .bnt-entrar:hover {
-    background: var(--vinho);
+    background: var(--vinho) !important;
 }

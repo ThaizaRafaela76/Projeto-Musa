@@ -34,6 +34,8 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
                 areaAtuacao: artista.areaAtuacao || "",
                 fotoPerfil: artista.fotoPerfil || "",
             })
+
+            setFiltro(artista.localizacao || "")
         }
     }, [artista, aberto])
     
@@ -111,7 +113,8 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
                                 ]}
                                     valor={filtro}
                                     onChange={(valor) => {
-                                        setFiltro(valor);
+                                        setFiltro(valor)
+                                        handleChange("localizacao", valor)
                                     }}
                                     aberto={filtroAberto}
                                     setAberto={setFiltroAberto}

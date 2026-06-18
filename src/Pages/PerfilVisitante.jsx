@@ -11,6 +11,10 @@ import BotaoDenuncia from "../Componentes/BotaoDenuncia"
 import ModalDenunciarPerfil from "../Componentes/ModalDenunciarPerfil"
 import NavbarVisitante from "../Componentes/NavbarVisitante"
 import { buscarPublicacoes } from "../services/publicacaoService.js"
+import { FaLink } from "react-icons/fa6";
+import { FaRegStar } from "react-icons/fa6";
+import { BsInstagram } from "react-icons/bs";
+
 
 
 
@@ -142,16 +146,18 @@ function PerfilVisitante({usuario}) {
 
                             style={{
                                 textDecoration: "none",
-                                color: "inherit"
+                                color: "inherit",
+                                fontWeight: "bold"
                             }}
-                        >Portfolio</a></p>
+                        >Portfólio</a></p>
                         <p>{artista.descricao}</p>
                         <div className="perfil-contatos">
+                            <h3>Contatos</h3>
                             <p><a 
                             href={
                                 artista.linkInstagram.startsWith("http")
-                                ? artista.linkPortfolio
-                                : `https://${artista.linkPortfolio}`
+                                ? artista.linkInstagram
+                                : `https://${artista.linkInstagram}`
                             }
 
                             style={{
