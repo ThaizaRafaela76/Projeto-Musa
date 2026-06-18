@@ -14,12 +14,12 @@ import BotaoEditarPerfil from "../Componentes/BotaoEditarPerfil"
 import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
 import { atualizarPerfil } from "../services/artistasService"
 import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
+import { BsInstagram } from "react-icons/bs";
 
 
 function Perfil({ artista, onPerfilAtualizado }) {
    const navigate = useNavigate()
    const[estadoModalEditar, setEstadoModalEditar] = useState(false);
-//    const [obras, setObras] = useState([])
    const [loading, setLoading] = useState(true)
    const [imgAberta, setImgAberta] = useState(false)
 
@@ -170,21 +170,24 @@ function Perfil({ artista, onPerfilAtualizado }) {
 
                             style={{
                                 textDecoration: "none",
-                                color: "inherit"
+                                color: "inherit",
+                                fontWeight: "bold"
                             }}
-                        >Meu portifolio</a></p>
+                        >Meu portfólio</a></p>
                         <p>{artista.descricao}</p>
                         <div className="perfil-contatos">
+                            <h3>Contatos</h3>
                             <p><a 
                             href={
                                 artista.linkInstagram.startsWith("http")
-                                ? artista.linkPortfolio
-                                : `https://${artista.linkPortfolio}`
+                                ? artista.linkInstagram
+                                : `https://${artista.linkInstagram}`
                             }
 
                             style={{
                                 textDecoration: "none",
-                                color: "inherit"
+                                color: "inherit",
+                                
                             }}
                             >Instagram</a></p>
                             <p>{artista.email}</p>

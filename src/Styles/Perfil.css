@@ -151,3 +151,12 @@ body {
   object-fit: contain;
   border-radius: 8px;
 }
+
+.btn-instagram {
+   text-decoration: "none";
+   color: var(--bege);
+}
+
+.btn-instagram svg {
+   font-size: 24px;
+}
