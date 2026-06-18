@@ -6,6 +6,7 @@
     border-radius: 20px;
 
     background-color: var(--vinho);
+    color: var(--bege);
 
     display: flex;
     justify-content: center;
@@ -22,5 +23,4 @@
 
 .botao-denuncia svg {
     font-size: 55px;
-    color: var(--bege);
 }

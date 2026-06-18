@@ -27,8 +27,8 @@ function PerfisArtistas({ mock, opcoesOrdem, opcoesFiltro }) {
     console.log("Teste: ", mockFiltrados.length);
 
     const navigate = useNavigate();
-    function irParaPerfil() {
-        navigate('/perfil');
+    function irParaPerfil(uid) {
+        navigate(`/perfil/${uid}`);
 
     }
     return (
@@ -48,7 +48,7 @@ function PerfisArtistas({ mock, opcoesOrdem, opcoesFiltro }) {
                         <div className="cardsContainer">
                             {
                                 mockFiltrados.map((item) => (
-                                    <div className="cardLink" onClick={irParaPerfil}>
+                                    <div key={item.uid} onClick={() => irParaPerfil(item.uid)}>
                                         <CardTemplateArtista
                                             nome={item.usuario}
                                             imagem={item.fotoPerfil}

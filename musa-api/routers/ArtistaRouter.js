@@ -74,6 +74,15 @@ router.put("/perfil", verificarToken, async (request, response) => {
     }
 })
 
+router.get("/:uid", async (request, response) => {
+    try {
+        const artista = await artistaService.buscarPorUid(request.params.uid)
+        response.json(artista)
+    } catch(error) {
+        response.status(400).json({erro: "Artista não encontrada"})
+    }
+})
+
 
 
 export default router

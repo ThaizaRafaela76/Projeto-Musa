@@ -24,3 +24,8 @@ export async function atualizarPerfil(dados) {
     const response = await api.put("/artistas/perfil", dados)
     return response.data
 }
+
+export async function buscarArtistaPorId(uid) {
+    const response = await api.get(`/artistas/${uid}`)
+    return response.data
+}

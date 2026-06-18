@@ -3,7 +3,7 @@ body {
   color: var(--bege)
 }
 
-.perfil-visitante .perfil {
+.perfil-visitante {
   display: flex;
   flex-direction: column;
   min-height: 100vh ;
@@ -45,8 +45,8 @@ body {
     border: none;
     border-radius: 8px;
 
-    background-color: var(--laranja);
-    color: var(--bege);
+    background-color: var(--bege);
+    color: var(--vinho);
 
     display: flex;
     justify-content: center;
@@ -60,6 +60,7 @@ body {
 
 .perfil-visitante .perfil-denunciar .botao-denuncia:hover {
     background-color: var(--pink);
+    color: var(--bege);
 }
 
 .perfil-visitante .perfil-contatos {

@@ -1,32 +1,45 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import {buscarArtistaPorId} from "../services/artistasService"
 import Rodape from "../Componentes/Rodape"
-import "../Styles/Perfil.css"
-import "../Componentes/Navbar"
+import "../Styles/Visitante/PerfilVisitante.css"
 import CardTemplate from "../Componentes/CardTemplate"
-import Navbar from "../Componentes/Navbar"
+import Navbar from "../Componentes/NavbarVisitante"
 import { IoWarningOutline } from "react-icons/io5"
 import ModalDenuncia from "../Componentes/ModalDenuncia"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
 import ModalDenunciarPerfil from "../Componentes/ModalDenunciarPerfil"
-import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
+import NavbarVisitante from "../Componentes/NavbarVisitante"
+import { buscarPublicacoes } from "../services/publicacaoService.js"
 
 
-function Perfil({ artista, onPerfilAtualizado }) {
+
+
+function PerfilVisitante() {
+    const {uid} = useParams()
+
+    const [artista, setArtista] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function carregarArtista() {
+            try {
+                const dados = await buscarArtistaPorId(uid)
+                setArtista(dados)
+            } catch (error) {
+                console.error(error)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        carregarArtista()
+    }, [uid])
+
    const navigate = useNavigate()
-   const [loading, setLoading] = useState(true)
    const [imgAberta, setImgAberta] = useState(false)
 
-   useEffect(() => {
-        if (artista === null) {
-            setLoading(false)
-            // Opcional: redirecionar para login
-            // navigate("/login")
-        } else if (artista) {
-            setLoading(false)
-        }
-    }, [artista, navigate])
-
+   
 
     const [obras, setObras] = useState([])
 
@@ -47,7 +60,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
         }
     }
     if (artista) carregarObras()
-}, [artista, refreshKey])
+}, [artista])
 
     const [obraSelecionada, setObraSelecionada] = useState(null)
 
@@ -61,6 +74,27 @@ function Perfil({ artista, onPerfilAtualizado }) {
         document.body.style.overflow = "auto"
     }
 
+    const[estadoModalDenunciarPerfil, setEstadoModalDenunciarPerfil] = useState(false);
+    const [modalDenunciaAberto, setModalDenunciaAberto] = useState(false)
+
+
+    const abrirModalDenunciarPerfil = () => {
+        setEstadoModalDenunciarPerfil(true);
+        document.body.style.overflow = "hidden"
+   }
+
+    const fecharModalDenunciarPerfil = () => {
+        setEstadoModalDenunciarPerfil(false);
+        document.body.style.overflow = "auto"
+   }
+
+   function abrirDenuncia() {
+        setModalDenunciaAberto(true)
+    }
+
+    function fecharDenuncia() {
+        setModalDenunciaAberto(false)
+    }
 
     if (loading) {
         return <div className="perfil"><h2>Carregando perfil...</h2></div>
@@ -68,7 +102,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
     if (!artista) {
         return (
             <div className="perfil">
-                <Navbar />
+                <NavbarVisitante />
                 <div style={{ textAlign: "center", padding: "50px" }}>
                     <h2>Perfil não encontrado</h2>
                     <button onClick={() => navigate("/login")}>Ir para Login</button>
@@ -92,8 +126,10 @@ function Perfil({ artista, onPerfilAtualizado }) {
                         </div>
                     </div>
                     <div className="perfil_dados">
-                        <div className="nome-editar">
+                        <div className="perfil-denunciar">
                             <h2>{artista.nomeCompleto}</h2>
+                            <BotaoDenuncia abrirModal={abrirModalDenunciarPerfil} />
+                            <ModalDenunciarPerfil aberto={estadoModalDenunciarPerfil} fecharModal={fecharModalDenunciarPerfil}/>
                         </div>
                         {/* Alterado para ser um link clicavel */}
                         <p><a
@@ -148,7 +184,12 @@ function Perfil({ artista, onPerfilAtualizado }) {
                         <div className="overlay-obra" >
                             <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
                                 <div className="btn-modal">
-                                    <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluirPublic(); }}/>
+                                    <button
+                                        className="botao-denuncia"
+                                        onClick={(e) => { e.stopPropagation(); abrirDenuncia(); }}
+                                    >
+                                        <IoWarningOutline />
+                                    </button>
                                     <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
                                 </div>
                                 <div className="org-modal">
@@ -174,7 +215,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
                                     <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="imagem-aberta" />
                                 </div>
                             )}
-
+                            <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
                         </div>
                     )}
                 </section>
@@ -184,4 +225,4 @@ function Perfil({ artista, onPerfilAtualizado }) {
     )
 }
 
-export default Perfil
+export default PerfilVisitante
