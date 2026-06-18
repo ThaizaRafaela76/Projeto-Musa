@@ -82,7 +82,13 @@ function FazerCadastro() {
     function validarEtapa1() {
         const novosErros = {}
         if (!form.nomeCompleto.trim()) novosErros.nomeCompleto = "Campo obrigatório"
-        if (!form.email.trim()) novosErros.email = "Campo obrigatório"
+
+        if (!form.email.trim()) {
+            novosErros.email = "Campo obrigatório"
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+            novosErros.email = "E-mail inválido"
+        }
+
         if (!form.nomeUsuario.trim()) novosErros.nomeUsuario = "Campo obrigatório"
         if (!senhaValida) novosErros.senha = "A senha não atende aos requisitos"
         if (form.senha !== form.confirmarSenha) novosErros.confirmarSenha = "As senhas não coincidem"
@@ -99,14 +105,16 @@ function FazerCadastro() {
 
     function validarEtapa3() {
         const novosErros = {}
+        if (!form.fotoPerfil) novosErros.fotoPerfil = "Foto de perfil obrigatória"
         if (!form.areaAtuacao) novosErros.areaAtuacao = "Campo obrigatório"
+        if (!form.imagemTrabalho) novosErros.imagemTrabalho = "Envie pelo menos uma imagem do seu trabalho"
         setErros(novosErros)
         return Object.keys(novosErros).length === 0
     }
 
     async function handleFinalizarCadastro() {
-        if (!validarEtapa3){
-            return;
+        if (!validarEtapa3()) {
+            return
         }
         setLoading(true)
         try {
@@ -131,7 +139,7 @@ function FazerCadastro() {
 
             await cadastrarArtista(formData)
 
-            setEtapa(4) 
+            setEtapa(4)
         } catch (error) {
             console.error(error)
             const mensagem = error.response?.data?.erro || "Erro ao realizar cadastro. Tente novamente."
@@ -140,8 +148,6 @@ function FazerCadastro() {
             setLoading(false)
         }
     }
-
-
 
     function proximaEtapa() {
         if (etapa === 1 && !validarEtapa1()) return
@@ -163,13 +169,11 @@ function FazerCadastro() {
 
     return (
         <main className="cadastro-page">
-            <img src={logo} 
-                alt="Musa" 
-                className="cadastro-logo-topo" 
-                onClick={()=>{navigate("/")}}
-                style={{cursor: "pointer"}}
-            />
+
+            <img src={logo} alt="Musa" className="cadastro-logo-topo" onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
             <div className="cadastro-card">
+
+
                 <div className="cadastro-formulario">
 
                     {/* TELA DE SUCESSO */}
@@ -346,8 +350,8 @@ function FazerCadastro() {
                             {etapa === 3 && (
                                 <div className="cadastro-campos">
                                     <div className="campo-cadastro">
-                                        <label>Foto de Perfil</label>
-                                        <div className="upload-foto-perfil">
+                                        <label>Foto de Perfil <span className="label-obrigatorio">*</span></label>
+                                        <div className={`upload-foto-perfil ${erros.fotoPerfil ? "upload-erro" : ""}`}>
                                             <label htmlFor="fotoPerfil">
                                                 {form.fotoPerfil ? (
                                                     <img
@@ -367,6 +371,7 @@ function FazerCadastro() {
                                                 onChange={(e) => handleChange("fotoPerfil", e.target.files[0])}
                                             />
                                         </div>
+                                        {erros.fotoPerfil && <span className="erro-msg">{erros.fotoPerfil}</span>}
                                     </div>
 
                                     <div className="campo-cadastro">
@@ -386,8 +391,11 @@ function FazerCadastro() {
                                     </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Imagem de um trabalho</label>
-                                        <label htmlFor="imagemTrabalho" className="upload-trabalho">
+                                        <label>Imagem de um trabalho <span className="label-obrigatorio">*</span></label>
+                                        <label
+                                            htmlFor="imagemTrabalho"
+                                            className={`upload-trabalho ${erros.imagemTrabalho ? "campo-erro" : ""}`}
+                                        >
                                             <span>{form.imagemTrabalho ? form.imagemTrabalho.name : "Upload da imagem"}</span>
                                             <IoCloudUploadOutline />
                                         </label>
@@ -398,6 +406,7 @@ function FazerCadastro() {
                                             hidden
                                             onChange={(e) => handleChange("imagemTrabalho", e.target.files[0])}
                                         />
+                                        {erros.imagemTrabalho && <span className="erro-msg">{erros.imagemTrabalho}</span>}
                                     </div>
                                 </div>
                             )}
