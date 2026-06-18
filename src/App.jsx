@@ -18,17 +18,7 @@ import FazerCadastro from "./Pages/FazerCadastro"
 function App() {
   const [usuario, setUsuario] = useState(undefined);
   const [artista, setArtista] = useState(null)
-  // const artistaInfo = {
-  //   foto: "https://i.pinimg.com/736x/20/70/4c/20704c0d36e53ee8ff255a02dffc3fd0.jpg",
-  //   nome: "Beatriz Silva",
-  //   username: "@beaslva",
-  //   cidade: "Quixadá",
-  //   portfolio: "www.beaslva.com.br",
-  //   bio: "Sou artista visual interessada nos limiares entre matéria e memória...",
-  //   contato: "beaslva@gmail.com",
-  //   redeSocial: "@beaslva.arts"
-  // };
-
+ 
   // useEffect(() => {
   //   const unsubscribe = onAuthStateChanged(auth, (user) => {
   //     setUsuario(user);
@@ -100,7 +90,7 @@ function App() {
 
         <Route
           path="/perfil/:uid"
-          element={<PerfilVisitante />}
+          element={<PerfilVisitante usuario={usuario} />}
         />
       </Routes>
     </Router>

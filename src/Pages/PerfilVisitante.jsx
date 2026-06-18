@@ -4,7 +4,7 @@ import {buscarArtistaPorId} from "../services/artistasService"
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Visitante/PerfilVisitante.css"
 import CardTemplate from "../Componentes/CardTemplate"
-import Navbar from "../Componentes/NavbarVisitante"
+import Navbar from "../Componentes/Navbar"
 import { IoWarningOutline } from "react-icons/io5"
 import ModalDenuncia from "../Componentes/ModalDenuncia"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
@@ -15,7 +15,7 @@ import { buscarPublicacoes } from "../services/publicacaoService.js"
 
 
 
-function PerfilVisitante() {
+function PerfilVisitante({usuario}) {
     const {uid} = useParams()
 
     const [artista, setArtista] = useState(null)
@@ -114,7 +114,7 @@ function PerfilVisitante() {
     return (
         <div className="perfil-visitante">
             <header>
-                <Navbar />
+                {usuario ? <Navbar /> : <NavbarVisitante />}
             </header>
             <main>
                 <section className="perfil_info">

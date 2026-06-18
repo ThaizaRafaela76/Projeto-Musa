@@ -28,7 +28,12 @@ function PerfisArtistas({ mock, opcoesOrdem, opcoesFiltro }) {
 
     const navigate = useNavigate();
     function irParaPerfil(uid) {
-        navigate(`/perfil/${uid}`);
+        const meuUid = localStorage.getItem("uid")
+        if(meuUid && uid === meuUid) {
+            navigate("/minhaconta")
+        } else {
+            navigate(`/perfil/${uid}`);
+        }
 
     }
     return (
