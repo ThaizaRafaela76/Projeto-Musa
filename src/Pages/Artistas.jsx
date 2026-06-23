@@ -1,62 +1,77 @@
+// Importa o componente Navbar (para usuários logados)
 import Navbar from "../Componentes/Navbar";
+
+// Importa o componente NavbarVisitante (para usuários que não estão logados)
 import NavbarVisitante from "../Componentes/NavbarVisitante";
+
+// Importa o componente Rodape (footer da página)
 import Rodape from "../Componentes/Rodape";
+
+// Importa o componente que mostra a lista de artistas com pesquisa, filtro e ordenação
 import PerfisArtistas from "../Componentes/PerfisArtistas";
-import "../Styles/Artistas.css"
+
+// Importa o arquivo CSS específico desta página
+import "../Styles/Artistas.css";
+
+// Importa useEffect e useState do React
 import { useEffect, useState } from "react";
+
+// Importa a função do service que busca todos os artistas do banco de dados
 import { buscarTodosArtistas } from "../services/artistasService";
 
 
-const Artistas = ({usuario}) => {
-    const imagens = [
-        "src/assets/pagu.png",
-        "src/assets/auxiliadora.png",
-        "src/assets/djaniramotta.png",
-        "src/assets/hilda.png",
-        // "src/assets/lygia.png", 
-        // "src/assets/.png"
-    ];
+// ======================= COMPONENTE PRINCIPAL =======================
 
-    // const artistasMock = [
-    //     { id: 1, usuario: "Nina Sousa", tipo: "Pintura", cidade: "Quixadá" },
-    //     { id: 2, usuario: "Beatriz Soares", tipo: "Fotografia", cidade: "Mombaça" },
-    //     { id: 3, usuario: "Cristiane Menezes", tipo: "Escultura", cidade: "Choró" },
-    //     { id: 4, usuario: "Francisca da Silva", tipo: "Ilustração", cidade: "Pedra Branca" },
-    //     { id: 5, usuario: "Zeuda Honório", tipo: "Pintura", cidade: "Quixeramobim" },
-    //     { id: 6, usuario: "Leticia Queiroz", tipo: "Grafite", cidade: "Banabuiu" },
-    //     { id: 7, usuario: "Julia Laiza", tipo: "Fotografia", cidade: "Ibaretama" },
-    //     { id: 8, usuario: "Erika Rodrigues", tipo: "Escultura", cidade: "Milhã" },
-    //     { id: 9, usuario: "Larissa Maia", tipo: "Ilustração", cidade: "Senador" },
-    //     { id: 10, usuario: "Thaiza Rafaela", tipo: "Pintura", cidade: "Solonopole" },
-    //     { id: 11, usuario: "Martina Ribeiro", tipo: "Grafite", cidade: "Piquet Carneiro" },
-    //     { id: 12, usuario: "Aparecida Maria", tipo: "Fotografia", cidade: "Ibicuitinga" },
-    // ];
+// Componente da página "Artistas"
+// Recebe a prop "usuario" para saber se o usuário está logado ou não
+const Artistas = ({ usuario }) => {
 
-    const [artistas, setArtistas] = useState([])
+    // ======================= ESTADOS =======================
 
+    // Estado que vai guardar a lista de artistas vindos do banco de dados
+    const [artistas, setArtistas] = useState([]);
+
+
+    // ======================= CARREGAMENTO DOS DADOS =======================
+
+    // useEffect roda automaticamente quando o componente é carregado
     useEffect(() => {
+        
+        // Função assíncrona para carregar os artistas
         const carregar = async () => {
             try {
-                const resultado = await buscarTodosArtistas()
-                const artis = resultado.map((item, index) => {
-                    item.cidade = item.localizacao
-                    item.usuario = item.nomeUsuario
-                    return item
-                })
-                console.log(artis)
-                setArtistas(artis)
-            } catch (error) {
-                console.error("Erro ao carregar artista:", error)
-            }
-        }
-        carregar()
-    }, [])
+                // Chama o service para buscar todos os artistas do Firebase
+                const resultado = await buscarTodosArtistas();
 
+                // Transforma os dados para o formato que o componente PerfisArtistas espera
+                const artis = resultado.map((item, index) => {
+                    // Renomeia "localizacao" para "cidade"
+                    item.cidade = item.localizacao;
+                    // Renomeia "nomeUsuario" para "usuario"
+                    item.usuario = item.nomeUsuario;
+                    return item;
+                });
+
+                console.log(artis);        // Mostra no console os dados carregados
+                setArtistas(artis);        // Atualiza o estado com os artistas
+            } catch (error) {
+                console.error("Erro ao carregar artista:", error);
+            }
+        };
+
+        carregar();   // Executa a função de carregamento
+    }, []);   // O array vazio [] significa: execute apenas uma vez ao montar o componente
+
+
+    // ======================= OPÇÕES DE FILTRO E ORDENAÇÃO =======================
+
+    // Opções de ordenação que serão passadas para o componente PerfisArtistas
     const opcoesOrdem = [
         { value: "az", label: "A → Z" },
         { value: "za", label: "Z → A" },
     ];
 
+    // Opções de filtro por cidade (lista fixa)
     const opcoesFiltro = [
         { value: "", label: "Todas as cidades" },
         { value: "Banabuiu", label: "Banabuiu" },
@@ -75,19 +90,30 @@ const Artistas = ({usuario}) => {
     ];
 
 
-
+    // ======================= RENDERIZAÇÃO DA PÁGINA =======================
     return (
-        <div>
-            
+        <div>   {/* Container principal da página */}
+
+            {/* Seção superior com título e imagem decorativa */}
             <div className="artistas">
-                <div className="navbar">{usuario ? <Navbar /> : <NavbarVisitante/>}</div>
+
+                {/* Navbar muda dependendo se o usuário está logado ou não */}
+                <div className="navbar">
+                    {usuario ? <Navbar /> : <NavbarVisitante/>}
+                </div>
+
+                {/* Conteúdo principal da seção de apresentação */}
                 <div className="artistasConteudo">
+                    
                     <div>
                         <span className="text1">Artistas</span>
                     </div>
+
                     <div className="text2">
                         <h1> São elas que criam. </h1>
                     </div>
+
+                    {/* Imagem decorativa grande */}
                     <div className="imagem-artistas">
                         <img
                             src={"src/assets/Images.png"}
@@ -95,10 +121,19 @@ const Artistas = ({usuario}) => {
                     </div>
                 </div>
             </div>
-            <PerfisArtistas mock={artistas} opcoesOrdem={opcoesOrdem} opcoesFiltro={opcoesFiltro}></PerfisArtistas>
-            <Rodape variante="bege" ></Rodape>
+
+            {/* Componente que mostra a lista de artistas com pesquisa, filtro e ordenação */}
+            <PerfisArtistas 
+                mock={artistas} 
+                opcoesOrdem={opcoesOrdem} 
+                opcoesFiltro={opcoesFiltro}
+            />
+
+            {/* Rodapé da página com variante "bege" (cor bege) */}
+            <Rodape variante="bege"></Rodape>
         </div>
     );
-}
+};
 
+// Exporta o componente para ser usado nas rotas
 export default Artistas;

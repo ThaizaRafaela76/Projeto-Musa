@@ -14,21 +14,6 @@ const Artistas = () => {
         // "src/assets/.png"
     ];
 
-    const artistasMock = [
-        { id: 1, usuario: "Nina Sousa", tipo: "Pintura", cidade: "Quixadá" },
-        { id: 2, usuario: "Beatriz Soares", tipo: "Fotografia", cidade: "Mombaça" },
-        { id: 3, usuario: "Cristiane Menezes", tipo: "Escultura", cidade: "Choró" },
-        { id: 4, usuario: "Francisca da Silva", tipo: "Ilustração", cidade: "Pedra Branca" },
-        { id: 5, usuario: "Zeuda Honório", tipo: "Pintura", cidade: "Quixeramobim" },
-        { id: 6, usuario: "Leticia Queiroz", tipo: "Grafite", cidade: "Banabuiu" },
-        { id: 7, usuario: "Julia Laiza", tipo: "Fotografia", cidade: "Ibaretama" },
-        { id: 8, usuario: "Erika Rodrigues", tipo: "Escultura", cidade: "Milhã" },
-        { id: 9, usuario: "Larissa Maia", tipo: "Ilustração", cidade: "Senador" },
-        { id: 10, usuario: "Thaiza Rafaela", tipo: "Pintura", cidade: "Solonopole" },
-        { id: 11, usuario: "Martina Ribeiro", tipo: "Grafite", cidade: "Piquet Carneiro" },
-        { id: 12, usuario: "Aparecida Maria", tipo: "Fotografia", cidade: "Ibicuitinga" },
-    ];
-
     const opcoesOrdem = [
         { value: "az", label: "A → Z" },
         { value: "za", label: "Z → A" },
