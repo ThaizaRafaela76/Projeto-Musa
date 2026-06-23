@@ -10,16 +10,11 @@ import Navbar from "../Componentes/Navbar"
 import ModalExcluirPublic from "../Componentes/ModalExcluirPubli.jsx"
 import BotaoExcluir from "../Componentes/BotaoExcluir.jsx"
 import { IoWarningOutline } from "react-icons/io5"
-import BotaoEditarPerfil from "../Componentes/BotaoEditarPerfil"
-import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
-import { atualizarPerfil } from "../services/artistasService"
 import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
-import { BsInstagram } from "react-icons/bs";
 
 
 function Perfil({ artista, onPerfilAtualizado }) {
    const navigate = useNavigate()
-   const[estadoModalEditar, setEstadoModalEditar] = useState(false);
    const [loading, setLoading] = useState(true)
    const [imgAberta, setImgAberta] = useState(false)
 
@@ -32,15 +27,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
             setLoading(false)
         }
     }, [artista, navigate])
-   const abrirModalEditar = () => {
-        setEstadoModalEditar(true);
-        document.body.style.overflow = "hidden"
-   }
 
-   const fecharModalEditar = () => {
-        setEstadoModalEditar(false);
-        document.body.style.overflow = "auto"
-   }
 
     const [estadoModal, setEstadoModal] = useState(false);
 
@@ -108,20 +95,6 @@ function Perfil({ artista, onPerfilAtualizado }) {
         setModalExcluirPublic(false)
     }
 
-    const handleSalvarPerfil = async (dadosAtualizados) => {
-        setLoading(true)
-        try {
-            const atualizado = await atualizarPerfil(dadosAtualizados)
-            if (onPerfilAtualizado) {
-                onPerfilAtualizado(atualizado)
-            }
-            setLoading(false)
-            setRefreshKey(prev => prev + 1)
-        } catch (error) {
-            console.error(error)
-            alert("Erro ao atualizar perfil")
-        }
-    }
 
 
     if (loading) {
@@ -156,8 +129,6 @@ function Perfil({ artista, onPerfilAtualizado }) {
                     <div className="perfil_dados">
                         <div className="nome-editar">
                             <h2>{artista.nomeCompleto}</h2>
-                            <BotaoEditarPerfil  aoClicar={abrirModalEditar}/>
-                            <ModalEditarPerfil aberto={estadoModalEditar} fechado={fecharModalEditar} artista={artista} onSalvar={handleSalvarPerfil}/>
                         </div>
                         {/* Alterado para ser um link clicavel */}
                         <p><a

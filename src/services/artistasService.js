@@ -16,15 +16,6 @@ export async function buscarTodosArtistas() {
     return response.data
 }
 
-export async function atualizarPerfil(dados) {
-    console.log(baseURL)
-    const foto = dados.fotoPerfil.replace(baseURL, "")
-    dados.fotoPerfil = foto
-    console.log("dados: ", dados)
-    const response = await api.put("/artistas/perfil", dados)
-    return response.data
-}
-
 export async function buscarArtistaPorId(uid) {
     const response = await api.get(`/artistas/${uid}`)
     return response.data

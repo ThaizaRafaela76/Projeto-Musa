@@ -55,20 +55,6 @@ class ArtistaRepository {
         return { token, uid: credencial.user.uid }
     }
 
-    async atualizarArtista(uid, dados) {
-        const q = query(collection(db, COLECAO), where("uid", "==", uid))
-        const snapshot = await getDocs(q)
-
-        if (snapshot.empty) {
-            throw new Error("Artista não encontrato")
-        }
-        const docRef = doc(db, COLECAO, snapshot.docs[0].id)
-        await updateDoc(docRef, dados)
-
-        return { id: snapshot.docs[0].id, uid, ...dados }
-    }
-
-
 }
 
 export default ArtistaRepository

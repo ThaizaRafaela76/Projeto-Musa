@@ -64,15 +64,6 @@ router.get("/perfil", verificarToken, async(request, response) => {
     }
 })
 
-router.put("/perfil", verificarToken, async (request, response) => {
-    try {
-        const dados = request.body
-        const atualizado = await artistaService.atualizarArtista(request.uid, dados)
-        response.json(atualizado)
-    } catch (error) {
-        response.status(400).json({ erro: error.message })
-    }
-})
 
 router.get("/:uid", async (request, response) => {
     try {

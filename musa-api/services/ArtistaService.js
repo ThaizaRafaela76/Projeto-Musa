@@ -47,11 +47,6 @@ class ArtistaService {
         return await this.artistaRepository.login(email, senha)
     }
 
-    async atualizarArtista(uid, dados) {
-        const artista = await this.artistaRepository.atualizarArtista(uid, dados)
-        artista.fotoPerfil = `http://localhost:3000${artista.fotoPerfil}`
-        return artista
-    } 
 }
 
 export default new ArtistaService()
