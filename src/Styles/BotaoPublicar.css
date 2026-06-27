@@ -3,7 +3,8 @@
     color: var(--bege);
 
     display: block;
-    padding: 8px 12px;
+    width: 300px;
+    padding: 8px;
     margin-left: auto;
     margin-top: 12px;
 

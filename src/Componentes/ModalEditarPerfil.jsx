@@ -6,7 +6,7 @@ import BotaoSalvarAlteracoes from "./BotaoSalvarAlteracoes"
 import Filtro from "../Componentes/Filtro"
 import { IoCloseOutline } from "react-icons/io5"
 
-const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
+const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) => {
     const [form, setForm] = useState({
         nomeCompleto: "",
         nomeUsuario: "",
@@ -93,10 +93,15 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
                                 value={form.nomeUsuario}
                                 handleOnChange={(e) => handleChange("nomeUsuario", e.target.value)}
                             />
+                            <CampoTextoPublicacaoEPerfil
+                                label="Nome completo"
+                                name="nomeCompleto"
+                                value={form.nomeCompleto}
+                                handleOnChange={(e) => handleChange("nomeCompleto", e.target.value)}
+                            />
                             <div className="modal-filtro-cidade">
                                 <h3>Cidade</h3>
                                 <Filtro opcoes={[
-                                    { value: "", label: "Todas as cidades" },
                                     { value: "Banabuiu", label: "Banabuiu" },
                                     { value: "Choró", label: "Choró" },
                                     { value: "Deputado Irapuan Pinheiro", label: "Deputado Irapuan Pinheiro" },
@@ -127,12 +132,6 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar}) => {
                     </div>
                     <div className="editar-lado-direito">
                         <div className="campos-lado-direito">
-                            <CampoTextoPublicacaoEPerfil
-                                label="Nome completo"
-                                name="nomeCompleto"
-                                value={form.nomeCompleto}
-                                handleOnChange={(e) => handleChange("nomeCompleto", e.target.value)}
-                            />
                             <CampoTextoPublicacaoEPerfil
                                 label="Link do portfólio"
                                 name="linkPortfolio"

@@ -3,8 +3,6 @@
     top: 50%;
     left: 50%;
     width: 800px;
-    max-height: 80vh;
-    overflow-y: auto;
     padding: 40px;
     transform: translate(-50%, -50%);
     border-radius: 8px;
@@ -80,6 +78,7 @@
 
 .modal-public-esquerda .btnFiltro {
     border: 2px solid var(--vinho);
+    width: 280px;
 }
 
 .modal-categoria-obra {
@@ -91,6 +90,11 @@
 .modal-categoria-obra .menuFiltro {
     top: auto !important;
     bottom: calc(100% + 8px) !important;
+}
+
+.modal-categoria-obra .menuFiltro {
+    border: 2px solid var(--vinho);
+    width: 280px;
 }
 
 

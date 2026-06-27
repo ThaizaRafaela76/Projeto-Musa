@@ -68,6 +68,16 @@ class ArtistaRepository {
         return { id: snapshot.docs[0].id, uid, ...dados }
     }
 
+    async atualizarNomeNasPublicacoes(uid, nomeCompleto) {
+        const q = query(collection(db, "publicacoes"), where("uid", "==", uid))
+        const snapshot = await getDocs(q)
+
+        const atualizacoes = snapshot.docs.map(docSnap =>
+            updateDoc(doc(db, "publicacoes", docSnap.id), { artistaObra: nomeCompleto })
+        )
+
+        await Promise.all(atualizacoes)
+    }
 
 }
 

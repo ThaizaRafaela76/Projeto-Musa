@@ -49,6 +49,11 @@ class ArtistaService {
 
     async atualizarArtista(uid, dados) {
         const artista = await this.artistaRepository.atualizarArtista(uid, dados)
+
+        if(dados.nomeCompleto) {
+            await this.artistaRepository.atualizarNomeNasPublicacoes(uid, dados.nomeCompleto)
+        }
+
         artista.fotoPerfil = `http://localhost:3000${artista.fotoPerfil}`
         return artista
     } 

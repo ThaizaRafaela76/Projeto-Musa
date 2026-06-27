@@ -10,11 +10,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 800px;
-    height: 600px;
+    width: 820px;
+    height: 650px;
     padding: 40px;
-    max-height: 100vh;
-    overflow-y: auto;
 
     z-index: 100;
     border-radius: 8px;
@@ -67,7 +65,9 @@
 
 .editar-conteudo {
     display: flex;
-    gap: 6rem;
+    justify-content: center;
+    align-items: center;
+    gap: 6.4rem;
 }
 
 .editar-lado-esquerdo {
@@ -76,7 +76,7 @@
     gap: 20px;
     
     align-items: center;
-    margin-top: -20px;
+    margin-top: -26px;
 }
 
 .campos-lado-esquerdo {
@@ -90,7 +90,7 @@
     flex-direction: column;
     gap: 16px;
 
-    margin-top: -20px;
+    margin-top: -32px;
 }
 
 .campos-lado-direito {
@@ -101,8 +101,15 @@
 
 .modal-filtro-cidade .btnFiltro {
     border: 2px solid var(--vinho);
+    width: 300px;
 }
 
+.modal-filtro-cidade .menuFiltro {
+    bottom: calc(100% + 6px);
+    border: 2px solid var(--vinho);
+    width: 300px;
+    top: auto;
+}
 
 .container-foto-perfil {
     position: relative;

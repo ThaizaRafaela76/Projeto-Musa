@@ -10,7 +10,7 @@ import Filtro from "./Filtro"
 import { FaX } from "react-icons/fa6";
 
 
-function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
+function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeholder }) {
 
     if (!aberto) return null;
 
@@ -106,8 +106,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                             />
                             <div className="modal-categoria-obra">
                                 <h3>Categoria da obra</h3>
-                                <Filtro opcoes={[
-                                    { value: "", label: "Categorias" },
+                                <Filtro placeholder="Categoria" opcoes={[
                                     { value: "Pintura", label: "Pintura" },
                                     { value: "Colagem", label: "Colagem" },
                                     { value: "Arte digital", label: "Arte digital" },

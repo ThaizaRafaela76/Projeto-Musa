@@ -3,9 +3,13 @@ import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icon
 import "../Styles/Filtro.css";
 
 
-const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOrdemAberta}) => {
+const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOrdemAberta, obrigatorio, placeholder}) => {
 
-  const labelAtual = opcoes.find((op) => op.value === valor)?.label || "Filtro";
+  const labelAtual = opcoes.find((op) => op.value === valor)?.label || placeholder || "Filtro";
+
+  const opcoesFiltradas = obrigatorio
+    ? opcoes.filter(op => op.value !== "")
+    : opcoes
 
   useEffect(()=>{
     if(aberto){
@@ -29,7 +33,8 @@ const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOr
 
       {aberto && (
         <div className="menuFiltro">
-          {opcoes.map((op) => (
+          <div className="menuFiltro-scroll">
+          {opcoesFiltradas.map((op) => (
             <div
               key={op.value}
               className={`itemFiltro ${valor === op.value ? "itemFiltro--ativo" : ""}`}
@@ -41,6 +46,7 @@ const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOr
               {op.label}
             </div>
           ))}
+          </div>
         </div>
       )}
     </div>

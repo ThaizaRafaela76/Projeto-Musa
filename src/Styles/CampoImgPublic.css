@@ -13,6 +13,7 @@
     border-radius: 8px;
     margin-top: 26px;
     gap: 14px;
+    overflow: hidden;
 }
 
 .upload-publicacao svg {
