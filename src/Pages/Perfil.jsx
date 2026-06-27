@@ -2,21 +2,25 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Perfil.css"
-import "../Componentes/Navbar"
 import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
 import ModalPublic from "../Componentes/ModalPublic"
 import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
 import ModalExcluirPublic from "../Componentes/ModalExcluirPubli.jsx"
-import BotaoExcluir from "../Componentes/BotaoExcluir.jsx"
 import { IoWarningOutline } from "react-icons/io5"
 import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
 
 
-function Perfil({ artista, onPerfilAtualizado }) {
+function Perfil({ artista}) {
+    
    const navigate = useNavigate()
    const [loading, setLoading] = useState(true)
    const [imgAberta, setImgAberta] = useState(false)
+   const [estadoModalCriarPublic, setEstadoModalCriarPublic] = useState(false);
+   const [obras, setObras] = useState([])
+   const [refreshKey, setRefreshKey] = useState(0)
+   const [obraSelecionada, setObraSelecionada] = useState(null)
+   const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
 
    useEffect(() => {
         if (artista === null) {
@@ -29,20 +33,15 @@ function Perfil({ artista, onPerfilAtualizado }) {
     }, [artista, navigate])
 
 
-    const [estadoModal, setEstadoModal] = useState(false);
-
-    const abrirModal = () => {
-        setEstadoModal(true)
+    const abrirModalCriarPublic = () => {
+        setEstadoModalCriarPublic(true)
         document.body.style.overflow = "hidden"
     }
 
-    const fecharModal = () => {
-        setEstadoModal(false)
+    const fecharModalCriarPublic = () => {
+        setEstadoModalCriarPublic(false)
         document.body.style.overflow = "auto"
     }
-
-    const [obras, setObras] = useState([])
-    const [refreshKey, setRefreshKey] = useState(0)
 
     useEffect(() => {
     async function carregarObras() {
@@ -63,8 +62,6 @@ function Perfil({ artista, onPerfilAtualizado }) {
     if (artista) carregarObras()
 }, [artista, refreshKey])
 
-    const [obraSelecionada, setObraSelecionada] = useState(null)
-    const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
 
     function abrirObra(obra) {
         setObraSelecionada(obra)
@@ -96,7 +93,6 @@ function Perfil({ artista, onPerfilAtualizado }) {
     }
 
 
-
     if (loading) {
         return <div className="perfil"><h2>Carregando perfil...</h2></div>
     }
@@ -118,7 +114,10 @@ function Perfil({ artista, onPerfilAtualizado }) {
                 <Navbar />
             </header>
             <main>
+                {/*SESSÃO QUE CONTÉM TODAS AS INFORMAÇÕES DA ARTISTA*/}
                 <section className="perfil_info">
+
+                    {/*LADO DIREITO - CONTÉM A FOTO, NOME DE USUARIO E CIDADE*/}
                     <div className="perfil_foto">
                         <img className="fotoPerfil" src={`${artista.fotoPerfil}?t=${Date.now()}`} alt={artista.nomeCompleto} />
                         <div className="perfil_user">
@@ -126,7 +125,10 @@ function Perfil({ artista, onPerfilAtualizado }) {
                             <p className="artista_cidade">{artista.localizacao}</p>
                         </div>
                     </div>
+    
+                    {/*LADO ESQUERDO - CONTÉM NOME, PORTFOLIO, BIO E CONTATOS*/}
                     <div className="perfil_dados">
+
                         <div className="nome-editar">
                             <h2>{artista.nomeCompleto}</h2>
                         </div>
@@ -146,6 +148,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
                             }}
                         >Meu portfólio</a></p>
                         <p>{artista.descricao}</p>
+
                         <div className="perfil-contatos">
                             <h3>Contatos</h3>
                             <p><a 
@@ -163,14 +166,20 @@ function Perfil({ artista, onPerfilAtualizado }) {
                             >Instagram</a></p>
                             <p>{artista.email}</p>
                         </div>
+
                     </div>
+
                 </section>
+
+                {/*SESSÃO QUE CONTÉM AS OBRAS DO PERFIL*/}            
                 <section className="perfil_obras">
+
                     <div className="criacao">
                         <h2>Minhas obras</h2>
-                        <BotaoNovaPublic aoClicar={abrirModal} />
-                        <ModalPublic aberto={estadoModal} fechado={fecharModal} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
+                        <BotaoNovaPublic aoClicar={abrirModalCriarPublic} />
+                        <ModalPublic aberto={estadoModalCriarPublic} fechado={fecharModalCriarPublic} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
                     </div>
+
                     <div className="obras">
                         {
                             obras.map((obra) => (
@@ -184,14 +193,21 @@ function Perfil({ artista, onPerfilAtualizado }) {
                             ))
                         }
                     </div>
+
+                    {/*MODAL DE VISUALIZAR A OBRA*/}
                     {obraSelecionada && (
+
                         <div className="overlay-obra" >
+
                             <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
+
                                 <div className="btn-modal">
                                     <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluirPublic(); }}/>
                                     <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
                                 </div>
+
                                 <div className="org-modal">
+
                                     <div className="div-imagem">
                                         <img 
                                             src={`http://localhost:3000${obraSelecionada.imagemObra}`} 
@@ -201,12 +217,15 @@ function Perfil({ artista, onPerfilAtualizado }) {
                                         />
                                         <h1 className="titulo-obra">{obraSelecionada.nomeObra}</h1>
                                     </div>
+
                                     <div className="div-info">
                                         <h2>{obraSelecionada.artistaObra}</h2>
                                         <h3>{obraSelecionada.categoriaObra}</h3>
                                         <p className="descr-obra">{obraSelecionada.descricaoObra}</p>
                                     </div>
+
                                 </div>
+
                             </div>
 
                             {imgAberta && (
@@ -223,6 +242,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
 
                         </div>
                     )}
+
                 </section>
             </main>
             <Rodape variante="bege" />

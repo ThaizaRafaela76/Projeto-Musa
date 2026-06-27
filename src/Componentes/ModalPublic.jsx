@@ -86,7 +86,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
     return (
         <div className="modal-overlay">
 
-            {/* header do modal */}
+            {/* HEADER DO MODAL */}
             <div className="modal-publicacao">
                 <div className="modal-public-header">
                     <h2>Nova publicação</h2>
@@ -94,9 +94,12 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                         <FaX />
                     </button>
                 </div>
+
+                {/* CAMPOS DO LADO ESQUERDO - FOTO E FILRO */}
                 <div className="modal-public-conteudo">
-                    <form className="form-publicacao" onSubmit={handleSubmit}>
-                        {/* conteúdo do lado esquerdo */}
+
+                    <form className="form-publicacao" onSubmit={handleSubmit}>  
+                        
                         <div className="modal-public-esquerda">
                             <CampoImgPublic
                                 name="imagemObra"
@@ -104,6 +107,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                                 setImagem={(img) => setFormPublic({ ...formPublic, imagemObra: img })}
                                 erro={erros.imagemObra}
                             />
+                            {/* FILTRO */}
                             <div className="modal-categoria-obra">
                                 <h3>Categoria da obra</h3>
                                 <Filtro opcoes={[
@@ -134,8 +138,10 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                                 />
                                 <span className="erro">{erros.categoriaObra}</span>
                             </div>
+
                         </div>
-                        {/* conteúdo do lado direito */}
+
+                        {/* CAMPOS DE TEXTO DA OBRA - NOME E DESCRIÇÃO */}
                         <div className="modal-public-direita">
                             <CampoTextoPublicacaoEPerfil
                                 label="Nome da obra"
@@ -153,6 +159,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada }) {
                                 erro={erros.descricaoObra} />
                             <BotaoPublicar publicarObra />
                         </div>
+
                     </form>
                 </div>
             </div>
