@@ -33,7 +33,6 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
             ],
 
             descricaoObra: [
-                {condicao: (v) => !v.trim(), mensagem: "*A descrição da obra é obrigatória"},
                 {condicao: (v) => v.trim().length > 240, mensagem: "*A descrição da obra deve possuir até 240 caracteres"}
             ],
 
