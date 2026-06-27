@@ -2,6 +2,7 @@ import express, { request, response } from "express"
 import artistaService from "../services/ArtistaService.js"
 import { verificarToken } from "../middleware/authMiddleware.js"
 import { upload } from "../middleware/uploadMiddleware.js"
+import uploadImagemLocal from "../services/uploadLocalService.js"
 
 const router = express.Router()
 
@@ -82,6 +83,31 @@ router.get("/:uid", async (request, response) => {
         response.status(400).json({erro: "Artista não encontrada"})
     }
 })
+
+router.patch("/foto-perfil",
+    verificarToken,
+    upload.single("fotoPerfil"),
+    async (request, response) => {
+        try {
+            const fotoPerfilFile = request.file
+
+            if (!fotoPerfilFile) {
+                return response.status(400).json({ erro: "Imagem é obrigatória" })
+            }
+
+            const fotoPerfilUrl = await uploadImagemLocal(fotoPerfilFile, "fotoPerfil")
+
+            const atualizado = await artistaService.atualizarArtista(request.uid, {
+                fotoPerfil: fotoPerfilUrl
+            })
+
+            response.json(atualizado)
+        } catch (error) {
+            console.error(error)
+            response.status(400).json({ erro: error.message })
+        }
+    }
+)
 
 
 

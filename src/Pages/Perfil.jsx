@@ -112,6 +112,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
         setLoading(true)
         try {
             const atualizado = await atualizarPerfil(dadosAtualizados)
+            console.log("atualizado:", atualizado) // <- adiciona isso
             if (onPerfilAtualizado) {
                 onPerfilAtualizado(atualizado)
             }

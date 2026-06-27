@@ -29,3 +29,14 @@ export async function buscarArtistaPorId(uid) {
     const response = await api.get(`/artistas/${uid}`)
     return response.data
 }
+
+export async function atualizarFotoPerfil(imagemFile) {
+    const formData = new FormData()
+    formData.append("fotoPerfil", imagemFile)
+
+    const response = await api.patch("/artistas/foto-perfil", formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+    })
+
+    return response.data
+}

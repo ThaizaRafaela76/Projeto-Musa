@@ -5,6 +5,7 @@ import CampoTextArea from "./CampoTextArea"
 import BotaoSalvarAlteracoes from "./BotaoSalvarAlteracoes"
 import Filtro from "../Componentes/Filtro"
 import { IoCloseOutline } from "react-icons/io5"
+import { atualizarFotoPerfil } from "../services/artistasService"
 
 const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) => {
     const [form, setForm] = useState({
@@ -43,30 +44,44 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) =>
         setForm(prev => ({ ...prev, [campo]: valor }))
     }
 
+    function handleFotoSelecionada(e) {
+        const arquivo = e.target.files[0]
+        if (!arquivo) return
+        setNovaFoto(arquivo)
+        setPreviewFoto(URL.createObjectURL(arquivo))
+}
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
 
         try {
+            let formAtualizado = { ...form }
+
+            if (novaFoto) {
+                const resultado = await atualizarFotoPerfil(novaFoto)
+                console.log("resultado foto:", resultado) // <- adiciona isso
+                formAtualizado.fotoPerfil = resultado.fotoPerfil
+            }
+
             if (onSalvar) {
-                await onSalvar(form)
+                await onSalvar(formAtualizado)
             }
             fechado()
         } catch (error) {
             console.error(error)
-            alert("Erro ao salvar alterações: " + (error.response?.data?.erro || error.message))
+            alert("Erro ao salvar alterações: " + (error.message))
         } finally {
             setLoading(false)
-            if (onSalvar){
-                await onSalvar(form)
-            }
         }
-
     }
 
     const [filtro, setFiltro] = useState("");
     const [filtroAberto, setFiltroAberto] = useState(false);
     const [ordemAberta, setOrdemAberta] = useState(false);
+    const [novaFoto, setNovaFoto] = useState(null)
+    const [previewFoto, setPreviewFoto] = useState(null)
+
     
     if (!aberto) {
         return null
@@ -84,7 +99,21 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) =>
                 <form className="editar-conteudo" onSubmit={handleSubmit}>
                     <div className="editar-lado-esquerdo">
                         <div className="container-foto-perfil">
-                            <img className="foto-modal-editar" src={artista.fotoPerfil} />
+                            <img
+                                className="foto-modal-editar"
+                                src={previewFoto || artista.fotoPerfil}
+                                alt="Foto de perfil"
+                            />
+                            <label className="label-trocar-foto" htmlFor="inputFotoPerfil">
+                                Trocar foto
+                            </label>
+                            <input
+                                id="inputFotoPerfil"
+                                type="file"
+                                accept="image/*"
+                                style={{ display: "none" }}
+                                onChange={handleFotoSelecionada}
+                            />
                         </div>
                         <div className="campos-lado-esquerdo">
                             <CampoTextoPublicacaoEPerfil
