@@ -1,9 +1,11 @@
 import ArtistaRepository from "../repositories/ArtistaRepository.js"
+import PublicacaoRepository from "../repositories/PublicacaoRepository.js"
 import uploadImagemLocal from "./uploadLocalService.js"
 
 class ArtistaService {
     constructor() {
         this.artistaRepository = new ArtistaRepository()
+        this.publicacaoRepository = new PublicacaoRepository()
     }
 
 
@@ -39,6 +41,16 @@ class ArtistaService {
             fotoPerfil: fotoPerfilUrl,
             imagemTrabalho: imagemTrabalhoUrl
         })
+
+        if(imagemTrabalhoUrl) {
+            await this.publicacaoRepository.criarPublic(
+                novaArtista.uid,
+                dados.nomeObra || "",
+                dados.descricaoObra || "",
+                dados.areaAtuacao || "",
+                imagemTrabalhoUrl
+            )
+        }
 
         return novaArtista
     }

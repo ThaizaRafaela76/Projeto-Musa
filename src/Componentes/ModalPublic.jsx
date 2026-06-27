@@ -143,6 +143,8 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
                                 value={formPublic.nomeObra}
                                 handleOnChange={(e) => setFormPublic({ ...formPublic, nomeObra: e.target.value })}
                                 erro={erros.nomeObra} />
+
+                            <div className="modal-campo-descricao">   
                             <CampoTextArea
                                 label="Descrição"
                                 name="descricaoObra"
@@ -150,6 +152,10 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
                                 placeholder="Conte-nos um pouco sobre sua obra... :)"
                                 handleOnChange={(e) => setFormPublic({ ...formPublic, descricaoObra: e.target.value })}
                                 erro={erros.descricaoObra} />
+
+                               <p className="dica-descricao">Dica da Musa: adicionar uma descrição ajuda as pessoas a conhecerem melhor a sua obra ;)</p> 
+                               </div>
+
                             <BotaoPublicar publicarObra />
                         </div>
                     </form>

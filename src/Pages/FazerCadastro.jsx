@@ -25,7 +25,7 @@ const opcoesCidade = [
 ]
 
 const opcoesArea = [
-    { value: "", label: "Selecione uma área" },
+    { value: "", label: "Selecione uma categoria" },
     { value: "Pintura", label: "Pintura" },
     { value: "Colagem", label: "Colagem" },
     { value: "Arte digital", label: "Arte digital" },
@@ -57,6 +57,7 @@ function FazerCadastro() {
         fotoPerfil: null,
         areaAtuacao: "",
         imagemTrabalho: null,
+        nomeObra: "",
     })
 
     const [erros, setErros] = useState({})
@@ -108,6 +109,7 @@ function FazerCadastro() {
         if (!form.fotoPerfil) novosErros.fotoPerfil = "Foto de perfil obrigatória"
         if (!form.areaAtuacao) novosErros.areaAtuacao = "Campo obrigatório"
         if (!form.imagemTrabalho) novosErros.imagemTrabalho = "Envie pelo menos uma imagem do seu trabalho"
+        if (!form.nomeObra.trim()) novosErros.nomeObra = "Campo obrigatório"
         setErros(novosErros)
         return Object.keys(novosErros).length === 0
     }
@@ -129,6 +131,7 @@ function FazerCadastro() {
             formData.append("linkInstagram", form.linkInstagram || "")
             formData.append("descricao", form.descricao || "")
             formData.append("areaAtuacao", form.areaAtuacao)
+            formData.append("nomeObra", form.nomeObra)
 
             if (form.fotoPerfil) {
                 formData.append("fotoPerfil", form.fotoPerfil)
@@ -374,24 +377,9 @@ function FazerCadastro() {
                                         {erros.fotoPerfil && <span className="erro-msg">{erros.fotoPerfil}</span>}
                                     </div>
 
-                                    <div className="campo-cadastro">
-                                        <label>Área de Atuação</label>
-                                        <div className="select-wrapper">
-                                            <select
-                                                value={form.areaAtuacao}
-                                                onChange={(e) => handleChange("areaAtuacao", e.target.value)}
-                                                className={erros.areaAtuacao ? "campo-erro" : ""}
-                                            >
-                                                {opcoesArea.map((op) => (
-                                                    <option key={op.value} value={op.value}>{op.label}</option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        {erros.areaAtuacao && <span className="erro-msg">{erros.areaAtuacao}</span>}
-                                    </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Imagem de um trabalho <span className="label-obrigatorio">*</span></label>
+                                        <label>Imagem de uma obra <span className="label-obrigatorio">*</span></label>
                                         <label
                                             htmlFor="imagemTrabalho"
                                             className={`upload-trabalho ${erros.imagemTrabalho ? "campo-erro" : ""}`}
@@ -408,6 +396,35 @@ function FazerCadastro() {
                                         />
                                         {erros.imagemTrabalho && <span className="erro-msg">{erros.imagemTrabalho}</span>}
                                     </div>
+
+                                    <div className="campo-cadastro">
+                                        <label>Nome da Obra <span className="label-obrigatorio">*</span></label>
+                                        <input
+                                            type="text"
+                                            placeholder="Título do seu trabalho"
+                                            value={form.nomeObra}
+                                            onChange={(e) => handleChange("nomeObra", e.target.value)}
+                                            className={erros.nomeObra ? "campo-erro" : ""}
+                                        />
+                                        {erros.nomeObra && <span className="erro-msg">{erros.nomeObra}</span>}
+                                    </div>
+
+                                    <div className="campo-cadastro">
+                                        <label>Categoria da obra</label>
+                                        <div className="select-wrapper">
+                                            <select
+                                                value={form.areaAtuacao}
+                                                onChange={(e) => handleChange("areaAtuacao", e.target.value)}
+                                                className={erros.areaAtuacao ? "campo-erro" : ""}
+                                            >
+                                                {opcoesArea.map((op) => (
+                                                    <option key={op.value} value={op.value}>{op.label}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        {erros.areaAtuacao && <span className="erro-msg">{erros.areaAtuacao}</span>}
+                                    </div>
+                                    
                                 </div>
                             )}
 

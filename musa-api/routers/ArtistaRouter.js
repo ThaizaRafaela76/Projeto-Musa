@@ -19,7 +19,7 @@ router.post("/cadastro",
     async(request, response) => {
         try {
             const { nomeCompleto, email, nomeUsuario, senha, localizacao, 
-                    linkPortfolio, linkInstagram, descricao, areaAtuacao } = request.body
+                    linkPortfolio, linkInstagram, descricao, areaAtuacao, nomeObra } = request.body
 
             const fotoPerfilFile = request.files?.fotoPerfil?.[0]
             const imagemTrabalhoFile = request.files?.imagemTrabalho?.[0]
@@ -34,6 +34,7 @@ router.post("/cadastro",
                 linkInstagram, 
                 descricao, 
                 areaAtuacao,
+                nomeObra,
                 fotoPerfil: fotoPerfilFile,
                 imagemTrabalho: imagemTrabalhoFile
             })
