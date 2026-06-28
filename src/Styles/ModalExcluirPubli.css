@@ -45,6 +45,7 @@
     color: var(--bege);
     border: 2px solid var(--vinho);
     border-radius: 10px;
+    cursor: pointer;
 
     font-weight: bold;
     padding: 3px 25px 3px 25px;
@@ -62,6 +63,7 @@
     color: var(--vinho);
     border: 2px solid var(--vinho);
     border-radius: 10px;
+    cursor: pointer;
 
     font-weight: bold;
     padding: 3px 25px 3px 25px;

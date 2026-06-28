@@ -15,6 +15,9 @@ import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
 import { atualizarPerfil } from "../services/artistasService"
 import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
 import { BsInstagram } from "react-icons/bs";
+import { MdOutlineEmail } from "react-icons/md";
+import { HiLink } from "react-icons/hi";
+
 
 
 function Perfil({ artista, onPerfilAtualizado }) {
@@ -140,6 +143,13 @@ function Perfil({ artista, onPerfilAtualizado }) {
             </div>
         )
     }
+
+    function extrairUserInstagram(link) {
+        if(!link) return null
+        const match = link.match(/instagram\.com\/([^/?#]+)/)
+        return match ?  match[1] : null
+    }
+
     return (
         <div className="perfil">
             <header>
@@ -161,43 +171,47 @@ function Perfil({ artista, onPerfilAtualizado }) {
                             <ModalEditarPerfil aberto={estadoModalEditar} fechado={fecharModalEditar} artista={artista} onSalvar={handleSalvarPerfil}/>
                         </div>
                         {/* Alterado para ser um link clicavel */}
-                        <p><a
-
+                        <h3>Biografia</h3>
+                        <p>{artista.descricao}</p>
+                        <div className="perfil-contatos">
+                            <h3>Onde me encontrar</h3>
+                            <a
                             href={
                                 artista.linkPortfolio.startsWith("http")
                                     ? artista.linkPortfolio
                                     : `https://${artista.linkPortfolio}`
                             }
-
-                            style={{
-                                textDecoration: "none",
-                                color: "inherit",
-                                fontWeight: "bold"
-                            }}
-                        >Meu portfólio</a></p>
-                        <p>{artista.descricao}</p>
-                        <div className="perfil-contatos">
-                            <h3>Contatos</h3>
-                            <p><a 
+                            className="portfolio-link"
+                            >
+                            <HiLink />
+                            Portfólio</a>
+                            <a 
                             href={
                                 artista.linkInstagram.startsWith("http")
                                 ? artista.linkInstagram
                                 : `https://${artista.linkInstagram}`
-                            }
+                            } 
 
-                            style={{
-                                textDecoration: "none",
-                                color: "inherit",
-                                
-                            }}
-                            >Instagram</a></p>
-                            <p>{artista.email}</p>
+                            target="_blank"
+                            rel="noreferrer"
+                            className="instagram-link"
+
+                            > <BsInstagram />
+                            {extrairUserInstagram(artista.linkInstagram)}</a>
+                            <a 
+                            href={`https://mail.google.com/mail/?view=cm&to=${artista.email}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="email-link">
+
+                            <MdOutlineEmail />  
+                            {artista.email}</a>
                         </div>
                     </div>
                 </section>
                 <section className="perfil_obras">
                     <div className="criacao">
-                        <h2>Minhas obras</h2>
+                        <h2>Minha galeria</h2>
                         <BotaoNovaPublic aoClicar={abrirModal} />
                         <ModalPublic aberto={estadoModal} fechado={fecharModal} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
                     </div>

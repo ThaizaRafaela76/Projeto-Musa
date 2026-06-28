@@ -7,6 +7,7 @@ function BotaoDenuncia({ abrirModal }) {
         <button
             className="botao-denuncia"
             onClick={abrirModal}
+            title="Denunciar"
         >
             <IoWarningOutline />
         </button>

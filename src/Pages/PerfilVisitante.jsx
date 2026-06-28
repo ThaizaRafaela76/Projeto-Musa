@@ -11,10 +11,9 @@ import BotaoDenuncia from "../Componentes/BotaoDenuncia"
 import ModalDenunciarPerfil from "../Componentes/ModalDenunciarPerfil"
 import NavbarVisitante from "../Componentes/NavbarVisitante"
 import { buscarPublicacoes } from "../services/publicacaoService.js"
-import { FaLink } from "react-icons/fa6";
-import { FaRegStar } from "react-icons/fa6";
 import { BsInstagram } from "react-icons/bs";
-
+import { MdOutlineEmail } from "react-icons/md";
+import { HiLink } from "react-icons/hi";
 
 
 
@@ -115,6 +114,13 @@ function PerfilVisitante({usuario}) {
             </div>
         )
     }
+
+    function extrairUserInstagram(link) {
+        if(!link) return null
+        const match = link.match(/instagram\.com\/([^/?#]+)/)
+        return match ? "@" + match[1] : null
+    }
+    
     return (
         <div className="perfil-visitante">
             <header>
@@ -135,43 +141,48 @@ function PerfilVisitante({usuario}) {
                             <BotaoDenuncia abrirModal={abrirModalDenunciarPerfil} />
                             <ModalDenunciarPerfil aberto={estadoModalDenunciarPerfil} fecharModal={fecharModalDenunciarPerfil}/>
                         </div>
+                        <h3>Biografia</h3>
                         {/* Alterado para ser um link clicavel */}
-                        <p><a
-
+                        <p>{artista.descricao}</p>
+                        <div className="perfil-contatos">
+                            <h3>Onde me encontrar</h3>
+                            <a
                             href={
                                 artista.linkPortfolio.startsWith("http")
                                     ? artista.linkPortfolio
                                     : `https://${artista.linkPortfolio}`
                             }
-
-                            style={{
-                                textDecoration: "none",
-                                color: "inherit",
-                                fontWeight: "bold"
-                            }}
-                        >Portfólio</a></p>
-                        <p>{artista.descricao}</p>
-                        <div className="perfil-contatos">
-                            <h3>Contatos</h3>
-                            <p><a 
+                            className="portfolio-link"
+                            >
+                            <HiLink />
+                            Portfólio</a>
+                            <a 
                             href={
                                 artista.linkInstagram.startsWith("http")
                                 ? artista.linkInstagram
                                 : `https://${artista.linkInstagram}`
-                            }
+                            } 
 
-                            style={{
-                                textDecoration: "none",
-                                color: "inherit"
-                            }}
-                            >Instagram</a></p>
-                            <p>{artista.email}</p>
+                            target="_blank"
+                            rel="noreferrer"
+                            className="instagram-link"
+
+                            > <BsInstagram />
+                            {extrairUserInstagram(artista.linkInstagram)}</a>
+                            <a 
+                            href={`https://mail.google.com/mail/?view=cm&to=${artista.email}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="email-link">
+
+                            <MdOutlineEmail />  
+                            {artista.email}</a>
                         </div>
                     </div>
                 </section>
                 <section className="perfil_obras">
                     <div className="criacao">
-                        <h2>Obras da artista</h2>
+                        <h2>Galeria de obras</h2>
                     </div>
                     <div className="obras">
                         {

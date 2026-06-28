@@ -29,6 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   max-width: 500px;
+  min-width: 500px;
   gap: 8px;
   text-align: justify;
 }
@@ -80,7 +81,7 @@ body {
 .criacao {
   display: flex;
   justify-content: space-between;
-  max-width: 1300px;
+  max-width: 1248px;
   margin: 0 auto;
   width: 100%
 }
@@ -94,6 +95,7 @@ body {
   grid-template-columns: repeat(4, 312px);
   row-gap: 2rem;
   justify-content: center;
+  margin-left: 22px;
 }
 
 .obras .card-template {
@@ -152,11 +154,38 @@ body {
   border-radius: 8px;
 }
 
-.btn-instagram {
-   text-decoration: "none";
-   color: var(--bege);
+
+.instagram-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--bege);
 }
 
-.btn-instagram svg {
-   font-size: 24px;
+.email-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--bege);
+    margin-left: -2px;
+}
+
+.email-link svg {
+  font-size: 19px;
+}
+
+.portfolio-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--bege);
+    margin-left: -3px;
+}
+
+.portfolio-link svg {
+  font-size: 19px;
+}
+
+.perfil_dados a:hover {
+  color: var(--laranja);
 }
