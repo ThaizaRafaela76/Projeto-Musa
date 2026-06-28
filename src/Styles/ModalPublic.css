@@ -106,7 +106,8 @@
 }
 
 .dica-descricao {
-    display: flex;
+    width: 300px;
+    margin: 0;
     font-size: 14px;
     color: var(--vinho);
     font-weight: 600;
@@ -116,7 +117,7 @@
 .modal-campo-descricao {
     display: flex;
     flex-direction: column;
-    gap: 6px; /* distância entre textarea e dica */
+    gap: 4px; /* distância entre textarea e dica */
 }
 
 

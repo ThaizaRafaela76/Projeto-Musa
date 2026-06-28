@@ -21,6 +21,7 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) =>
     })
 
     const [loading, setLoading] = useState(false)
+
     
     useEffect(() => {
         if (artista && aberto) {
@@ -37,6 +38,7 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) =>
             })
 
             setFiltro(artista.localizacao || "")
+            setErros({})
         }
     }, [artista, aberto])
     
@@ -51,8 +53,25 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) =>
         setPreviewFoto(URL.createObjectURL(arquivo))
 }
 
+    const validarErros = () => {
+        const novosErros = {}
+
+        if(!form.nomeUsuario.trim()) {
+            novosErros.nomeUsuario = "*O campo não pode ficar vazio"
+        }
+        if(!form.nomeCompleto.trim()) {
+            novosErros.nomeCompleto = "*O campo não pode ficar vazio"
+        }
+        if(form.descricao.lenght > 240) {
+            novosErros.descricao = "*A descrição deve possuir até 240 caracteres"
+        }
+        setErros(novosErros)
+        return Object.keys(novosErros).length === 0
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if(!validarErros()) return
         setLoading(true)
 
         try {
@@ -81,6 +100,7 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) =>
     const [ordemAberta, setOrdemAberta] = useState(false);
     const [novaFoto, setNovaFoto] = useState(null)
     const [previewFoto, setPreviewFoto] = useState(null)
+    const [erros, setErros] = useState({})
 
     
     if (!aberto) {
@@ -121,13 +141,18 @@ const ModalEditarPerfil = ({aberto, fechado, artista, onSalvar, obrigatorio}) =>
                                 name="nomeUsuario"
                                 value={form.nomeUsuario}
                                 handleOnChange={(e) => handleChange("nomeUsuario", e.target.value)}
+                                erro={erros.nomeUsuario}
                             />
+
                             <CampoTextoPublicacaoEPerfil
                                 label="Nome completo"
                                 name="nomeCompleto"
                                 value={form.nomeCompleto}
                                 handleOnChange={(e) => handleChange("nomeCompleto", e.target.value)}
+                                erro={erros.nomeCompleto}
                             />
+
+
                             <div className="modal-filtro-cidade">
                                 <h3>Cidade</h3>
                                 <Filtro opcoes={[

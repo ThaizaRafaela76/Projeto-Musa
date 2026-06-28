@@ -161,6 +161,7 @@
 .bnt-esq, .bnt-dir{
     color: var(--bege);
     font-size: 45px;
+    cursor: pointer;
 }
 .bnt-dir:hover, .bnt-esq:hover {
     color: var(--vinho);
@@ -292,6 +293,7 @@ a {
     color: var(--bege);
     border: none;
     border-radius: 8px;
+    cursor: pointer;
 
     font-weight: bold;
     padding: 9px 45px;

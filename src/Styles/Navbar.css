@@ -31,6 +31,7 @@
     color: var(--vinho);
     font-size: 1.4rem;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .link-sobre:hover {
@@ -62,7 +63,8 @@
 .links button svg {
   width: 35px;
   height: 35px;
-  color: var(--vinho)
+  color: var(--vinho);
+  cursor: pointer;
 }
 
 .links button svg:hover {
