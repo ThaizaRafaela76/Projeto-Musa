@@ -1,0 +1,76 @@
+.div-modal-excluir-artista {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-excluir-artista {
+    width: 750px;
+    height: 350px;
+    border-radius: 8px;
+    background-color: var(--bege);
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto-excluir-artista {
+    color: var(--vinho);
+    max-width: 700px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.bnt-excluir-artista {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4rem;
+    margin-top: 2rem;
+}
+
+.confir-bnt-artista {
+    background-color: var(--vinho);
+    color: var(--bege);
+    border: 2px solid var(--vinho);
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-weight: bold;
+    padding: 5px 40px;
+    font-size: 1.5rem;
+}
+
+.confir-bnt-artista:hover {
+    background-color: var(--laranja);
+    border: 2px solid var(--laranja);
+}
+
+.canc-bnt-artista {
+    background: none;
+    color: var(--vinho);
+    border: 2px solid var(--vinho);
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-weight: bold;
+    padding: 5px 40px;
+    font-size: 1.5rem;
+}
+
+.canc-bnt-artista:hover {
+    background-color: var(--laranja);
+    border: 2px solid var(--laranja);
+    color: var(--bege);
+}
