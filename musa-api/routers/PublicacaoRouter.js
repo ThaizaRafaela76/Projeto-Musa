@@ -38,6 +38,16 @@ router.post("/",
     }
 )
 
+router.delete("/admin/:id", verificarToken, async(request, response) => {
+    try {
+        const { id } = request.params
+        const resultado = await publicacaoService.deletarPublicacaoAdmin(id)
+        response.json(resultado)
+    } catch (error) {
+        response.status(400).json({ erro: error.message })
+    }
+})
+
 router.delete("/:id", verificarToken, async(request, response) => {
     try{
         const { id } = request.params
@@ -48,5 +58,6 @@ router.delete("/:id", verificarToken, async(request, response) => {
         response.status(400).json({ erro: error.message })
     }
 })
+
 
 export default router

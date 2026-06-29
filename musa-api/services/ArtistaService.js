@@ -8,8 +8,6 @@ class ArtistaService {
         this.publicacaoRepository = new PublicacaoRepository()
     }
 
-
-
     async buscarTodos() {
         const artistas = await this.artistaRepository.buscarTodos()
         const artistaMap = artistas.map((item, index)=>{
@@ -68,7 +66,11 @@ class ArtistaService {
 
         artista.fotoPerfil = `http://localhost:3000${artista.fotoPerfil}`
         return artista
-    } 
+    }
+
+    async deletarArtista(id) {
+        return await this.artistaRepository.deletarArtista(id)
+    }
 }
 
 export default new ArtistaService()

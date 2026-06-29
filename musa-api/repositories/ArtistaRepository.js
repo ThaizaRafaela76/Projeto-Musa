@@ -1,5 +1,5 @@
 import ArtistaModel from "../models/ArtistaModel.js"
-import { collection, getDocs, addDoc, query, where, updateDoc, doc } from "firebase/firestore"
+import { collection, getDocs, addDoc, query, where, updateDoc, doc, deleteDoc } from "firebase/firestore"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { db, auth } from "../firebase.js"
 
@@ -20,7 +20,6 @@ class ArtistaRepository {
         const doc = snapshot.docs[0]
         return { id: doc.id, ...doc.data() }
     }
-
 
     async criarArtista(dados) {
         const { nomeCompleto, email, nomeUsuario, senha, localizacao,
@@ -79,6 +78,11 @@ class ArtistaRepository {
         await Promise.all(atualizacoes)
     }
 
+    async deletarArtista(id) {
+        const docRef = doc(db, COLECAO, id)
+        await deleteDoc(docRef)
+        return { mensagem: "Artista deletada com sucesso" }
+    }
 }
 
 export default ArtistaRepository

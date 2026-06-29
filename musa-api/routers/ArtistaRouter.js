@@ -76,15 +76,6 @@ router.put("/perfil", verificarToken, async (request, response) => {
     }
 })
 
-router.get("/:uid", async (request, response) => {
-    try {
-        const artista = await artistaService.buscarPorUid(request.params.uid)
-        response.json(artista)
-    } catch(error) {
-        response.status(400).json({erro: "Artista não encontrada"})
-    }
-})
-
 router.patch("/foto-perfil",
     verificarToken,
     upload.single("fotoPerfil"),
@@ -110,6 +101,24 @@ router.patch("/foto-perfil",
     }
 )
 
+// Rota admin — deve ficar antes de /:uid
+router.delete("/admin/:id", verificarToken, async(request, response) => {
+    try {
+        const { id } = request.params
+        const resultado = await artistaService.deletarArtista(id)
+        response.json(resultado)
+    } catch (error) {
+        response.status(400).json({ erro: error.message })
+    }
+})
 
+router.get("/:uid", async (request, response) => {
+    try {
+        const artista = await artistaService.buscarPorUid(request.params.uid)
+        response.json(artista)
+    } catch(error) {
+        response.status(400).json({erro: "Artista não encontrada"})
+    }
+})
 
 export default router

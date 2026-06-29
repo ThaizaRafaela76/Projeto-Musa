@@ -47,6 +47,12 @@ class PublicacaoRepository {
         await deleteDoc(docRef)
         return {mensagem: "Publicação deletada com sucesso"}
     }
+
+    async deletarPublicacaoAdmin(id) {
+        const docRef = doc(db, COLECAO, id)
+        await deleteDoc(docRef)
+        return { mensagem: "Publicação deletada com sucesso" }
+    }
 }
 
 export default PublicacaoRepository

@@ -1,0 +1,90 @@
+
+.pagina-artistas-admin {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bege);
+    text-align: center;
+}
+
+.titulo-artistas-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-left: var(--padding-pagina);
+    padding-right: var(--padding-pagina);
+    margin-top: 25px;
+}
+
+.titulo-artistas-admin p {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--vinho);
+}
+
+.titulo-artistas-admin h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--vinho);
+    margin-bottom: 40px;
+}
+
+.imagem-artistas-admin {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+}
+
+.imagem-artistas-admin img {
+    width: 90%;
+    max-width: 1600px;
+    object-fit: cover;
+}
+
+.cards-section-artistas-admin {
+    padding-left: var(--padding-pagina);
+    padding-right: var(--padding-pagina);
+}
+
+.controles-artistas-admin {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.cards-artistas-admin {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.card-artista-admin-wrapper {
+    position: relative;
+}
+
+.checkbox-card-artista-admin {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.checkbox-card-artista-admin input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--vinho);
+}
+
+.mensagem-artistas-admin {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    color: var(--vinho);
+}

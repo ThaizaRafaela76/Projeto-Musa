@@ -16,3 +16,8 @@ export async function deletarPublicacao(id, uid) {
     const response = await api.delete(`/publicacoes/${id}`, { data: { uid } })
     return response.data
 }
+
+export async function deletarPublicacaoAdmin(id) {
+    const response = await api.delete(`/publicacoes/admin/${id}`)
+    return response.data
+}

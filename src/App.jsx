@@ -15,6 +15,11 @@ import PerfilVisitante from "./Pages/PerfilVisitante"
 import Login from "./Pages/Login";
 import AcervoVisitante from "./Pages/AcervoVisitante";
 import FazerCadastro from "./Pages/FazerCadastro"
+
+import PerfilAdmin from "./Pages/PerfilAdmin";
+import AcervoAdmin from "./Pages/AcervoAdmin"
+import ArtistasAdmin from "./Pages/ArtistasAdmin";
+
 function App() {
   const [usuario, setUsuario] = useState(undefined);
   const [artista, setArtista] = useState(null)
@@ -92,6 +97,9 @@ function App() {
           path="/perfil/:uid"
           element={<PerfilVisitante usuario={usuario} />}
         />
+        <Route path="/admin/denuncias" element={<PerfilAdmin />} />
+        <Route path="/admin/acervo" element={<AcervoAdmin />} />
+        <Route path="/admin/artistas" element= {<ArtistasAdmin />} />
       </Routes>
     </Router>
   );
