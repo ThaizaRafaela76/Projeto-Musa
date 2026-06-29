@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 import Rodape from "../Componentes/Rodape"
 import "../Styles/Perfil.css"
 import BotaoNovaPublic from "../Componentes/BotaoNovaPublic"
@@ -7,31 +6,29 @@ import ModalPublic from "../Componentes/ModalPublic"
 import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
 import ModalExcluirPublic from "../Componentes/ModalExcluirPubli.jsx"
+import BotaoExcluir from "../Componentes/BotaoExcluir"
 import { IoWarningOutline } from "react-icons/io5"
 import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService.js"
 
 
-function Perfil({ artista}) {
+function Perfil({artista}) {
     
-   const navigate = useNavigate()
-   const [loading, setLoading] = useState(true)
-   const [imgAberta, setImgAberta] = useState(false)
    const [estadoModalCriarPublic, setEstadoModalCriarPublic] = useState(false);
    const [obras, setObras] = useState([])
    const [refreshKey, setRefreshKey] = useState(0)
    const [obraSelecionada, setObraSelecionada] = useState(null)
    const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
 
-   useEffect(() => {
-        if (artista === null) {
-            setLoading(false)
-            // Opcional: redirecionar para login
-            // navigate("/login")
-        } else if (artista) {
-            setLoading(false)
-        }
-    }, [artista, navigate])
 
+    function abrirObra(obra) {
+        setObraSelecionada(obra)
+        document.body.style.overflow = "hidden"
+    }
+
+    function fecharObra() {
+        setObraSelecionada(null)
+        document.body.style.overflow = "auto"
+    }
 
     const abrirModalCriarPublic = () => {
         setEstadoModalCriarPublic(true)
@@ -42,6 +39,15 @@ function Perfil({ artista}) {
         setEstadoModalCriarPublic(false)
         document.body.style.overflow = "auto"
     }
+
+    function abrirModalExcluirPublic() {
+        setModalExcluirPublic(true)
+    }
+    
+    function fecharModalExcluirPublic() {
+        setModalExcluirPublic(false)
+    }
+
 
     useEffect(() => {
     async function carregarObras() {
@@ -62,17 +68,6 @@ function Perfil({ artista}) {
     if (artista) carregarObras()
 }, [artista, refreshKey])
 
-
-    function abrirObra(obra) {
-        setObraSelecionada(obra)
-        document.body.style.overflow = "hidden"
-    }
-
-    function fecharObra() {
-        setObraSelecionada(null)
-        document.body.style.overflow = "auto"
-    }
-
     async function confirmarExclusao() {
         try {
             await deletarPublicacao(obraSelecionada.id, artista.uid)
@@ -84,30 +79,12 @@ function Perfil({ artista}) {
         }
     }
 
-    function abrirModalExcluirPublic() {
-        setModalExcluirPublic(true)
-    }
-    
-    function fecharModalExcluirPublic() {
-        setModalExcluirPublic(false)
-    }
 
-
-    if (loading) {
+    if (!artista) {
         return <div className="perfil"><h2>Carregando perfil...</h2></div>
     }
-    if (!artista) {
-        return (
-            <div className="perfil">
-                <Navbar />
-                <div style={{ textAlign: "center", padding: "50px" }}>
-                    <h2>Perfil não encontrado</h2>
-                    <button onClick={() => navigate("/login")}>Ir para Login</button>
-                </div>
-                <Rodape variante="bege" />
-            </div>
-        )
-    }
+
+
     return (
         <div className="perfil">
             <header>
@@ -133,37 +110,12 @@ function Perfil({ artista}) {
                             <h2>{artista.nomeCompleto}</h2>
                         </div>
                         {/* Alterado para ser um link clicavel */}
-                        <p><a
-
-                            href={
-                                artista.linkPortfolio.startsWith("http")
-                                    ? artista.linkPortfolio
-                                    : `https://${artista.linkPortfolio}`
-                            }
-
-                            style={{
-                                textDecoration: "none",
-                                color: "inherit",
-                                fontWeight: "bold"
-                            }}
-                        >Meu portfólio</a></p>
+                        <h3>Biografia</h3>
                         <p>{artista.descricao}</p>
 
                         <div className="perfil-contatos">
                             <h3>Contatos</h3>
-                            <p><a 
-                            href={
-                                artista.linkInstagram.startsWith("http")
-                                ? artista.linkInstagram
-                                : `https://${artista.linkInstagram}`
-                            }
-
-                            style={{
-                                textDecoration: "none",
-                                color: "inherit",
-                                
-                            }}
-                            >Instagram</a></p>
+                            <p>Instagram</p>
                             <p>{artista.email}</p>
                         </div>
 
@@ -212,8 +164,6 @@ function Perfil({ artista}) {
                                         <img 
                                             src={`http://localhost:3000${obraSelecionada.imagemObra}`} 
                                             alt={obraSelecionada.nomeObra} 
-                                            onClick={() => setImgAberta(true)}
-                                            style={{cursor: "pointer"}}
                                         />
                                         <h1 className="titulo-obra">{obraSelecionada.nomeObra}</h1>
                                     </div>
@@ -227,12 +177,6 @@ function Perfil({ artista}) {
                                 </div>
 
                             </div>
-
-                            {imgAberta && (
-                                <div className="overlay-img" onClick={() => setImgAberta(false)}>
-                                    <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="imagem-aberta" />
-                                </div>
-                            )}
 
                            <ModalExcluirPublic
                                 aberto={modalExcluirPublic}
