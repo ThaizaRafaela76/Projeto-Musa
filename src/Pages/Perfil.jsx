@@ -20,12 +20,12 @@ function Perfil({artista}) {
    const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
 
 
-    function abrirObra(obra) {
+    const abrirObra = (obra) => {
         setObraSelecionada(obra)
         document.body.style.overflow = "hidden"
     }
 
-    function fecharObra() {
+    const fecharObra =() => {
         setObraSelecionada(null)
         document.body.style.overflow = "auto"
     }
@@ -40,44 +40,41 @@ function Perfil({artista}) {
         document.body.style.overflow = "auto"
     }
 
-    function abrirModalExcluirPublic() {
+    const abrirModalExcluirPublic = () => {
         setModalExcluirPublic(true)
     }
     
-    function fecharModalExcluirPublic() {
+    const fecharModalExcluirPublic = () => {
         setModalExcluirPublic(false)
     }
 
 
     useEffect(() => {
-    async function carregarObras() {
-        try {
-            const todasPublicacoes = await buscarPublicacoes()
-            console.log("publicações:", todasPublicacoes)
-            console.log("primeira publicação:", todasPublicacoes[0])
-            console.log("uid da artista:", artista.uid)
-            const obrasArtista = todasPublicacoes
-            .filter(p => p.uid === artista.uid)
-            .sort((a, b) => new Date(b.dataDeCriacao.seconds) - new Date(a.dataDeCriacao.seconds))                   
-            console.log("obras filtradas:", obrasArtista)
-            setObras(obrasArtista)
-        } catch (error) {
-            console.error("Erro ao carregar obras:", error)
+        async function carregarObras() {
+            try {
+                const todasPublicacoes = await buscarPublicacoes()
+                const obrasArtista = todasPublicacoes
+                .filter(p => p.uid === artista.uid)
+                .sort((a, b) => new Date(b.dataDeCriacao.seconds) - new Date(a.dataDeCriacao.seconds))                   
+                console.log("obras filtradas:", obrasArtista)
+                setObras(obrasArtista)
+            } catch (error) {
+                console.error("Erro ao carregar obras:", error)
+            }
         }
-    }
-    if (artista) carregarObras()
-}, [artista, refreshKey])
+        if (artista) carregarObras()
+    }, [artista, refreshKey])
 
-    async function confirmarExclusao() {
-        try {
-            await deletarPublicacao(obraSelecionada.id, artista.uid)
-            fecharModalExcluirPublic()
-            fecharObra()
-            setRefreshKey(prev => prev + 1)
-        } catch (error) {
-            alert("Erro ao excluir a obra.")
+        async function confirmarExclusao() {
+            try {
+                await deletarPublicacao(obraSelecionada.id, artista.uid)
+                fecharModalExcluirPublic()
+                fecharObra()
+                setRefreshKey(prev => prev + 1)
+            } catch (error) {
+                alert("Erro ao excluir a obra.")
+            }
         }
-    }
 
 
     if (!artista) {
@@ -96,7 +93,7 @@ function Perfil({artista}) {
 
                     {/*LADO DIREITO - CONTÉM A FOTO, NOME DE USUARIO E CIDADE*/}
                     <div className="perfil_foto">
-                        <img className="fotoPerfil" src={`${artista.fotoPerfil}?t=${Date.now()}`} alt={artista.nomeCompleto} />
+                        <img className="fotoPerfil" src={`${artista.fotoPerfil}`} alt={artista.nomeCompleto} />
                         <div className="perfil_user">
                             <h3>{artista.nomeUsuario}</h3>
                             <p className="artista_cidade">{artista.localizacao}</p>
@@ -115,7 +112,7 @@ function Perfil({artista}) {
 
                         <div className="perfil-contatos">
                             <h3>Contatos</h3>
-                            <p>Instagram</p>
+                            <a href={artista.linkInstagram} target="_blank">{artista.linkInstagram}</a>
                             <p>{artista.email}</p>
                         </div>
 
