@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import "../Styles/Login.css";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate() // Inicializa a função para mudar de página
   return (
     <main className="login-page">
 
@@ -17,8 +17,14 @@ const Login = () => {
         src={logo}
         alt="Musa"
         className="login-logo-topo"
+
+        // EVENTO DE CLIQUE: Quando o usuário clica no logo, ele é mandado de volta para a página inicial ("/")
         onClick={()=>{navigate("/")}}
+
+        // ESTILO EM LINHA: Muda o cursor do mouse para aquela "mãozinha" indicando que o logo é clicável
         style={{cursor: "pointer"}}
+
+        
       />
 
       {/* CARD PRINCIPAL (não mexe na estrutura interna) */}
