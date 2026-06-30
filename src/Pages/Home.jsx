@@ -19,62 +19,62 @@ import perfil from '../assets/image 11.png'
 
 
 const Home = ({usuario}) => {
-    const ref = useRef(null)
+const ref = useRef(null)                                             //acessa ao elemento DOM
 
     function scrollDir() {
-        ref.current.scrollBy({ left: 300, behavior: 'smooth' })
+        ref.current.scrollBy({ left: 300, behavior: 'smooth' })         
     }
     function scrollEsq() {
         ref.current.scrollBy({ left: -300, behavior: 'smooth' })
     }
 
     const refArtistas = useRef(null)
-    const [podeEsq, setPodeEsq] = useState(false)
-    const [podeDir, setPodeDir] = useState(true)
+    const [podeEsq, setPodeEsq] = useState(false)   //desabilitado
+    const [podeDir, setPodeDir] = useState(true)    //habilitado
 
     function verificaScroll() {
         const el = refArtistas.current
-        setPodeEsq(el.scrollLeft > 0)
-        setPodeDir(el.scrollLeft + el.clientWidth < el.scrollWidth)
+        setPodeEsq(el.scrollLeft > 0)   //pode voltar para a esquerda
+        setPodeDir(el.scrollLeft + el.clientWidth < el.scrollWidth)     //ver se ainda tem card para a direita, e mantem o botão habilitado
     }
 
     function scrollDirArtistas() {
         refArtistas.current.scrollBy({ left: 300, behavior: 'smooth' })
-        setTimeout(verificaScroll, 350)
+        setTimeout(verificaScroll, 350)     //espera a animação terminar antes de verificar a posição do scroll, sem isso os botões daria errado
     }
     function scrollEsqArtistas() {
         refArtistas.current.scrollBy({ left: -300, behavior: 'smooth' })
         setTimeout(verificaScroll, 350)
     }
 
-    const [ultimasPostagens, setUltimasPostagens] = useState([])
+    const [ultimasPostagens, setUltimasPostagens] = useState([])            //guarda informações em uma lista e faz o componente atualizar.
 
     useEffect(() => {
         async function carregarPostagens() {
             try {
-                const publicacoes = await buscarPublicacoes()
-                const ultimas = publicacoes.slice(-6).reverse()
-                setUltimasPostagens(ultimas)
+                const publicacoes = await buscarPublicacoes()           //dados que vem do back
+                const ultimas = publicacoes.slice(-6).reverse()         
+                setUltimasPostagens(ultimas)                            //atualiza a lista de post na tela
             } catch (error) {
                 console.error("Erro ao carregar postagens:", error)
             }
         }
         carregarPostagens()
-    }, [])
+    }, [])                                                              //array vazio para rodar so uma vez
 
     const [artistas, setArtistas] = useState([])
 
-    useEffect(() => {
+    useEffect(() => {                                                 //executa código assim que o componente carrega 
         const carregar = async () => {
             try {
                 const resultado = await buscarTodosArtistas()
-                const artis = resultado.map((item, index) => {
-                    item.cidade = item.localizacao
+                const artis = resultado.map((item, index) => {         //o map aqui serve para renomear campos do backend
+                    item.cidade = item.localizacao                  //cria um novo campo chamado cidade com o valor que estava em localizacao
                     item.usuario = item.nomeUsuario
                     return item
                 })
                 console.log(artis)
-                setArtistas(artis)
+                setArtistas(artis)                              //cria um novo array com os campos renomeados e salva aqui
             } catch (error) {
                 console.error("Erro ao carregar artista:", error)
             }
@@ -122,7 +122,7 @@ const Home = ({usuario}) => {
                         <Link to="/acervo"><BotaoVerMais /></Link>
                     </div>
                     <div className="post-card" ref={ref}>
-                        {ultimasPostagens.map((obra) => (
+                        {ultimasPostagens.map((obra) => (                       //obra é o paramentro da função
                             <CardTemplate
                                 key={obra.id}
                                 imagem={`http://localhost:3000${obra.imagemObra}`}
@@ -153,7 +153,7 @@ const Home = ({usuario}) => {
 
                     <div className="div-artista-carrossel">
                         <div className="artista-card" ref={refArtistas}  onScroll={verificaScroll}>
-                            {artistas.map((artista)=>{
+                            {artistas.map((artista)=>{                      //artista é uma variavel de estado
                                 return (
                                     <CardTemplateArtista imagem={artista.fotoPerfil} nome={artista.usuario} />
                                 )
@@ -162,7 +162,7 @@ const Home = ({usuario}) => {
                     </div>
 
                     <div style={{ width: "52px", flexShrink: 0 }}>
-                        {podeDir && (
+                        {podeDir && (                                           //verifica
                             <button className="bnt-dir-artista" onClick={scrollDirArtistas}>
                                 <FaCircleArrowRight />
                             </button>
