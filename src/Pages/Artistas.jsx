@@ -36,61 +36,36 @@ const Artistas = ({ usuario }) => {
 
     // useEffect roda automaticamente quando o componente é carregado
     useEffect(() => {
-        
+        //a função assíncrona não precisa esperar, ela não precisa terminar de esperar 
+        //o codigo pode continuar executando, mas se tiver wait 
         // Função assíncrona para carregar os artistas
         const carregar = async () => {
             try {
-                // Chama o service para buscar todos os artistas do Firebase
+                // Chama o service para buscar todos os artistas do API 
                 const resultado = await buscarTodosArtistas();
 
                 // Transforma os dados para o formato que o componente PerfisArtistas espera
-                const artis = resultado.map((item, index) => {
+                //item = artista
+                const lista_artistas_formatados = resultado.map((artista, index) => {
                     // Renomeia "localizacao" para "cidade"
-                    item.cidade = item.localizacao;
+                    artista.cidade = artista.localizacao;
                     // Renomeia "nomeUsuario" para "usuario"
-                    item.usuario = item.nomeUsuario;
-                    return item;
+                    artista.usuario = artista.nomeUsuario;
+                    return artista;
                 });
-
-                console.log(artis);        // Mostra no console os dados carregados
-                setArtistas(artis);        // Atualiza o estado com os artistas
+                //setar a minha lista de artista formatados, vou mudar o meu artistas para os artistas formatados
+                setArtistas(lista_artistas_formatados); // Atualiza o estado com os artistas
             } catch (error) {
                 console.error("Erro ao carregar artista:", error);
             }
         };
 
-        carregar();   // Executa a função de carregamento
+        carregar();   // Executa a função de carregamento´
     }, []);   // O array vazio [] significa: execute apenas uma vez ao montar o componente
 
 
-    // ======================= OPÇÕES DE FILTRO E ORDENAÇÃO =======================
-
-    // Opções de ordenação que serão passadas para o componente PerfisArtistas
-    const opcoesOrdem = [
-        { value: "az", label: "A → Z" },
-        { value: "za", label: "Z → A" },
-    ];
-
-    // Opções de filtro por cidade (lista fixa)
-    const opcoesFiltro = [
-        { value: "", label: "Todas as cidades" },
-        { value: "Banabuiu", label: "Banabuiu" },
-        { value: "Choró", label: "Choró" },
-        { value: "Deputado Irapuan Pinheiro", label: "Deputado Irapuan Pinheiro" },
-        { value: "Ibaretama", label: "Ibaretama" },
-        { value: "Ibicuitinga", label: "Ibicuitinga" },
-        { value: "Milhã", label: "Milhã" },
-        { value: "Mombaça", label: "Mombaça" },
-        { value: "Pedra Branca", label: "Pedra Branca" },
-        { value: "Piquet Carneiro", label: "Piquet Carneiro" },
-        { value: "Quixadá", label: "Quixadá" },
-        { value: "Quixeramobim", label: "Quixeramobim" },
-        { value: "Senador", label: "Senador" },
-        { value: "Solonopole", label: "Solonopole" },
-    ];
-
-
     // ======================= RENDERIZAÇÃO DA PÁGINA =======================
+    //retornar o html da minha página
     return (
         <div>   {/* Container principal da página */}
 
@@ -124,9 +99,7 @@ const Artistas = ({ usuario }) => {
 
             {/* Componente que mostra a lista de artistas com pesquisa, filtro e ordenação */}
             <PerfisArtistas 
-                mock={artistas} 
-                opcoesOrdem={opcoesOrdem} 
-                opcoesFiltro={opcoesFiltro}
+                artistas={artistas} 
             />
 
             {/* Rodapé da página com variante "bege" (cor bege) */}

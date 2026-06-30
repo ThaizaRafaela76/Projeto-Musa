@@ -22,25 +22,7 @@ import NavbarVisitante from "../Componentes/NavbarVisitante.jsx"
 function Acervo({usuario}) {
 
     const [pesquisa, setPesquisa] = useState("")
-    const [filtro, setFiltro] = useState("")
-    const [ordem, setOrdem] = useState("az")
-    const [filtroAberto, setFiltroAberto] = useState(false)
-    const [ordemAberta, setOrdemAberta] = useState(false)
-    const opcoesFiltro = [
-        { value: "", label: "Todas as obras" },
-        { value: "Pintura", label: "Pintura" },
-        { value: "Colagem", label: "Colagem" },
-        { value: "Arte digital", label: "Arte digital" },
-        { value: "Fotografia", label: "Fotografia" },
-        { value: "Xilogravura", label: "Xilogravura" },
-        { value: "Design", label: "Design" },
-        { value: "Poesia", label: "Poesia" },
-        { value: "Literatura", label: "Literatura" },
-        { value: "Arquitetura", label: "Arquitetura" },
-        { value: "Artesanato", label: "Artesanato" },
-        { value: "Desenho", label: "Desenho" },
-        { value: "Escultura", label: "Escultura" },
-    ]
+    
 
     const [obraSelecionada, setObraSelecionada] = useState(null)
     const [modalDenunciaAberto, setModalDenunciaAberto] = useState(false)
@@ -80,12 +62,8 @@ function Acervo({usuario}) {
 
     const obrasFiltrados = obras.filter((item) => {
         const passaPesquisa = item.nomeObra.toLowerCase().includes(pesquisa.toLowerCase());
-        const passaFiltro = (filtro === "" || item.categoriaObra === filtro);
-        console.log(passaPesquisa && passaFiltro);
-        return passaPesquisa && passaFiltro;
-    }).sort((a, b) => {
-        return ordem == "az" ? a.nomeObra.localeCompare(b.nomeObra) : b.nomeObra.localeCompare(a.nomeObra)
-    });
+        return passaPesquisa;
+    })
 
     const [estadoModal, setEstadoModal] = useState(false);
 
@@ -129,12 +107,8 @@ function Acervo({usuario}) {
 
             <section className="cards-section">
 
-
                 <div className="controles-acervo">
                     <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} />
-                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} />
-                    <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
-                    {usuario && (<BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>)}
                 </div>       
                 <ModalPublic aberto={estadoModal} fechado={fecharModal} onPublicacaoCriada={() => setRefreshKey(prev => prev + 1)} />
                 {
