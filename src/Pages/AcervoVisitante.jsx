@@ -1,9 +1,5 @@
 import { useState } from "react"
 import BarraPesquisa from "../Componentes/BarraPesquisa"
-import Filtro from "../Componentes/Filtro"
-import Ordenar from "../Componentes/Ordenar"
-import ModalDenuncia from "../Componentes/ModalDenuncia"
-import { IoWarningOutline } from "react-icons/io5"
 
 import NavbarVisitante from "../Componentes/NavbarVisitante"
 import Rodape from "../Componentes/Rodape";
@@ -22,50 +18,28 @@ import imagemEusou from "../assets/eusou.png";
 import imagemAntropofagia from "../assets/antropofagia.png";
 import bannerAcervo from "../assets/banner-acervo.png";
 
+
 function AcervoVisitante() {
 
+    // estado da busca
     const [pesquisa, setPesquisa] = useState("")
-    const [filtro, setFiltro] = useState("")
-    const [ordem, setOrdem] = useState("az")
-    const [filtroAberto, setFiltroAberto] = useState(false)
-    const [ordemAberta, setOrdemAberta] = useState(false)
-    const opcoesFiltro = [
-        { value: "", label: "Filtro" },
-        { value: "Pintura", label: "Pintura" },
-        { value: "Colagem", label: "Colagem" },
-        { value: "Arte digital", label: "Arte digital" },
-        { value: "Fotografia", label: "Fotografia" },
-        { value: "Xilogravura", label: "Xilogravura" },
-        { value: "Design", label: "Design" },
-        { value: "Poesia", label: "Poesia" },
-        { value: "Literatura", label: "Literatura" },
-        { value: "Arquitetura", label: "Arquitetura" },
-        { value: "Artesanato", label: "Artesanato" },
-        { value: "Desenho", label: "Desenho" },
-        { value: "Escultura", label: "Escultura" },
-    ]
 
+    // estado da obra 
     const [obraSelecionada, setObraSelecionada] = useState(null)
-    const [modalDenunciaAberto, setModalDenunciaAberto] = useState(false)
 
+    
     function abrirObra(obra) {
         setObraSelecionada(obra)
-        document.body.style.overflow = "hidden"
+        document.body.style.overflow = "hidden" //scroll
     }
 
+    
     function fecharObra() {
         setObraSelecionada(null)
         document.body.style.overflow = "auto"
     }
 
-    function abrirDenuncia() {
-        setModalDenunciaAberto(true)
-    }
-
-    function fecharDenuncia() {
-        setModalDenunciaAberto(false)
-    }
-
+    // lista 
     const obras = [
         { id: 1, imagem: imagemAntropofagia, titulo: "ANTROPOFAGIA", autora: "Tarsila do Amaral", categoria: "Pintura", descricao: "A pintura Antropofagia (1929), de Tarsila do Amaral, é uma das obras mais importantes do Modernismo brasileiro. A tela sintetiza o Movimento Antropofágico — proposto por Oswald de Andrade — ao fundir elementos da cultura nacional, da fauna e da flora com técnicas europeias, simbolizando a deglutição da cultura estrangeira para criar uma identidade genuinamente brasileira." },
         { id: 2, imagem: imagemOcula, titulo: "OCULA", autora: "Lygia Pape", categoria: "Pintura", descricao: "Lygia Pape (1927–2004) foi uma das pioneiras do movimento Neoconcreto no Brasil. Sua obra revolucionária dissolveu as fronteiras entre o objeto e o observador, explorando a geometria, o espaço e o corpo humano por meio de esculturas, gravuras, instalações e cinema." },
@@ -77,12 +51,9 @@ function AcervoVisitante() {
         { id: 8, imagem: imagemColunaPartida, titulo: "A COLUNA PARTIDA", autora: "Frida Kahlo", categoria: "Pintura", descricao: "A Coluna Partida (1944) é um autorretrato visceral da pintora mexicana Frida Kahlo. Ele retrata a sua agonia física e emocional após uma grave cirurgia na coluna. A obra é mundialmente conhecida por expor a sua dor crônica de forma crua, simbolizando simultaneamente o sofrimento, o aprisionamento e a força espiritual." },
     ]
 
+    // filtra novo array
     const obrasFiltrados = obras.filter((item) => {
-        const passaPesquisa = item.titulo.toLowerCase().includes(pesquisa.toLowerCase());
-        const passaFiltro = (filtro === "" || item.categoria === filtro);
-        return passaPesquisa && passaFiltro;
-    }).sort((a, b) => {
-        return ordem == "az" ? a.titulo.localeCompare(b.titulo) : b.titulo.localeCompare(a.titulo)
+        return item.titulo.toLowerCase().includes(pesquisa.toLowerCase());
     });
 
     return (
@@ -90,6 +61,7 @@ function AcervoVisitante() {
 
             <NavbarVisitante />
 
+            {/* título e subtítulo da página */}
             <section className="titulo-acervo">
                 <p>Acervo Digital</p>
                 <h1>
@@ -99,18 +71,20 @@ function AcervoVisitante() {
                 </h1>
             </section>
 
+            {/* banner de destaque */}
             <section className="imagem-acervo">
                 <img src={bannerAcervo} alt="Acervo Digital" />
             </section>
 
             <section className="cards-section">
 
+                {/* campo de busca */}
                 <div className="controles-acervo">
+                    {/*props*/}
                     <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} />
-                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} />
-                    <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
                 </div>
 
+                
                 {obrasFiltrados.length === 0 ? (
                     <p className="mensagem">Nenhuma obra encontrada</p>
                 ) : (
@@ -127,32 +101,25 @@ function AcervoVisitante() {
                     </div>
                 )}
 
+                {/* só aparece se uma obra foi clicada */}
                 {obraSelecionada && (
-                    <div className="overlay-obra">
-                        <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
+                    <div className="overlay-obra"> {/* fundo escuro por trás */}
+                        <div className="modal-geral" onClick={(e) => e.stopPropagation()}> {/* evita fechar ao clicar dentro */}
                             <div className="btn-modal">
-                                <button
-                                    className="botao-denuncia"
-                                    onClick={(e) => { e.stopPropagation(); abrirDenuncia(); }}
-                                >
-                                    <IoWarningOutline />
-                                </button>
-                                <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
+                                <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button> {/* fecha o modal */}
                             </div>
                             <div className="org-modal">
                                 <div className="div-imagem">
                                     <img src={obraSelecionada.imagem} alt={obraSelecionada.titulo} />
                                     <h1 className="titulo-obra">{obraSelecionada.titulo}</h1>
                                 </div>
-                                <div className="div-info">
+                                <div className="div-info"> {/* dados da obra clicada */}
                                     <h2>{obraSelecionada.autora}</h2>
                                     <h3>{obraSelecionada.categoria}</h3>
                                     <p className="descr-obra">{obraSelecionada.descricao}</p>
                                 </div>
                             </div>
                         </div>
-
-                        <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
                     </div>
                 )}
 
