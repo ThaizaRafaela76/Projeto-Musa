@@ -162,7 +162,7 @@ const ref = useRef(null)                                             //acessa ao
                     </div>
 
                     <div style={{ width: "52px", flexShrink: 0 }}>
-                        {podeDir && (                                           //verifica
+                        {podeDir && (                                           //verifica se o botão pode ou não aparecer
                             <button className="bnt-dir-artista" onClick={scrollDirArtistas}>
                                 <FaCircleArrowRight />
                             </button>
