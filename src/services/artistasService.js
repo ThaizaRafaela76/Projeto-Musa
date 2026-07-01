@@ -38,10 +38,8 @@ export async function buscarPerfil() {
 // Função para buscar TODOS os artistas (usada na página de listagem)
 export async function buscarTodosArtistas() {
 
-    // Faz uma requisição GET para pegar todos os artistas
     const response = await api.get("/artistas");
 
-    // Retorna a lista de artistas
     return response.data;
 }
 
@@ -49,8 +47,6 @@ export async function buscarTodosArtistas() {
 // Função para buscar um artista específico pelo UID
 export async function buscarArtistaPorId(uid) {
 
-    // Faz uma requisição GET passando o UID na URL
-    // Exemplo: /artistas/abc123xyz
     const response = await api.get(`/artistas/${uid}`);
 
     // Retorna os dados daquele artista

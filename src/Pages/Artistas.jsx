@@ -20,64 +20,49 @@ import { useEffect, useState } from "react";
 import { buscarTodosArtistas } from "../services/artistasService";
 
 
-// ======================= COMPONENTE PRINCIPAL =======================
-
 // Componente da página "Artistas"
-// Recebe a prop "usuario" para saber se o usuário está logado ou não
 const Artistas = ({ usuario }) => {
 
-    // ======================= ESTADOS =======================
-
-    // Estado que vai guardar a lista de artistas vindos do banco de dados
+    //váriavel de estado artistas 
     const [artistas, setArtistas] = useState([]);
 
-
-    // ======================= CARREGAMENTO DOS DADOS =======================
-
-    // useEffect roda automaticamente quando o componente é carregado
     useEffect(() => {
-        //a função assíncrona não precisa esperar, ela não precisa terminar de esperar 
-        //o codigo pode continuar executando, mas se tiver wait 
+       
         // Função assíncrona para carregar os artistas
         const carregar = async () => {
             try {
                 // Chama o service para buscar todos os artistas do API 
                 const resultado = await buscarTodosArtistas();
-
-                // Transforma os dados para o formato que o componente PerfisArtistas espera
-                //item = artista
+                
+                // Transforma os dados
                 const lista_artistas_formatados = resultado.map((artista, index) => {
-                    // Renomeia "localizacao" para "cidade"
+
                     artista.cidade = artista.localizacao;
-                    // Renomeia "nomeUsuario" para "usuario"
+
                     artista.usuario = artista.nomeUsuario;
                     return artista;
                 });
-                //setar a minha lista de artista formatados, vou mudar o meu artistas para os artistas formatados
+
                 setArtistas(lista_artistas_formatados); // Atualiza o estado com os artistas
-            } catch (error) {
+            }
+            catch (error) {
                 console.error("Erro ao carregar artista:", error);
             }
         };
 
-        carregar();   // Executa a função de carregamento´
-    }, []);   // O array vazio [] significa: execute apenas uma vez ao montar o componente
+        carregar();   // Executa a função de carregamento
+    }, []); 
 
-
-    // ======================= RENDERIZAÇÃO DA PÁGINA =======================
-    //retornar o html da minha página
+    //retornar o html
     return (
-        <div>   {/* Container principal da página */}
+        <div>
 
-            {/* Seção superior com título e imagem decorativa */}
             <div className="artistas">
 
-                {/* Navbar muda dependendo se o usuário está logado ou não */}
                 <div className="navbar">
                     {usuario ? <Navbar /> : <NavbarVisitante/>}
                 </div>
 
-                {/* Conteúdo principal da seção de apresentação */}
                 <div className="artistasConteudo">
                     
                     <div>
@@ -97,12 +82,10 @@ const Artistas = ({ usuario }) => {
                 </div>
             </div>
 
-            {/* Componente que mostra a lista de artistas com pesquisa, filtro e ordenação */}
             <PerfisArtistas 
                 artistas={artistas} 
             />
 
-            {/* Rodapé da página com variante "bege" (cor bege) */}
             <Rodape variante="bege"></Rodape>
         </div>
     );

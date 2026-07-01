@@ -1,8 +1,4 @@
-// ======================= IMPORTAÇÕES =======================
-
 // Importa useState do React.
-// useState serve para criar variáveis que guardam informações e, quando mudam, 
-// fazem a tela do usuário atualizar automaticamente.
 import { useState } from "react";
 
 // Importa useNavigate do React Router Dom.
@@ -19,51 +15,22 @@ import CardTemplateArtista from "../Componentes/CardTemplateArtista"; // Card de
 import "../Styles/PerfisArtistas.css";
 
 
-// ======================= COMPONENTE PRINCIPAL =======================
-
-// Este é o componente principal da página que mostra a lista de artistas.
-// Ele recebe 3 informações do componente pai (props):
-// - artistas: lista completa de artistas
-// - opcoesOrdem: opções de ordenação (A→Z, Z→A)
-// - opcoesFiltro: lista de cidades para filtrar
 function PerfisArtistas({ artistas }) {
-    //esses valores só vão ser acionados 
-    // ======================= ESTADOS (useState) =======================
-    // Aqui criamos as "memórias" do componente (estados)
 
-    // Guarda o que o usuário está digitando na barra de pesquisa
-    //set guarda um valor dentro de pesquisa, ele altera o valor
     const [pesquisa, setPesquisa] = useState("");
     
-
-    // ======================= FILTRAGEM + ORDENAÇÃO =======================
-
-    // Cria uma nova lista chamada artistasFiltrados, aplicando filtro e ordenação
-    // Primeiro filtra os artistas
-    //Está sendo criado uma nova lista contendo os artistas que foram filtrados pelo o que o usuario digitou na barra
-    //de pesquisa e pelo nome da cidade que o usuario escolheu no filtro 
-    //arrow function é uma função anonima 
     const artistasFiltrados = artistas.filter((artista) => {
-        //vai criar uma nova lista de artistas filtrados pela pesquisa e pela cidade
-        // Verifica se o nome do artista contém o texto que o usuário pesquisou. 
-        // toLowerCase() transforma tudo em minúsculo para não diferenciar "Ana" de "ana"
-        //vai perguntar se a pesquisa está dentro do includes. Includes = verificar . Tenho uma lista de caracteres, então o includes se pertence aquele nome
-        //vai ver o que o usuario digitou e ver se ta dentro da lista de artistas
+
         const passaPesquisa = artista.usuario.toLowerCase().includes(pesquisa.toLowerCase());
 
-
-        //retornar verdadeiro ou falso
-        //para cada usuário, vai verificar se é verdadeiro ou falso, se essa condição for verdadeira.
-        return passaPesquisa  // Só mantém quem passou nos dois testes
+        return passaPesquisa; 
     })
-    // ======================= NAVEGAÇÃO =======================
-
-    // Cria a função de navegação entre páginas 
+  
     const navigate = useNavigate();
-    // Função que é chamada quando o usuário clica em um card de artista
+   
+    //função executada ao clicar no card 
     function irParaPerfil(uid) {
-        // Pega o UID do usuário que está logado (salvo no navegador)
-        //armazenamento interto do browser, guardado in memoria esse ID
+
         const meuUid = localStorage.getItem("uid");
 
         // Se o usuário clicou no próprio perfil..,

@@ -7,11 +7,11 @@ import "../Styles/Filtro.css";
 
 //uma função em arrow function. Aqui são as propriedades que estão sendo passadas
 //para o componente filtro
-function Filtro ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOrdemAberta}){
+function Filtro ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOrdemAberta}) {
 //Verificando se a constante labelAtual tem o valor igual o valor da propriedade passada
 //As opções.find vai encontrar dentro dessas opções se o valor está aqui dentro, se tiver a labelAtual vai ficar com o valor de label
 //? -> tá verificando se existe 
-  let labelAtual = null
+  const labelAtual = null;
   if (opcoes.find((op) => op.value === valor)){
     labelAtual = opcoes.find((op) => op.value === valor).label
   }

@@ -1,22 +1,22 @@
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Para navegar entre as páginas
-import { signInWithEmailAndPassword } from "firebase/auth"; // A função que faz o login no Firebase
+import { Link, useNavigate } from "react-router-dom"; 
+import { signInWithEmailAndPassword } from "firebase/auth";
 import CampoInput from "./CampoInput";
 import Botao from "./BotaoLogin";
 
-import { auth } from "../firebaseConfig"; // Configuração do seu Firebase
+import { auth } from "../firebaseConfig"; 
 
 import "../Styles/FormLogin.css";
 
 //Estados e inicialização
 const FormLogin = () => {
-  const [email, setEmail] = useState(""); //se nãoa inicializar vazio causa erro, useState retorna um array
+  const [email, setEmail] = useState(""); 
   const [senha, setSenha] = useState("");
 
-  // Estados para controlar as mensagens de erro
+  
   const [erro, setErro] = useState("");
-  const [erroEmail, setErroEmail] = useState(""); //permite que rerenderize garantindo que o estado atualize
+  const [erroEmail, setErroEmail] = useState(""); 
   const [erroSenha, setErroSenha] = useState("");
 
   const navigate = useNavigate(); // Função para mandar o usuário para outra tela após o login
@@ -32,8 +32,7 @@ const FormLogin = () => {
 
     let possuiErro = false;
 
-    // Usamos um 'if' separado (e não um 'else if') para garantir que ambos os campos 
-    // sejam validados no mesmo clique, permitindo exibir múltiplos erros simultâneos.
+    // Usamos um 'if' separado (e não um 'else if') para garantir que ambos os campos sejam validados no mesmo clique, exibe múltiplos erros simultâneos.
     if (!email.trim()) {
       setErroEmail("Campo obrigatório"); // Modifica o estado do erro de senha
       possuiErro = true;
@@ -62,8 +61,6 @@ const FormLogin = () => {
     // O auth é uma instância que já configurei e representa a conexão com o Firebase, indicando qual projeto acessar.
 
     try {
-      // Envia o email e senha para o Firebase validar
-      //credencial e o resuado da promessa
       const credencial = await signInWithEmailAndPassword(
         auth,
         email,
@@ -73,11 +70,10 @@ const FormLogin = () => {
       // Pega o token de segurança do usuário que acabou de logar
       const token = await credencial.user.getIdToken();
 
-      // Salva o token e o ID do usuário no navegador (localStorage) para mantê-lo logar
+      // Salva o token e o ID do usuário no navegador (localStorage)
       localStorage.setItem("token", token);
-      localStorage.setItem("uid", credencial.user.uid); //pegar o identficador (user) e user é uma props
+      localStorage.setItem("uid", credencial.user.uid);
 
-      // Login bem-sucedido! Manda o usuário para a página inicial ("/")
       navigate("/");
       // bloco que lida com erros se a promessa de login falhar
     } catch (error) {
@@ -112,14 +108,9 @@ const FormLogin = () => {
 
           // O 'handleOnChange' é ativado toda vez que o usuário digita ou apaga uma letra
           handleOnChange={(e) => {
-            // 1. Pega o que foi digitado (e.target.value) e salva no estado 'email'
-            // Isso faz a letra aparecer visualmente dentro do campo na tela
+            // Pega o que foi digitado (e.target.value) e salva no estado 'email'
             setEmail(e.target.value);
 
-            // Definição técnica dos termos:
-            // e = objeto do evento do navegador.
-            // target = o campo HTML de entrada (input) que disparou a ação.
-            // value = o conteúdo textual atual daquele campo naquele exato instante.
             if (erroEmail) {
               // Se existia um erro, limpa ele (volta para vazio "") 
               // Fazemos isso para que a mensagem vermelha suma assim que o usuário começar a corrigir o texto
@@ -148,8 +139,6 @@ const FormLogin = () => {
         />
 
         {erro && (
-          // Se a variável 'erro' tiver algum texto (verdadeiro), 
-          // ENTÃO este código HTML (span) será renderizado na tela:
           <span style={{ color: "red" }}>
             {erro}
           </span>
