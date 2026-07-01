@@ -2,7 +2,7 @@ import { useState } from "react"
 import BarraPesquisa from "../Componentes/BarraPesquisa"
 import Filtro from "../Componentes/Filtro"
 import Ordenar from "../Componentes/Ordenar"
-import ModalDenuncia from "../Componentes/ModalDenuncia"
+import ModalDenunciaForm from "../Componentes/ModalDenunciaForm"
 import { IoWarningOutline } from "react-icons/io5"
 
 import NavbarVisitante from "../Componentes/NavbarVisitante"
@@ -152,7 +152,7 @@ function AcervoVisitante() {
                             </div>
                         </div>
 
-                        <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
+                        <ModalDenunciaForm aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
                     </div>
                 )}
 

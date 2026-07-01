@@ -1,0 +1,216 @@
+.overlay-denuncia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+}
+
+/* MODAL PRINCIPAL */
+.modal-denuncia-form {
+    position: relative;
+    background-color: var(--bege);
+    color: var(--vinho);
+    border-radius: 16px;
+    padding: 40px;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 301;
+}
+
+.modal-denuncia-form h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+    margin: 0;
+    padding-top: 20px;
+}
+
+.btn-fechar-denuncia {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--vinho);
+    color: var(--bege);
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-fechar-denuncia:hover {
+    background-color: var(--laranja);
+}
+
+/* CHECKBOXES */
+.checkboxes-denuncia {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--vinho);
+    cursor: pointer;
+    flex-shrink: 0;
+    border: none !important;
+    outline: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* CAMPO DE TEXTO */
+.campo-descricao-denuncia {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-descricao-denuncia label {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.campo-descricao-denuncia textarea {
+    resize: none;
+    height: 90px;
+    padding: 10px;
+    border: 1.5px solid var(--vinho);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bege);
+    color: var(--vinho);
+    outline: none;
+}
+
+.campo-descricao-denuncia textarea::placeholder {
+    color: var(--vinho);
+    opacity: 0.4;
+}
+
+/* ERRO */
+.erro-denuncia {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--pink);
+    margin: 0;
+}
+
+/* BOTÃO ENVIAR */
+.btn-enviar-denuncia {
+    align-self: flex-end;
+    background-color: var(--laranja);
+    color: var(--bege);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-enviar-denuncia:hover {
+    background-color: var(--vinho);
+}
+
+/* MODAL DE CONFIRMAÇÃO */
+.overlay-confirmar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 400;
+}
+
+.modal-confirmar {
+    background-color: var(--bege);
+    color: var(--vinho);
+    border-radius: 16px;
+    padding: 40px;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    z-index: 401;
+}
+
+.modal-confirmar h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+}
+
+.btns-confirmar {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-confirmar {
+    background-color: var(--vinho);
+    color: var(--bege);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-confirmar:hover {
+    background-color: var(--laranja);
+}
+
+.btn-cancelar-denuncia {
+    background-color: transparent;
+    color: var(--vinho);
+    border: 2px solid var(--vinho);
+    border-radius: 8px;
+    padding: 8px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cancelar-denuncia:hover {
+    background-color: var(--vinho);
+    color: var(--bege);
+}

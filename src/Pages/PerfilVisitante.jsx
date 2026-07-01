@@ -6,7 +6,7 @@ import "../Styles/Visitante/PerfilVisitante.css"
 import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
 import { IoWarningOutline } from "react-icons/io5"
-import ModalDenuncia from "../Componentes/ModalDenuncia"
+import ModalDenunciaForm from "../Componentes/ModalDenunciaForm"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
 import ModalDenunciarPerfil from "../Componentes/ModalDenunciarPerfil"
 import NavbarVisitante from "../Componentes/NavbarVisitante"
@@ -232,7 +232,7 @@ function PerfilVisitante({usuario}) {
                                     <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="imagem-aberta" />
                                 </div>
                             )}
-                            <ModalDenuncia aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
+                            <ModalDenunciaForm aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
                         </div>
                     )}
                 </section>
