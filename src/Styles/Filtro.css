@@ -15,7 +15,7 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
-  width: 225px;
+  width: 235px;
 }
 
 .btnFiltro:hover {
@@ -40,7 +40,7 @@
   border-radius: 8px;
   overflow: hidden;
   z-index: 100;
-  min-width: 200px;
+  min-width: 235px;
   font-weight: bolder;
 }
 

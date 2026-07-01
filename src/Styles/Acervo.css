@@ -110,10 +110,13 @@
 /*LARGURA DO BOTÃO FILTRAR E ESPAÇAMENTO ENTRE O NOME DO BOTÃO E A SETA*/
 
 .controles-acervo .btnFiltro {
-    width: 150px;
-    justify-content: space-between;
+    width: 180px !important;
+    justify-content: space-between !important;
 }
 
+.controles-acervo .menuFiltro {
+    min-width: 180px !important;
+}
 /* TAMANHO DOS CARDS */
 
 .cards-acervo .card-template {

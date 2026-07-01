@@ -153,7 +153,7 @@ function Acervo({usuario}) {
 
                 <div className="controles-acervo">
                     <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} />
-                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} />
+                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} busque={"Busque por obras"}/>
                     <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
                     {usuario && (<BotaoNovaPublic aoClicar={abrirModal}></BotaoNovaPublic>)}
                 </div>       

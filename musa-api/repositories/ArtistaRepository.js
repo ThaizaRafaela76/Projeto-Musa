@@ -24,7 +24,7 @@ class ArtistaRepository {
     async criarArtista(dados) {
         const { nomeCompleto, email, nomeUsuario, senha, localizacao,
             linkPortfolio, linkInstagram, descricao, areaAtuacao,
-            fotoPerfil, imagemTrabalho } = dados
+            fotoPerfil, imagemTrabalho, tipo } = dados
 
         const credencial = await createUserWithEmailAndPassword(auth, email, senha)
         const uid = credencial.user.uid
@@ -41,7 +41,8 @@ class ArtistaRepository {
             areaAtuacao,
             fotoPerfil: fotoPerfil || null,
             imagemTrabalho: imagemTrabalho || null,
-            dataDeCriacao: new Date()
+            dataDeCriacao: new Date(),
+            tipo: tipo
         }
 
         const docRef = await addDoc(collection(db, COLECAO), novoArtista)

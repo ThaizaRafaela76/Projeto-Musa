@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icon
 import "../Styles/Filtro.css";
 
 
-const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOrdemAberta, obrigatorio, placeholder}) => {
+const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOrdemAberta, obrigatorio, placeholder, busque}) => {
 
   const labelAtual = opcoes.find((op) => op.value === valor)?.label || placeholder || "Filtro";
 
@@ -27,7 +27,7 @@ const Filtro = ({ opcoes, valor, onChange, aberto, setAberto, ordemAberta, setOr
           setAberto(!aberto);
         }}
       >
-        {labelAtual}
+        {aberto ? busque : labelAtual}
         <span className="setaFiltro">{!aberto && (<MdOutlineKeyboardArrowDown />)}{aberto && (<MdOutlineKeyboardArrowUp />)}</span>
       </button>
 
