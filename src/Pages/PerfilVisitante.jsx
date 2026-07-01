@@ -8,7 +8,6 @@ import Navbar from "../Componentes/Navbar"
 import { IoWarningOutline } from "react-icons/io5"
 import ModalDenunciaForm from "../Componentes/ModalDenunciaForm"
 import BotaoDenuncia from "../Componentes/BotaoDenuncia"
-import ModalDenunciarPerfil from "../Componentes/ModalDenunciarPerfil"
 import NavbarVisitante from "../Componentes/NavbarVisitante"
 import { buscarPublicacoes } from "../services/publicacaoService.js"
 import { BsInstagram } from "react-icons/bs";
@@ -77,26 +76,26 @@ function PerfilVisitante({usuario}) {
         document.body.style.overflow = "auto"
     }
 
-    const[estadoModalDenunciarPerfil, setEstadoModalDenunciarPerfil] = useState(false);
-    const [modalDenunciaAberto, setModalDenunciaAberto] = useState(false)
+    const[estadoModalDenunciForm, setEstadoModalDenunciaForm] = useState(false);
+    const[modalDenunciaFormAberto, setModalDenunciaFormAberto] = useState(false)
 
 
-    const abrirModalDenunciarPerfil = () => {
-        setEstadoModalDenunciarPerfil(true);
+    const abrirModalDenunciaForm = () => {
+        setModalDenunciaFormAberto(true);
         document.body.style.overflow = "hidden"
    }
 
-    const fecharModalDenunciarPerfil = () => {
-        setEstadoModalDenunciarPerfil(false);
+    const fecharModalDenunciaForm = () => {
+        setModalDenunciaFormAberto(false);
         document.body.style.overflow = "auto"
    }
 
    function abrirDenuncia() {
-        setModalDenunciaAberto(true)
+        setModalDenunciaFormAberto(true)
     }
 
     function fecharDenuncia() {
-        setModalDenunciaAberto(false)
+        setModalDenunciaFormAberto(false)
     }
 
     if (loading) {
@@ -138,8 +137,8 @@ function PerfilVisitante({usuario}) {
                     <div className="perfil_dados">
                         <div className="perfil-denunciar">
                             <h2>{artista.nomeCompleto}</h2>
-                            <BotaoDenuncia abrirModal={abrirModalDenunciarPerfil} />
-                            <ModalDenunciarPerfil aberto={estadoModalDenunciarPerfil} fecharModal={fecharModalDenunciarPerfil}/>
+                            <BotaoDenuncia abrirModal={abrirModalDenunciaForm} />
+                            <ModalDenunciaForm aberto={modalDenunciaFormAberto} fecharModal={fecharModalDenunciaForm} />
                         </div>
                         <h3>Biografia</h3>
                         {/* Alterado para ser um link clicavel */}
@@ -232,7 +231,7 @@ function PerfilVisitante({usuario}) {
                                     <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="imagem-aberta" />
                                 </div>
                             )}
-                            <ModalDenunciaForm aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
+                            <ModalDenunciaForm aberto={modalDenunciaFormAberto} fecharModal={fecharModalDenunciaForm} />
                         </div>
                     )}
                 </section>
