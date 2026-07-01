@@ -47,7 +47,9 @@
 
 
 .upload-publicacao label.erro-borda {
-    border: 2px solid var(--pink);
+    border: 1px solid var(--pink);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+    animation: shake 0.3s ease-in-out;
 }
 
 .upload-publicacao label.erro p,
@@ -79,4 +81,12 @@
     background-color: var(--vinho);
     border-radius: 8px;
     transition: background-color 0.2s ease;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
 }

@@ -1,7 +1,7 @@
-const CampoTextAreaPublic = ({label, name, placeholder, value, handleOnChange, erro}) => {
+const CampoTextAreaPublic = ({label, name, placeholder, value, handleOnChange, erro, opcional}) => {
     return(
         <div className="campo-texto-public">
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={name}>{label} {opcional && <span className="label-opcional">(opcional)</span>}</label>
             <textarea
                 className={`campo-texto-public-field ${erro ? "campo-erro" : ""}`}
                 name={name}

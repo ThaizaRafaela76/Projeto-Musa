@@ -51,7 +51,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
         const regrasDeValidacao = {
             nomeObra: [
                 {condicao: (v) => !v.trim(), mensagem: "*O nome da obra é obrigatório"},
-                {condicao: (v) => v.trim().length > 18, mensagem: "*O nome da obra deve possuir até 18 caracteres"}
+                {condicao: (v) => v.trim().length > 20, mensagem: "*O nome da obra deve possuir até 20 caracteres"}
             ],
 
             descricaoObra: [
@@ -59,7 +59,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
             ],
 
             imagemObra: [
-                {condicao: (v) => !v && !(obraParaEditar && obraParaEditar.imagemObra), mensagem: "Insira uma imagem"},
+                {condicao: (v) => !v && !(obraParaEditar && obraParaEditar.imagemObra), mensagem: "*Insira uma imagem"},
             ],
 
             categoriaObra: [
@@ -178,9 +178,10 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
                                 value={formPublic.descricaoObra}
                                 placeholder="Conte-nos um pouco sobre sua obra... :)"
                                 handleOnChange={(e) => setFormPublic({ ...formPublic, descricaoObra: e.target.value })}
-                                erro={erros.descricaoObra} />
+                                erro={erros.descricaoObra}
+                                opcional={true} />
 
-                               <p className="dica-descricao">Dica da Musa: adicionar uma descrição ajuda as pessoas a conhecerem melhor a sua obra ;)</p> 
+                               <p className="dica-descricao"><strong>Dica da Musa:</strong> adicionar uma descrição ajuda as pessoas a conhecerem melhor a sua obra ;)</p> 
                                </div>
 
                             <BotaoPublicar publicarObra />

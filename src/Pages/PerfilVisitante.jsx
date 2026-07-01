@@ -115,9 +115,21 @@ function PerfilVisitante({usuario}) {
     }
 
     function extrairUserInstagram(link) {
-        if(!link) return null
+        if (!link) return null
         const match = link.match(/instagram\.com\/([^/?#]+)/)
-        return match ? "@" + match[1] : null
+        if (match) return match[1]
+        // não é um link completo, deve ser só o nome de usuário
+        return link.replace(/^@/, "")
+    }
+
+    function montarLinkInstagram(link) {
+        if (!link) return null
+        if (link.includes("instagram.com")) {
+            return link.startsWith("http") ? link : `https://${link}`
+        }
+        // só o nome de usuário: monta a URL certa
+        const usuario = link.replace(/^@/, "")
+        return `https://instagram.com/${usuario}`
     }
     
     return (
@@ -145,29 +157,32 @@ function PerfilVisitante({usuario}) {
                         <p>{artista.descricao}</p>
                         <div className="perfil-contatos">
                             <h3>Onde me encontrar</h3>
-                            <a
-                            href={
-                                artista.linkPortfolio.startsWith("http")
-                                    ? artista.linkPortfolio
-                                    : `https://${artista.linkPortfolio}`
-                            }
-                            className="portfolio-link"
-                            >
-                            <HiLink />
-                            Portfólio</a>
-                            <a 
-                            href={
-                                artista.linkInstagram.startsWith("http")
-                                ? artista.linkInstagram
-                                : `https://${artista.linkInstagram}`
-                            } 
+                            
+                            {artista.linkPortfolio && (
+                                
+                               <a href={
+                                    artista.linkPortfolio.startsWith("http")
+                                        ? artista.linkPortfolio
+                                        : `https://${artista.linkPortfolio}`
+                                }
+                                target="_blank"
+                                rel="noreferrer"
+                                className="portfolio-link"
+                                >
+                                <HiLink />
+                                Portfólio</a>
+                            )}
 
-                            target="_blank"
-                            rel="noreferrer"
-                            className="instagram-link"
+                            {artista.linkInstagram && (
+                                <a 
+                                href={montarLinkInstagram(artista.linkInstagram)}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="instagram-link"
+                                > <BsInstagram />
+                                {extrairUserInstagram(artista.linkInstagram)}</a>
+                            )}
 
-                            > <BsInstagram />
-                            {extrairUserInstagram(artista.linkInstagram)}</a>
                             <a 
                             href={`https://mail.google.com/mail/?view=cm&to=${artista.email}`}
                             target="_blank"

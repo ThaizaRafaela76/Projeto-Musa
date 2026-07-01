@@ -21,3 +21,11 @@ app.listen(PORT, () => {
     console.log(`API rodando em http://localhost:${PORT}`)
     console.log(`Imagens disponíveis em: http://localhost:${PORT}/uploads`)
 })
+
+process.on("unhandledRejection", (reason) => {
+    console.error("🔴 Unhandled Rejection:", reason)
+})
+
+process.on("uncaughtException", (error) => {
+    console.error("🔴 Uncaught Exception:", error)
+})

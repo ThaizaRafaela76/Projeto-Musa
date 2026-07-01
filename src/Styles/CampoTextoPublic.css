@@ -22,6 +22,12 @@ label {
     font-weight: bolder;
 }
 
+.label-opcional {
+    font-size: 14px;
+    color: var(--vinho);
+    font-weight: 600;
+}
+
 input::placeholder, textarea::placeholder {
     color: var(--vinho);
     opacity: 0.5;
