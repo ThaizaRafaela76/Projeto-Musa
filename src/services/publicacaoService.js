@@ -12,6 +12,13 @@ export async function criarPublicacao(formData) {
     return response.data
 }
 
+export async function editarPublicacao(id, formData) {
+    const response = await api.put(`/publicacoes/${id}`, formData, {
+        headers: {"Content-Type": "multipart/form-data"}
+    })
+    return response.data
+}
+
 export async function deletarPublicacao(id, uid) {
     const response = await api.delete(`/publicacoes/${id}`, { data: { uid } })
     return response.data

@@ -1,19 +1,16 @@
 import "../Styles/CampoImgPublic.css"
 import { FaRegImage } from "react-icons/fa6";
 
-const CampoImgPublic = ({name, imagem, setImagem, erro}) => {
+const CampoImgPublic = ({ name, imagem, imagemAtual, setImagem, erro }) => {
 
     function handleImagem(e) {
         const arquivo = e.target.files[0]
-
-        console.log(arquivo)
-
-        if(arquivo) {
+        if (arquivo) {
             setImagem(arquivo)
         }
     }
 
-    return(
+    return (
         <div className="upload-publicacao">
             <label htmlFor="upload_public" className={erro ? "erro-borda" : ""}>
                 {imagem ? (
@@ -22,20 +19,26 @@ const CampoImgPublic = ({name, imagem, setImagem, erro}) => {
                         alt="Prévia da obra"
                         className="preview-img"
                     />
+                ) : imagemAtual ? (
+                    <img 
+                        src={imagemAtual}
+                        alt="Prévia da obra"
+                        className="preview-img"
+                    />
                 ) : (
-                <>
-                <p>Adicionar uma imagem</p>
-                <FaRegImage />
-                </>
-            )}
+                    <>
+                        <p>Adicionar uma imagem</p>
+                        <FaRegImage />
+                    </>
+                )}
             </label>
 
             <input 
-            type="file" 
-            id="upload_public"
-            accept="image/*" 
-            onChange={handleImagem}
-            hidden
+                type="file" 
+                id="upload_public"
+                accept="image/*" 
+                onChange={handleImagem}
+                hidden
             />
 
             {erro && <span className="erro-imagem">{erro}</span>}

@@ -1,0 +1,26 @@
+.botao-editar-public {
+    background-color: var(--vinho);
+    color: var(--bege);
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 11px 12px;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+
+    cursor: pointer;
+
+    display: flex;
+    margin-top: 2px;
+
+    transition: background-color 0.2s;
+}
+
+.botao-editar-public:hover {
+    background-color: var(--laranja);
+}

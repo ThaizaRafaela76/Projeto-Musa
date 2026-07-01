@@ -25,6 +25,16 @@ class PublicacaoService {
         return novaPublicacao
     }
 
+    async editarPublicacao(id, uid, nomeObra, descricaoObra, categoriaObra, imagemObraFile) {
+        const dadosAtualizados = {nomeObra, descricaoObra, categoriaObra}
+
+        if(imagemObraFile) {
+            dadosAtualizados.imagemObra = await uploadImagemLocal(imagemObraFile, "publicacoes")
+        }
+
+        return await this.publicacaoRepository.editarPublicacao(id, uid, dadosAtualizados)
+    }
+
     async deletarPublicacao(id, uid) {
         return await this.publicacaoRepository.deletarPublicacao(id, uid)
     }

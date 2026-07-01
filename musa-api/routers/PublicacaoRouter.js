@@ -38,6 +38,32 @@ router.post("/",
     }
 )
 
+router.put("/:id", 
+    verificarToken, 
+    upload.single("imagemObra"), 
+    async (request, response) => {
+        try {
+            const { id } = request.params
+            const { nomeObra, descricaoObra, categoriaObra } = request.body
+            const imagemObraFile = request.file
+
+            const publicacaoAtualizada = await publicacaoService.editarPublicacao(
+                id,
+                request.uid,
+                nomeObra,
+                descricaoObra,
+                categoriaObra,
+                imagemObraFile
+            )
+
+            response.json(publicacaoAtualizada)
+        } catch (error) {
+            console.error(error)
+            response.status(400).json({ erro: error.message })
+        }
+    }
+)
+
 router.delete("/admin/:id", verificarToken, async(request, response) => {
     try {
         const { id } = request.params

@@ -9,6 +9,7 @@ import CardTemplate from "../Componentes/CardTemplate"
 import Navbar from "../Componentes/Navbar"
 import ModalExcluirPublic from "../Componentes/ModalExcluirPubli.jsx"
 import BotaoExcluir from "../Componentes/BotaoExcluir.jsx"
+import BotaoEditarPublic from "../Componentes/BotaoEditarPublic.jsx"
 import { IoWarningOutline } from "react-icons/io5"
 import BotaoEditarPerfil from "../Componentes/BotaoEditarPerfil"
 import ModalEditarPerfil from "../Componentes/ModalEditarPerfil"
@@ -22,9 +23,17 @@ import { HiLink } from "react-icons/hi";
 
 function Perfil({ artista, onPerfilAtualizado }) {
    const navigate = useNavigate()
-   const[estadoModalEditar, setEstadoModalEditar] = useState(false);
+   const [estadoModal, setEstadoModal] = useState(false);
    const [loading, setLoading] = useState(true)
+   const [obras, setObras] = useState([])
+   const [obraSelecionada, setObraSelecionada] = useState(null)
    const [imgAberta, setImgAberta] = useState(false)
+   const[estadoModalEditar, setEstadoModalEditar] = useState(false)
+   const [obraParaEditar, setObraParaEditar] = useState(null)
+   const [modalEditarPublic, setModalEditarPublic] = useState(false)
+   const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
+   const [refreshKey, setRefreshKey] = useState(0)
+
 
    useEffect(() => {
         if (artista === null) {
@@ -35,17 +44,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
             setLoading(false)
         }
     }, [artista, navigate])
-   const abrirModalEditar = () => {
-        setEstadoModalEditar(true);
-        document.body.style.overflow = "hidden"
-   }
 
-   const fecharModalEditar = () => {
-        setEstadoModalEditar(false);
-        document.body.style.overflow = "auto"
-   }
-
-    const [estadoModal, setEstadoModal] = useState(false);
 
     const abrirModal = () => {
         setEstadoModal(true)
@@ -57,10 +56,53 @@ function Perfil({ artista, onPerfilAtualizado }) {
         document.body.style.overflow = "auto"
     }
 
-    const [obras, setObras] = useState([])
-    const [refreshKey, setRefreshKey] = useState(0)
+    function abrirObra(obra) {
+        setObraSelecionada(obra)
+        document.body.style.overflow = "hidden"
+    }
 
-    useEffect(() => {
+    function fecharObra() {
+        setObraSelecionada(null)
+        document.body.style.overflow = "auto"
+    }
+
+   const abrirModalEditar = () => {
+        setEstadoModalEditar(true);
+        document.body.style.overflow = "hidden"
+   }
+
+   const fecharModalEditar = () => {
+        setEstadoModalEditar(false);
+        document.body.style.overflow = "auto"
+   }
+
+    function abrirModalEditarPublic() {
+        setObraParaEditar(obraSelecionada)
+        fecharObra()
+        setModalEditarPublic(true)
+   }
+
+   function fecharModalEditarPublic() {
+        setModalEditarPublic(false)
+        setObraParaEditar(null)
+   }
+
+   function abrirModalExcluirPublic() {
+        setModalExcluirPublic(true)
+    }
+    
+    function fecharModalExcluirPublic() {
+        setModalExcluirPublic(false)
+    }
+
+
+    function extrairUserInstagram(link) {
+        if(!link) return null
+        const match = link.match(/instagram\.com\/([^/?#]+)/)
+        return match ?  match[1] : null
+    }
+
+useEffect(() => {
     async function carregarObras() {
         try {
             const todasPublicacoes = await buscarPublicacoes()
@@ -76,21 +118,8 @@ function Perfil({ artista, onPerfilAtualizado }) {
             console.error("Erro ao carregar obras:", error)
         }
     }
-    if (artista) carregarObras()
-}, [artista, refreshKey])
-
-    const [obraSelecionada, setObraSelecionada] = useState(null)
-    const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
-
-    function abrirObra(obra) {
-        setObraSelecionada(obra)
-        document.body.style.overflow = "hidden"
-    }
-
-    function fecharObra() {
-        setObraSelecionada(null)
-        document.body.style.overflow = "auto"
-    }
+        if (artista) carregarObras()
+    }, [artista, refreshKey])
 
     async function confirmarExclusao() {
         try {
@@ -101,14 +130,6 @@ function Perfil({ artista, onPerfilAtualizado }) {
         } catch (error) {
             alert("Erro ao excluir a obra.")
         }
-    }
-
-    function abrirModalExcluirPublic() {
-        setModalExcluirPublic(true)
-    }
-    
-    function fecharModalExcluirPublic() {
-        setModalExcluirPublic(false)
     }
 
     const handleSalvarPerfil = async (dadosAtualizados) => {
@@ -144,11 +165,6 @@ function Perfil({ artista, onPerfilAtualizado }) {
         )
     }
 
-    function extrairUserInstagram(link) {
-        if(!link) return null
-        const match = link.match(/instagram\.com\/([^/?#]+)/)
-        return match ?  match[1] : null
-    }
 
     return (
         <div className="perfil">
@@ -232,8 +248,9 @@ function Perfil({ artista, onPerfilAtualizado }) {
                         <div className="overlay-obra" >
                             <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
                                 <div className="btn-modal">
-                                    <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluirPublic(); }}/>
-                                    <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
+                                    <BotaoEditarPublic title="Editar publicação" editarPublic={(e) => { e.stopPropagation(); abrirModalEditarPublic(); }}/>
+                                    <BotaoExcluir title="Excluir publicação" excluirObra={(e) => { e.stopPropagation(); abrirModalExcluirPublic(); }}/>
+                                    <button className="btn-fechar-obra" title="Fechar" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
                                 </div>
                                 <div className="org-modal">
                                     <div className="div-imagem">
@@ -267,6 +284,16 @@ function Perfil({ artista, onPerfilAtualizado }) {
 
                         </div>
                     )}
+
+                    <ModalPublic 
+                                aberto={modalEditarPublic} 
+                                fechado={fecharModalEditarPublic} 
+                                obraParaEditar={obraParaEditar}
+                                onPublicacaoCriada={() => {
+                                    setRefreshKey(prev => prev + 1)
+                                    fecharModalEditarPublic()
+                                    fecharObra()
+                    }} />
                 </section>
             </main>
             <Rodape variante="bege" />

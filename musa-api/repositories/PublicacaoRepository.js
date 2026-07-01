@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, query, where, doc, deleteDoc } from "firebase/firestore"
+import { collection, getDocs, addDoc, query, where, doc, updateDoc ,deleteDoc } from "firebase/firestore"
 import { db } from "../firebase.js"
 
 
@@ -33,6 +33,19 @@ class PublicacaoRepository {
 
         const docRef = await addDoc(collection(db, COLECAO), novaPublicacao)
         return { id: docRef.id, ...novaPublicacao }
+    }
+
+    async editarPublicacao(id, uid, dadosAtualizados) {
+        const docRef = doc(db, COLECAO, id)
+        const snapshot = await getDocs(query(collection(db, COLECAO), where("uid", "==", uid)))
+
+        const pertenceArtista = snapshot.docs.some(d => d.id === id)
+        if(!pertenceArtista) {
+            throw new Error("Você não tem permissão para deletar essa publicação")
+        }
+
+        await updateDoc(docRef, dadosAtualizados)
+        return {id, ...dadosAtualizados}
     }
 
     async deletarPublicacao(id, uid) {

@@ -1,5 +1,5 @@
-import { useState } from "react"
-import {criarPublicacao} from "../services/publicacaoService"
+import { useState, useEffect } from "react"
+import {criarPublicacao, editarPublicacao} from "../services/publicacaoService"
 import "../Styles/ModalPublic.css"
 import BotaoNovaPublic from "./BotaoNovaPublic"
 import CampoTextoPublicacaoEPerfil from "./CampoTextoPublicacaoEPerfil"
@@ -10,9 +10,8 @@ import Filtro from "./Filtro"
 import { FaX } from "react-icons/fa6";
 
 
-function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeholder }) {
+function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeholder, obraParaEditar }) {
 
-    if (!aberto) return null;
 
     const [formPublic, setFormPublic] = useState({
         nomeObra: "",
@@ -22,6 +21,29 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
     })
 
     const [erros, setErros] = useState({})
+    const [filtro, setFiltro] = useState("");
+    const [filtroAberto, setFiltroAberto] = useState(false);
+    const [ordemAberta, setOrdemAberta] = useState(false);
+
+    useEffect(() => {
+        if(aberto) {
+            if(obraParaEditar) {
+                setFormPublic({
+                    nomeObra: obraParaEditar.nomeObra,
+                    descricaoObra: obraParaEditar.descricaoObra,
+                    categoriaObra: obraParaEditar.categoriaObra,
+                    imagemObra: null
+                })
+                setFiltro(obraParaEditar.categoriaObra)
+            } else {
+                setFormPublic({nomeObra: "", descricaoObra: "", categoriaObra: "", imagemObra: null})
+                setFiltro("")
+            } 
+            setErros({})
+        }
+    }, [aberto, obraParaEditar])
+
+    if (!aberto) return null;
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -37,7 +59,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
             ],
 
             imagemObra: [
-                {condicao: (v) => !v, mensagem: "*Insira uma imagem"},
+                {condicao: (v) => !v && !(obraParaEditar && obraParaEditar.imagemObra), mensagem: "Insira uma imagem"},
             ],
 
             categoriaObra: [
@@ -67,28 +89,33 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
             formData.append("nomeObra", formPublic.nomeObra)
             formData.append("descricaoObra", formPublic.descricaoObra)
             formData.append("categoriaObra", formPublic.categoriaObra)
-            formData.append("imagemObra", formPublic.imagemObra)
+            if(formPublic.imagemObra) {
+                formData.append("imagemObra", formPublic.imagemObra)
+            }
 
-            await criarPublicacao(formData)
+            if(obraParaEditar) {
+                await editarPublicacao(obraParaEditar.id, formData)
+                alert("Sua obra foi atualizada com sucesso!")
+            } else {
+                await criarPublicacao(formData)
+                alert("Musa, sua obra foi publicada com sucesso! :)")
+            }
+
             if(onPublicacaoCriada) onPublicacaoCriada()
-            alert("Musa, sua obra foi publicada com sucesso! :)")
             fechado() 
-        } catch(error) {
-            console.error(error)
-            alert("Erro ao publicar :( Tente novamente")
+    } catch(error) {
+        console.error(error)
+        alert(obraParaEditar ? "Erro ao atualizar :( Tente novamente" : "Erro ao publicar :( Tente novamente")
         }
     }
 
-    const [filtro, setFiltro] = useState("");
-    const [filtroAberto, setFiltroAberto] = useState(false);
-    const [ordemAberta, setOrdemAberta] = useState(false);
     return (
         <div className="modal-overlay">
 
             {/* header do modal */}
             <div className="modal-publicacao">
                 <div className="modal-public-header">
-                    <h2>Nova publicação</h2>
+                    <h2>{obraParaEditar ? "Editar Publicação" : "Nova publicação"}</h2>
                     <button className="fechar-modal-public" onClick={fechado}>
                         <FaX />
                     </button>
@@ -100,6 +127,7 @@ function ModalPublic({ aberto, fechado, onPublicacaoCriada, obrigatorio, placeho
                             <CampoImgPublic
                                 name="imagemObra"
                                 imagem={formPublic.imagemObra}
+                                imagemAtual={obraParaEditar ? `http://localhost:3000${obraParaEditar.imagemObra}` : null }
                                 setImagem={(img) => setFormPublic({ ...formPublic, imagemObra: img })}
                                 erro={erros.imagemObra}
                             />
