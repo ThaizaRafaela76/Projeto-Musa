@@ -14,11 +14,17 @@ import BotaoVerMais from "../Componentes/BotaoVerMais"
 import CardTemplate from "../Componentes/CardTemplate"
 import CardTemplateArtista from "../Componentes/CardTemplateArtista"
 import { buscarTodosArtistas } from "../services/artistasService";
-
+import { useNavigate } from "react-router-dom"
 import perfil from '../assets/image 11.png'
 
 
 const Home = ({usuario}) => {
+    const navigate = useNavigate()
+    useEffect((()=>{
+        if(usuario && usuario.tipo === "admin"){
+            navigate("/admin/denuncias")
+        }
+    }),[usuario])
     const ref = useRef(null)
 
     function scrollDir() {
