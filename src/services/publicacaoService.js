@@ -28,3 +28,8 @@ export async function deletarPublicacaoAdmin(id) {
     const response = await api.delete(`/publicacoes/admin/${id}`)
     return response.data
 }
+
+export async function buscarPublicacaoPorId(id) {
+    const response = await api.get(`/publicacoes/${id}`)
+    return response.data
+}

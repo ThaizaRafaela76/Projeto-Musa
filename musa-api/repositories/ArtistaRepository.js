@@ -1,5 +1,5 @@
 import ArtistaModel from "../models/ArtistaModel.js"
-import { collection, getDocs, addDoc, query, where, updateDoc, doc, deleteDoc } from "firebase/firestore"
+import { collection, getDocs, addDoc, query, where, updateDoc, doc, deleteDoc, getDoc } from "firebase/firestore"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { db, auth } from "../firebase.js"
 
@@ -21,6 +21,12 @@ class ArtistaRepository {
         return { id: doc.id, ...doc.data() }
     }
 
+    async buscarPorDocId(id) {
+        const docRef = doc(db, COLECAO, id)
+        const snapshot = await getDoc(docRef)
+        if (!snapshot.exists()) throw new Error("Artista não encontrada")
+        return { id: snapshot.id, ...snapshot.data() }
+    }
     async criarArtista(dados) {
         const { nomeCompleto, email, nomeUsuario, senha, localizacao,
             linkPortfolio, linkInstagram, descricao, areaAtuacao,

@@ -19,7 +19,7 @@ router.post("/cadastro",
     async(request, response) => {
         try {
             const { nomeCompleto, email, nomeUsuario, senha, localizacao, 
-                    linkPortfolio, linkInstagram, descricao, areaAtuacao, nomeObra } = request.body
+                    linkPortfolio, linkInstagram, descricao, areaAtuacao, nomeObra, tipo } = request.body
 
             const fotoPerfilFile = request.files?.fotoPerfil?.[0]
             const imagemTrabalhoFile = request.files?.imagemTrabalho?.[0]
@@ -36,7 +36,8 @@ router.post("/cadastro",
                 areaAtuacao,
                 nomeObra,
                 fotoPerfil: fotoPerfilFile,
-                imagemTrabalho: imagemTrabalhoFile
+                imagemTrabalho: imagemTrabalhoFile,
+                tipo:tipo,
             })
 
             response.status(201).json(novaArtista)
@@ -102,15 +103,28 @@ router.patch("/foto-perfil",
 )
 
 // Rota admin — deve ficar antes de /:uid
-router.delete("/admin/:id", verificarToken, async(request, response) => {
+// router.delete("/admin/:id", async(request, response) => {
+//     try {
+//         const { id } = request.params
+//         const resultado = await artistaService.deletarArtista(id)
+//         response.json(resultado)
+//     } catch (error) {
+//         response.status(400).json({ erro: error.message })
+//     }
+// })
+
+router.delete("/admin/:id", async(request, response) => {
     try {
         const { id } = request.params
+        console.log("deletar artista chamado com id:", id) // 👈
         const resultado = await artistaService.deletarArtista(id)
         response.json(resultado)
     } catch (error) {
         response.status(400).json({ erro: error.message })
     }
 })
+
+
 
 router.get("/:uid", async (request, response) => {
     try {

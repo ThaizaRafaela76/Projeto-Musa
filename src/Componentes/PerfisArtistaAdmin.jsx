@@ -54,7 +54,7 @@ function PerfisArtistasAdmin({ mock, opcoesOrdem, opcoesFiltro }) {
 
     function handleCheckbox(e, artista) {
         e.stopPropagation()
-        setArtistaParaExcluir(prev => prev?.id === artista.id ? null : artista)
+        setArtistaParaExcluir(prev => prev?.uid === artista.uid ? null : artista)
     }
 
     function fecharModalExcluir() {
@@ -66,8 +66,9 @@ function PerfisArtistasAdmin({ mock, opcoesOrdem, opcoesFiltro }) {
     async function confirmarExclusao() {
         try {
             console.log("artistaParaExcluir:", artistaParaExcluir)
-            await deletarArtistaAdmin(artistaParaExcluir.id)
+            await deletarArtistaAdmin(artistaParaExcluir.uid)
             fecharModalExcluir()
+            window.location.reload()
         } catch (error) {
             console.log("erro:", error)
             alert("Erro ao excluir a artista.")
@@ -79,7 +80,7 @@ function PerfisArtistasAdmin({ mock, opcoesOrdem, opcoesFiltro }) {
             <div className="conteudo">
                 <div className="controles">
                     <BarraPesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} />
-                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} />
+                    <Filtro opcoes={opcoesFiltro} valor={filtro} onChange={setFiltro} aberto={filtroAberto} setAberto={setFiltroAberto} ordemAberta={ordemAberta} setOrdemAberta={setOrdemAberta} busque={"Busque por cidades"} />
                     <Ordenar valor={ordem} onChange={setOrdem} aberto={ordemAberta} setAberto={setOrdemAberta} filtroAberto={filtroAberto} setFiltroAberto={setFiltroAberto} />
                     <BotaoExcluir variante="bege" excluirObra={handleBotaoLixeira} />
                 </div>
@@ -101,7 +102,7 @@ function PerfisArtistasAdmin({ mock, opcoesOrdem, opcoesFiltro }) {
                                     >
                                         <input
                                             type="checkbox"
-                                            checked={artistaParaExcluir?.id === item.id}
+                                            checked={artistaParaExcluir?.uid === item.uid}
                                             onChange={() => {}}
                                             style={{ width: 20, height: 20, cursor: "pointer", accentColor: "var(--vinho)" }}
                                         />

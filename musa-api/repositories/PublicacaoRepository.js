@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, query, where, doc, updateDoc ,deleteDoc } from "firebase/firestore"
+import { collection, getDocs, addDoc, query, where, doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore"
 import { db } from "../firebase.js"
 
 
@@ -15,7 +15,7 @@ class PublicacaoRepository {
         const artistaSnapshot = await getDocs(
             query(collection(db, "artistas"), where("uid", "==", uid))
         )
-        if (artistaSnapshot.empty){
+        if (artistaSnapshot.empty) {
             throw new Error("Artista não encontrado")
         }
 
@@ -40,12 +40,12 @@ class PublicacaoRepository {
         const snapshot = await getDocs(query(collection(db, COLECAO), where("uid", "==", uid)))
 
         const pertenceArtista = snapshot.docs.some(d => d.id === id)
-        if(!pertenceArtista) {
+        if (!pertenceArtista) {
             throw new Error("Você não tem permissão para deletar essa publicação")
         }
 
         await updateDoc(docRef, dadosAtualizados)
-        return {id, ...dadosAtualizados}
+        return { id, ...dadosAtualizados }
     }
 
     async deletarPublicacao(id, uid) {
@@ -53,18 +53,36 @@ class PublicacaoRepository {
         const snapshot = await getDocs(query(collection(db, COLECAO), where("uid", "==", uid)))
 
         const pertenceArtista = snapshot.docs.some(d => d.id === id)
-        if(!pertenceArtista) {
+        if (!pertenceArtista) {
             throw new Error("Você não tem permissão para deletar essa publicação")
         }
 
         await deleteDoc(docRef)
-        return {mensagem: "Publicação deletada com sucesso"}
+        return { mensagem: "Publicação deletada com sucesso" }
     }
 
     async deletarPublicacaoAdmin(id) {
         const docRef = doc(db, COLECAO, id)
         await deleteDoc(docRef)
         return { mensagem: "Publicação deletada com sucesso" }
+    }
+
+    async buscarPorUid(uid) {
+        const snapshot = await getDocs(
+            query(collection(db, COLECAO), where("uid", "==", uid))
+        )
+        return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+    }
+
+    async buscarPorId(id) {
+        const docRef = doc(db, COLECAO, id)
+        const snapshot = await getDoc(docRef)
+
+        if (!snapshot.exists()) {
+            throw new Error("Publicação não encontrada")
+        }
+
+        return { id: snapshot.id, ...snapshot.data() }
     }
 }
 

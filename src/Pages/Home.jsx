@@ -86,7 +86,7 @@ const Home = ({usuario}) => {
     return (
         <div className="div-geral">
             <header className="inicio-homee">
-                {usuario ? <Navbar /> : <NavbarVisitante/>}
+                {usuario ?  <Navbar /> : <NavbarVisitante/>}
                 <div className="capa-homee">
                     <img src={Capa} />
                 </div>
@@ -122,9 +122,9 @@ const Home = ({usuario}) => {
                         <Link to="/acervo"><BotaoVerMais /></Link>
                     </div>
                     <div className="post-card" ref={ref}>
-                        {ultimasPostagens.map((obra) => (
+                        {ultimasPostagens.map((obra, index) => (
                             <CardTemplate
-                                key={obra.id}
+                                key={`${index}${obra.id}`}
                                 imagem={`http://localhost:3000${obra.imagemObra}`}
                                 titulo={obra.nomeObra}
                                 subtitulo={obra.artistaObra}
@@ -153,9 +153,9 @@ const Home = ({usuario}) => {
 
                     <div className="div-artista-carrossel">
                         <div className="artista-card" ref={refArtistas}  onScroll={verificaScroll}>
-                            {artistas.map((artista)=>{
+                            {artistas.map((artista, index)=>{
                                 return (
-                                    <CardTemplateArtista imagem={artista.fotoPerfil} nome={artista.usuario} />
+                                    <CardTemplateArtista imagem={artista.fotoPerfil} nome={artista.usuario} key={index}/>
                                 )
                             })}
                         </div>

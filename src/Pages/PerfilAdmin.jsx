@@ -5,60 +5,68 @@ import CardTemplate from "../Componentes/CardTemplate"
 import CardTemplateArtista from "../Componentes/CardTemplateArtista"
 import BotaoExcluir from "../Componentes/BotaoExcluir"
 import ModalExcluirPubli from "../Componentes/ModalExcluirPubli.jsx"
-import { buscarPublicacoes, deletarPublicacao } from "../services/publicacaoService"
-import { buscarTodosArtistas } from "../services/artistasService"
+import { deletarPublicacaoAdmin } from "../services/publicacaoService"
+import { buscarTodosArtistas, deletarArtistaAdmin } from "../services/artistasService"
+import { buscarTodasDenunciasObra, deletarDenunciaObra } from "../services/denunciasObraService.js"
+import { buscarTodasDenunciasArtista, deletarDenunciaArtista } from "../services/denunciasArtistaService.js"
 import "../Styles/PerfilAdmin.css";
 import "../Styles/Acervo.css";
 
-function AdminDenuncias() {
-
-    const [obras, setObras] = useState([])
-    const [artistas, setArtistas] = useState([])
+function AdminDenuncias({ usuario }) {
     const [refreshKey, setRefreshKey] = useState(0)
+
+    const [denunciasPublicacoes, setDenunciasPublicacoes] = useState([])
     const [obraSelecionada, setObraSelecionada] = useState(null)
+    const [selecionadasO, setSelecionadasO] = useState([])
+    const [imgAbertaObra, setImgAbertaObra] = useState(false)
+
+    const [denunciasArtistas, setDenunciasArtistas] = useState([])
+    const [artistaSelecionado, setArtistaSelecionado] = useState(null) // 👈 null, não []
+    const [selecionadasA, setSelecionadasA] = useState([])
+    const [imgAbertaArtista, setImgAbertaArtista] = useState(false)
+
     const [modalExcluirAberto, setModalExcluirAberto] = useState(false)
-    const [imgAberta, setImgAberta] = useState(false)
+    const [tipoExclusao, setTipoExclusao] = useState(null) // "obra" ou "artista"
 
     useEffect(() => {
         async function carregarDados() {
             try {
-                const publicacoes = await buscarPublicacoes()
-                setObras(publicacoes)
+                const denunciasP = await buscarTodasDenunciasObra()
+                setDenunciasPublicacoes(denunciasP)
             } catch (error) {
-                console.error("Erro ao carregar obras:", error)
+                console.error("Erro ao carregar denúncias de obras:", error)
             }
             try {
-                const todasArtistas = await buscarTodosArtistas()
-                setArtistas(todasArtistas)
+                const denunciasA = await buscarTodasDenunciasArtista()
+                setDenunciasArtistas(denunciasA)
             } catch (error) {
-                console.error("Erro ao carregar artistas:", error)
+                console.error("Erro ao carregar denúncias de artistas:", error)
             }
         }
         carregarDados()
     }, [refreshKey])
 
-    function abrirObra(obra) {
-        setObraSelecionada(obra)
+    function toggleSelecionadaO(id) {
+        setSelecionadasO(prev =>
+            prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
+        )
+    }
+
+    function abrirObra(d) {
+        setObraSelecionada(d)
         document.body.style.overflow = "hidden"
     }
 
     function fecharObra() {
         setObraSelecionada(null)
-        setImgAberta(false)
+        setImgAbertaObra(false)
         document.body.style.overflow = "auto"
     }
 
-    function abrirModalExcluir() {
-        setModalExcluirAberto(true)
-    }
-
-    function fecharModalExcluir() {
-        setModalExcluirAberto(false)
-    }
-
-    async function confirmarExclusao() {
+    async function confirmarExclusaoObra() {
         try {
-            await deletarPublicacao(obraSelecionada.id)
+            await deletarPublicacaoAdmin(obraSelecionada.obra.id)
+            await deletarDenunciaObra(obraSelecionada.id)
             fecharModalExcluir()
             fecharObra()
             setRefreshKey(prev => prev + 1)
@@ -67,9 +75,87 @@ function AdminDenuncias() {
         }
     }
 
+    async function excluirSelecionadasO() {
+        if (selecionadasO.length === 0) return
+        try {
+            await Promise.all(
+                selecionadasO.map(async (id) => {
+                    const denuncia = denunciasPublicacoes.find(d => d.obra.id === id)
+                    await deletarPublicacaoAdmin(denuncia.obra.id)
+                    await deletarDenunciaObra(denuncia.id)
+                })
+            )
+            setSelecionadasO([])
+            setRefreshKey(prev => prev + 1)
+        } catch (error) {
+            alert("Erro ao excluir obras selecionadas.")
+        }
+    }
+
+
+    function toggleSelecionadaA(id) {
+        setSelecionadasA(prev =>
+            prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
+        )
+    }
+
+    function abrirArtista(d) {
+        setArtistaSelecionado(d)
+        document.body.style.overflow = "hidden"
+    }
+
+    function fecharArtista() {
+        setArtistaSelecionado(null)
+        setImgAbertaArtista(false)
+        document.body.style.overflow = "auto"
+    }
+
+    async function confirmarExclusaoArtista() {
+        try {
+            await deletarArtistaAdmin(artistaSelecionado.artista.uid)
+            await deletarDenunciaArtista(artistaSelecionado.id)
+            fecharModalExcluir()
+            fecharArtista()
+            setRefreshKey(prev => prev + 1)
+        } catch (error) {
+            alert("Erro ao excluir a artista.")
+        }
+    }
+
+    async function excluirSelecionadasA() {
+        if (selecionadasA.length === 0) return
+        try {
+            await Promise.all(
+                selecionadasA.map(async (id) => {
+                    const denuncia = denunciasArtistas.find(d => d.artista.uid === id)
+                    await deletarArtistaAdmin(denuncia.artista.uid)
+                    await deletarDenunciaArtista(denuncia.id)
+                })
+            )
+            setSelecionadasA([])
+            setRefreshKey(prev => prev + 1)
+        } catch (error) {
+            alert("Erro ao excluir artistas selecionadas.")
+        }
+    }
+
+    function abrirModalExcluir(tipo) {
+        setTipoExclusao(tipo)
+        setModalExcluirAberto(true)
+    }
+
+    function fecharModalExcluir() {
+        setModalExcluirAberto(false)
+        setTipoExclusao(null)
+    }
+
+    async function confirmarExclusao() {
+        if (tipoExclusao === "obra") await confirmarExclusaoObra()
+        if (tipoExclusao === "artista") await confirmarExclusaoArtista()
+    }
+
     return (
         <div className="pagina-admin">
-
             <NavbarAdmin />
 
             <section className="cabecalho-admin">
@@ -79,24 +165,32 @@ function AdminDenuncias() {
 
             <section className="secao-denuncias">
 
+                {/* ===== OBRAS ===== */}
                 <div className="bloco-denuncias">
                     <div className="bloco-topo">
                         <h2>Obras denunciadas</h2>
-                        <button className="btn-excluir">Excluir</button>
+                        <button className="btn-excluir" onClick={excluirSelecionadasO}>
+                            Excluir {selecionadasO.length > 0 && `(${selecionadasO.length})`}
+                        </button>
                     </div>
                     <div className="cards-denuncias">
-                        {obras.length === 0 ? (
+                        {denunciasPublicacoes.length === 0 ? (
                             <p className="mensagem-vazia">Não há obras denunciadas</p>
                         ) : (
-                            obras.map((obra) => (
-                                <div key={obra.id} className="card-denuncia-wrapper" onClick={() => abrirObra(obra)} style={{ cursor: "pointer" }}>
-                                    <div className="checkbox-denuncia" onClick={(e) => e.stopPropagation()}>
-                                        <input type="checkbox" />
+                            denunciasPublicacoes.map((d) => (
+                                <div key={d.id} className="card-denuncia-wrapper" onClick={() => abrirObra(d)} style={{ cursor: "pointer" }}>
+                                    <div className="checkbox-denuncia">
+                                        <input
+                                            type="checkbox"
+                                            checked={selecionadasO.includes(d.obra.id)}
+                                            onChange={(e) => { e.stopPropagation(); toggleSelecionadaO(d.obra.id) }}
+                                            onClick={(e) => e.stopPropagation()}
+                                        />
                                     </div>
                                     <CardTemplate
-                                        imagem={`http://localhost:3000${obra.imagemObra}`}
-                                        titulo={obra.nomeObra}
-                                        subtitulo={obra.artistaObra}
+                                        imagem={`http://localhost:3000${d.obra.imagemObra}`}
+                                        titulo={d.obra.nomeObra}
+                                        subtitulo={d.obra.artistaObra}
                                     />
                                 </div>
                             ))
@@ -104,23 +198,31 @@ function AdminDenuncias() {
                     </div>
                 </div>
 
+                {/* ===== ARTISTAS ===== */}
                 <div className="bloco-denuncias">
                     <div className="bloco-topo">
                         <h2>Artistas denunciadas</h2>
-                        <button className="btn-excluir">Excluir</button>
+                        <button className="btn-excluir" onClick={excluirSelecionadasA}>
+                            Excluir {selecionadasA.length > 0 && `(${selecionadasA.length})`}
+                        </button>
                     </div>
                     <div className="cards-denuncias">
-                        {artistas.length === 0 ? (
+                        {denunciasArtistas.length === 0 ? (
                             <p className="mensagem-vazia">Não há artistas denunciadas</p>
                         ) : (
-                            artistas.map((artista) => (
-                                <div key={artista.id} className="card-denuncia-wrapper artista-wrapper">
-                                    <div className="checkbox-denuncia" onClick={(e) => e.stopPropagation()}>
-                                        <input type="checkbox" />
+                            denunciasArtistas.map((d) => (
+                                <div key={d.id} className="card-denuncia-wrapper artista-wrapper" onClick={() => abrirArtista(d)} style={{ cursor: "pointer" }}>
+                                    <div className="checkbox-denuncia">
+                                        <input
+                                            type="checkbox"
+                                            checked={selecionadasA.includes(d.artista.uid)}
+                                            onChange={(e) => { e.stopPropagation(); toggleSelecionadaA(d.artista.uid) }}
+                                            onClick={(e) => e.stopPropagation()}
+                                        />
                                     </div>
                                     <CardTemplateArtista
-                                        imagem={artista.fotoPerfil}
-                                        nome={artista.nomeCompleto}
+                                        imagem={d.artista.fotoPerfil}
+                                        nome={d.artista.nomeCompleto}
                                     />
                                 </div>
                             ))
@@ -130,34 +232,81 @@ function AdminDenuncias() {
 
             </section>
 
+            {/* ===== MODAL OBRA ===== */}
             {obraSelecionada && (
                 <div className="overlay-obra">
                     <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
                         <div className="btn-modal">
-                            <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluir(); }} />
-                            <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra(); }}>✕</button>
+                            <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluir("obra") }} />
+                            <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharObra() }}>✕</button>
                         </div>
                         <div className="org-modal">
                             <div className="div-imagem">
                                 <img
-                                    src={`http://localhost:3000${obraSelecionada.imagemObra}`}
-                                    alt={obraSelecionada.nomeObra}
-                                    onClick={() => setImgAberta(true)}
+                                    src={`http://localhost:3000${obraSelecionada.obra.imagemObra}`}
+                                    alt={obraSelecionada.obra.nomeObra}
+                                    onClick={() => setImgAbertaObra(true)}
                                     style={{ cursor: "pointer" }}
                                 />
-                                <h1 className="titulo-obra">{obraSelecionada.nomeObra}</h1>
+                                <h1 className="titulo-obra">{obraSelecionada.obra.nomeObra}</h1>
                             </div>
                             <div className="div-info">
-                                <h2>{obraSelecionada.artistaObra}</h2>
-                                <h3>{obraSelecionada.categoriaObra}</h3>
-                                <p className="descr-obra">{obraSelecionada.descricaoObra}</p>
+                                <h2>{obraSelecionada.obra.artistaObra}</h2>
+                                <h3>{obraSelecionada.obra.categoriaObra}</h3>
+                                <h3>Motivos da denúncia:</h3>
+                                <ul style={{ paddingLeft: "2rem" }}>
+                                    {obraSelecionada.motivos.map((m, index) => (
+                                        <li key={index}>{m}</li>
+                                    ))}
+                                </ul>
+                                <h3>Descrição da denúncia:</h3>
+                                <p className="descr-obra">{obraSelecionada.descricao}</p>
                             </div>
                         </div>
                     </div>
+                    {imgAbertaObra && (
+                        <div className="overlay-imagem" onClick={() => setImgAbertaObra(false)}>
+                            <img src={`http://localhost:3000${obraSelecionada.obra.imagemObra}`} className="img-aberta" />
+                        </div>
+                    )}
+                </div>
+            )}
 
-                    {imgAberta && (
-                        <div className="overlay-imagem" onClick={() => setImgAberta(false)}>
-                            <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="img-aberta" />
+            {/* ===== MODAL ARTISTA ===== */}
+            {artistaSelecionado && (
+                <div className="overlay-obra">
+                    <div className="modal-geral" onClick={(e) => e.stopPropagation()}>
+                        <div className="btn-modal">
+                            <BotaoExcluir excluirObra={(e) => { e.stopPropagation(); abrirModalExcluir("artista") }} />
+                            <button className="btn-fechar-obra" onClick={(e) => { e.stopPropagation(); fecharArtista() }}>✕</button>
+                        </div>
+                        <div className="org-modal">
+                            <div className="div-imagem">
+                                <img
+                                    src={artistaSelecionado.artista.fotoPerfil}
+                                    alt={artistaSelecionado.artista.nomeCompleto}
+                                    onClick={() => setImgAbertaArtista(true)}
+                                    style={{ cursor: "pointer" }}
+                                />
+                                <h1 className="titulo-obra">{artistaSelecionado.artista.nomeCompleto}</h1>
+                            </div>
+                            <div className="div-info">
+                                <h2>{artistaSelecionado.artista.nomeCompleto}</h2>
+                                <h3>{artistaSelecionado.artista.localizacao}</h3>
+                                <h3>Motivos da denúncia:</h3>
+                                <ul style={{ paddingLeft: "2rem" }}>
+                                    {artistaSelecionado.motivos.map((m, index) => (
+                                        <li key={index}>{m}</li>
+                                    ))}
+                                </ul>
+                                <h3>Descrição da denúncia:</h3>
+                                <p className="descr-obra">{artistaSelecionado.descricao}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {imgAbertaArtista && (
+                        <div className="overlay-imagem" onClick={() => setImgAbertaArtista(false)}>
+                            <img src={`http://localhost:3000${artistaSelecionado.artista.fotoPerfil}`} className="img-aberta" />
                         </div>
                     )}
                 </div>
@@ -170,9 +319,8 @@ function AdminDenuncias() {
             />
 
             <Rodape variante="bege" />
-
         </div>
-    );
+    )
 }
 
-export default AdminDenuncias;
+export default AdminDenuncias

@@ -42,6 +42,14 @@ class PublicacaoService {
     async deletarPublicacaoAdmin(id) {
         return await this.publicacaoRepository.deletarPublicacaoAdmin(id)
     }
+
+    async buscarPorId(id) {
+      try{
+         return await this.publicacaoRepository.buscarPorId(id)
+       } catch {
+        return {}
+       }
+    }
 }
 
 export default new PublicacaoService()

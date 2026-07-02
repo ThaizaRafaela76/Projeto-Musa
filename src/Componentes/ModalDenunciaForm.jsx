@@ -1,8 +1,12 @@
 import { useState } from "react"
 import { IoClose } from "react-icons/io5"
 import "../Styles/ModalDenunciaForm.css"
+import { criarDenunciaArtista } from "../services/denunciasArtistaService"
+import { criarDenunciaObra } from "../services/denunciasObraService"
 
-function ModalDenunciaForm({ aberto, fecharModal }) {
+
+// se tipo pode ser obra, ou artista, o id ou é da obra ou do artista
+function ModalDenunciaForm({ aberto, fecharModal, tipo, id }) {
 
     const [checkboxes, setCheckboxes] = useState({
         conteudoOfensivo: false,
@@ -13,6 +17,7 @@ function ModalDenunciaForm({ aberto, fecharModal }) {
     const [descricao, setDescricao] = useState("")
     const [erro, setErro] = useState("")
     const [confirmarAberto, setConfirmarAberto] = useState(false)
+    const [enviando, setEnviando] = useState(false)
 
     if (!aberto) return null
 
@@ -32,13 +37,45 @@ function ModalDenunciaForm({ aberto, fecharModal }) {
         setConfirmarAberto(true)
     }
 
-    function handleConfirmar() {
-        setCheckboxes({ conteudoOfensivo: false, violacaoDireitos: false, informacaoIncorreta: false })
-        setDescricao("")
-        setErro("")
-        setConfirmarAberto(false)
-        alert("Denúncia enviada com sucesso!")
-        fecharModal()
+    async function handleConfirmar() {
+        try{
+            setEnviando(true)
+
+            const motivos = []
+
+            if (checkboxes.conteudoOfensivo){
+                motivos.push("Conteúdo ofensivo ou impróprio")
+            }
+            if (checkboxes.violacaoDireitos){
+                motivos.push("Violação de direitos autorais")
+            }
+            if (checkboxes.informacaoIncorreta){ 
+                motivos.push("Informação incorreta sobre a artista")
+            }
+
+            if(tipo === "artista"){
+                await criarDenunciaArtista(id, motivos, descricao)
+            }
+            else if(tipo === "obra"){
+               await criarDenunciaObra(id, motivos, descricao) 
+            }
+
+
+
+            setCheckboxes({ conteudoOfensivo: false, violacaoDireitos: false, informacaoIncorreta: false })
+            setDescricao("")
+            setErro("")
+            setConfirmarAberto(false)
+            alert("Denúncia enviada com sucesso!")
+            fecharModal()
+            
+        } catch (error){
+            setErro("Erro ao enviar denúncia. Tente novamente.")
+            setConfirmarAberto(false)
+        } finally {
+            setEnviando(false)
+        }
+        
     }
 
     function handleCancelar() {

@@ -150,7 +150,7 @@ function PerfilVisitante({usuario}) {
                         <div className="perfil-denunciar">
                             <h2>{artista.nomeCompleto}</h2>
                             <BotaoDenuncia abrirModal={abrirModalDenunciaForm} />
-                            <ModalDenunciaForm aberto={modalDenunciaFormAberto} fecharModal={fecharModalDenunciaForm} />
+                            <ModalDenunciaForm aberto={modalDenunciaFormAberto} fecharModal={fecharModalDenunciaForm} tipo={"artista"} id={artista.uid}/>
                         </div>
                         <h3>Biografia</h3>
                         {/* Alterado para ser um link clicavel */}
@@ -246,7 +246,7 @@ function PerfilVisitante({usuario}) {
                                     <img src={`http://localhost:3000${obraSelecionada.imagemObra}`} className="imagem-aberta" />
                                 </div>
                             )}
-                            <ModalDenunciaForm aberto={modalDenunciaFormAberto} fecharModal={fecharModalDenunciaForm} />
+                            <ModalDenunciaForm aberto={modalDenunciaFormAberto} fecharModal={fecharModalDenunciaForm} tipo={"obra"} id={obraSelecionada.id} />
                         </div>
                     )}
                 </section>

@@ -214,7 +214,7 @@ function Acervo({usuario}) {
                             </div>
                         )}
 
-                        <ModalDenunciaForm aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} />
+                        <ModalDenunciaForm aberto={modalDenunciaAberto} fecharModal={fecharDenuncia} tipo={"obra"} id={obraSelecionada.id}/>
 
                     </div>
                 )}

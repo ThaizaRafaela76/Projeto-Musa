@@ -102,9 +102,9 @@ const HomeVisitante = () => {
                         <Link to="/acervo"><BotaoVerMais /></Link>
                     </div>
                     <div className="post-card" ref={ref}>
-                        {ultimoPost.map((obra) => (
+                        {ultimoPost.map((obra, index) => (
                             <CardTemplate 
-                                key={obra.id}
+                                key={`${obra.id}${index}`}
                                 imagem={`http://localhost:3000${obra.imagemObra}`} 
                                 titulo={obra.nomeObra}
                                 subtitulo={obra.artistaObra}  

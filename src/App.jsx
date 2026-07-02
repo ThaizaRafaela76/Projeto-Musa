@@ -105,7 +105,7 @@ function App() {
           path="/minhaconta"
           element={usuario ?
             (usuario && usuario.tipo === "admin" ?
-              <PerfilAdmin /> :
+              <PerfilAdmin usuario={usuario}/> :
               <Perfil artista={artista} onPerfilAtualizado={atualizarPerfilNoApp} />
             ) :
             <Navigate to="/login" />
@@ -114,9 +114,9 @@ function App() {
 
         <Route
           path="/perfil/:uid"
-          element={ usuario && usuario.tipo === "admin" ? <PerfilAdmin/> : <PerfilVisitante usuario={usuario} /> }
+          element={ usuario && usuario.tipo === "admin" ? <PerfilAdmin usuario={usuario}/> : <PerfilVisitante usuario={usuario} /> }
         />
-        <Route path="/admin/denuncias" element={<PerfilAdmin />} />
+        <Route path="/admin/denuncias" element={<PerfilAdmin usuario={usuario}/>} />
         <Route path="/admin/acervo" element={<AcervoAdmin />} />
         <Route path="/admin/artistas" element={<ArtistasAdmin />} />
       </Routes>

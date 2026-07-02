@@ -2,7 +2,7 @@ import api from "./api";
 import { baseURL } from "./api";
 
 export async function cadastrarArtista(formData) {
-    formData.tipo = "user"
+    formData.append("tipo", "user")
     const response = await api.post("/artistas/cadastro", formData, {
         headers: { "Content-Type": "multipart/form-data" }
     })

@@ -7,7 +7,7 @@ import ModalSair from "./ModalSair"
 
 import { useState } from "react"
 
-function Navbar() {
+function NavbarAdmin() {
 
     const [menuAberto, setMenuAberto] = useState(false)
     const [mostrarModal, setMostrarModal] = useState(false)
@@ -70,4 +70,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default NavbarAdmin
