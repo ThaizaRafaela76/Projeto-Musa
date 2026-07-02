@@ -90,9 +90,7 @@ router.patch("/foto-perfil",
 
             const fotoPerfilUrl = await uploadImagemLocal(fotoPerfilFile, "fotoPerfil")
 
-            const atualizado = await artistaService.atualizarArtista(request.uid, {
-                fotoPerfil: fotoPerfilUrl
-            })
+            const atualizado = await artistaService.atualizarFotoPerfil(request.uid, fotoPerfilUrl)
 
             response.json(atualizado)
         } catch (error) {

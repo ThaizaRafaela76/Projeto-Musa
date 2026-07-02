@@ -76,6 +76,11 @@ class ArtistaService {
         return { ...atualizado, fotoPerfil: `http://localhost:3000${artistaAtual.fotoPerfil}` }
     }
 
+    async atualizarFotoPerfil(uid, fotoPerfilUrl) {
+        const atualizado = await this.artistaRepository.atualizarArtista(uid, { fotoPerfil: fotoPerfilUrl })
+        return { ...atualizado, fotoPerfil: `http://localhost:3000${fotoPerfilUrl}` }
+    }
+
     async deletarArtista(uid) {
     try {
         const publicacoesDoArtista = await this.publicacaoRepository.buscarPorUid(uid)
