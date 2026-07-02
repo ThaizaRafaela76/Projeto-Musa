@@ -206,7 +206,7 @@ function FazerCadastro() {
                             {etapa === 1 && (
                                 <div className="cadastro-campos">
                                     <div className="campo-cadastro">
-                                        <label>Nome Completo</label>
+                                        <label>*Nome Completo</label>
                                         <input
                                             type="text"
                                             placeholder="Seu nome"
@@ -218,7 +218,7 @@ function FazerCadastro() {
                                     </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Email</label>
+                                        <label>*Email</label>
                                         <input
                                             type="email"
                                             placeholder="Example@email.com"
@@ -230,7 +230,7 @@ function FazerCadastro() {
                                     </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Nome de Usuário</label>
+                                        <label>*Nome de Usuário</label>
                                         <input
                                             type="text"
                                             placeholder="Nome de sua preferência para o perfil"
@@ -242,7 +242,7 @@ function FazerCadastro() {
                                     </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Senha</label>
+                                        <label>*Senha</label>
                                         <div className="input-senha-wrapper">
                                             <input
                                                 type={mostrarSenha ? "text" : "password"}
@@ -276,7 +276,7 @@ function FazerCadastro() {
                                     </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Confirmar Senha</label>
+                                        <label>*Confirmar Senha</label>
                                         <div className="input-senha-wrapper">
                                             <input
                                                 type={mostrarConfirmar ? "text" : "password"}
@@ -302,7 +302,7 @@ function FazerCadastro() {
                             {etapa === 2 && (
                                 <div className="cadastro-campos">
                                     <div className="campo-cadastro">
-                                        <label>Localização</label>
+                                        <label>*Localização</label>
                                         <div className="select-wrapper">
                                             <select
                                                 value={form.localizacao}
@@ -353,7 +353,7 @@ function FazerCadastro() {
                             {etapa === 3 && (
                                 <div className="cadastro-campos">
                                     <div className="campo-cadastro">
-                                        <label>Foto de Perfil <span className="label-obrigatorio">*</span></label>
+                                        <label>*Foto de Perfil <span className="label-obrigatorio">*</span></label>
                                         <div className={`upload-foto-perfil ${erros.fotoPerfil ? "upload-erro" : ""}`}>
                                             <label htmlFor="fotoPerfil">
                                                 {form.fotoPerfil ? (
@@ -379,7 +379,7 @@ function FazerCadastro() {
 
 
                                     <div className="campo-cadastro">
-                                        <label>Imagem de uma obra <span className="label-obrigatorio">*</span></label>
+                                        <label>*Imagem de uma obra <span className="label-obrigatorio">*</span></label>
                                         <label
                                             htmlFor="imagemTrabalho"
                                             className={`upload-trabalho ${erros.imagemTrabalho ? "campo-erro" : ""}`}
@@ -398,7 +398,7 @@ function FazerCadastro() {
                                     </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Nome da Obra <span className="label-obrigatorio">*</span></label>
+                                        <label>*Nome da Obra <span className="label-obrigatorio">*</span></label>
                                         <input
                                             type="text"
                                             placeholder="Título do seu trabalho"
@@ -410,7 +410,7 @@ function FazerCadastro() {
                                     </div>
 
                                     <div className="campo-cadastro">
-                                        <label>Categoria da obra</label>
+                                        <label>*Categoria da obra</label>
                                         <div className="select-wrapper">
                                             <select
                                                 value={form.areaAtuacao}
