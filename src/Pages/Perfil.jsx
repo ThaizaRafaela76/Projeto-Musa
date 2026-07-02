@@ -28,7 +28,7 @@ function Perfil({ artista, onPerfilAtualizado }) {
    const [obras, setObras] = useState([])
    const [obraSelecionada, setObraSelecionada] = useState(null)
    const [imgAberta, setImgAberta] = useState(false)
-   const[estadoModalEditar, setEstadoModalEditar] = useState(false)
+   const [estadoModalEditar, setEstadoModalEditar] = useState(false)
    const [obraParaEditar, setObraParaEditar] = useState(null)
    const [modalEditarPublic, setModalEditarPublic] = useState(false)
    const [modalExcluirPublic, setModalExcluirPublic] = useState(false)
@@ -154,6 +154,7 @@ useEffect(() => {
             }
             setLoading(false)
             setRefreshKey(prev => prev + 1)
+            alert("Perfil atualizado com sucesso!")
         } catch (error) {
             console.error(error)
             alert("Erro ao atualizar perfil")

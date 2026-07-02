@@ -64,6 +64,18 @@ class ArtistaService {
         return await this.artistaRepository.login(email, senha)
     }
 
+    async atualizarArtista(uid, dados) {
+        const artistaAtual = await this.artistaRepository.buscarPorUid(uid)
+        const { fotoPerfil, ...dadosPermitidos } = dados
+        const atualizado = await this.artistaRepository.atualizarArtista(uid, dadosPermitidos)
+
+        if (dadosPermitidos.nomeCompleto && dadosPermitidos.nomeCompleto !== artistaAtual.nomeCompleto) {
+            await this.artistaRepository.atualizarNomeNasPublicacoes(uid, dadosPermitidos.nomeCompleto)
+        }
+
+        return { ...atualizado, fotoPerfil: `http://localhost:3000${artistaAtual.fotoPerfil}` }
+    }
+
     async deletarArtista(uid) {
     try {
         const publicacoesDoArtista = await this.publicacaoRepository.buscarPorUid(uid)
